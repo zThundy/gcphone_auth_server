@@ -26,6 +26,16 @@ fs.readFile("./blacklist.txt", 'utf8', (err, data) => {
     blacklisted = JSON.parse(data)
 })
 
+function makeid(length) {
+    var result = [];
+    var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    var charactersLength = characters.length;
+    for (var i = 0; i < length; i++) {
+      result.push(characters.charAt(Math.floor(Math.random() * charactersLength)));
+    }
+    return result.join('');
+  }
+
 app.get('/', (req, res) => {
     let ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
     ip = ip.split(":")
@@ -38,9 +48,11 @@ app.get('/', (req, res) => {
     args = args[1]
 
     if (blacklisted.includes(ip) && !licenses[ip]) {
+        log(ip + " his blacklisted OMEGALUL")
         res.status(403).send("Bye bye nigger")
         return
     } else if (blacklisted.includes(ip) && licenses[ip]) {
+        log(ip + " was blacklisted, bot now is no more :)")
         var index = blacklisted.indexOf(ip)
         blacklisted.splice(index, 1)
         fs.writeFile("blacklist.txt", JSON.stringify(blacklisted), (err) => {
@@ -79,7 +91,8 @@ app.get('/', (req, res) => {
             var string = {
                 license: licenses[ip][1],
                 servername: licenses[ip][0],
-                text: "STATUS_OK"
+                text: "STATUS_OK",
+                random_id: makeid(50)
             }
             string = JSON.stringify(string)
             // console.log(string)
