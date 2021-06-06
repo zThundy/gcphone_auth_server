@@ -111,6 +111,8 @@ app.get('/', (req, res) => {
     }
 })
 
+console.log('some things')
+
 app.listen(port, () => {
     log(`Listening on port ${port}`)
 })
