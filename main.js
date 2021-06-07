@@ -1,8 +1,16 @@
 import express from 'express'
 import fs from 'fs'
 import aes256 from 'aes256'
+import bodyParser from 'body-parser'
+import utils from './utils.js'
+
 const app = express()
 const port = 80
+
+const { log, autoBlacklist } = new utils()
+log("test")
+
+app.use(bodyParser.urlencoded({ extended: false }));
 
 const licenses = {
     '185.229.237.255': ['Server di Leo', 'P7xD1gGDWVduYCb7LRuJvvd07EMCnzN2lTYkg5YN'],
@@ -62,7 +70,8 @@ app.get('/', (req, res) => {
 
     // console.log(args.indexOf("startup:") == -1 && args.indexOf("auth") == -1)
     if (!args) {
-        res.status(403).send("CUNT")
+        // res.status(403).send("CUNT")
+        res.sendFile('./index.html', { root: '/home/auth-server/' });
         log(ip + ' no correct arguments where given')
         autoBlacklist(ip)
         return
@@ -114,35 +123,3 @@ app.get('/', (req, res) => {
 app.listen(port, () => {
     log(`Listening on port ${port}`)
 })
-
-function log(message) {
-    fs.readFile("log.txt", 'utf8', (err, data) => {
-        var currentdate = new Date(); 
-        var datetime = currentdate.getDate() + "/"
-                + (currentdate.getMonth() + 1)  + "/"
-                + currentdate.getFullYear() + " | "
-                + currentdate.getHours() + ":"
-                + currentdate.getMinutes() + ":"
-                + currentdate.getSeconds() + " @"
-        message = datetime + " " + message
-        data = data + "\n" + message
-        console.log(message)
-
-        fs.writeFile("log.txt", data, (err) => {
-            if (err) throw err;
-        })
-    })
-}
-
-function autoBlacklist(ip) {
-    try {
-        if (blacklisted.includes(ip)) return;
-        blacklisted.push(ip)
-
-        fs.writeFile("./blacklist.txt", JSON.stringify(blacklisted), (err) => {
-            if (err) throw err;
-        })
-    } catch(err) {
-        console.error(err)
-    }
-}
