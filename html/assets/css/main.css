@@ -1,0 +1,91 @@
+body {
+	margin: 0;
+    padding: 0;
+    border: 0;
+	background-color: grey;
+	user-select: none;
+	font-family: "Segoe UI",sans-serif;
+}
+
+.preload * {
+	-webkit-transition: none !important;
+	-moz-transition: none !important;
+	-ms-transition: none !important;
+	-o-transition: none !important;
+}
+
+#auth-container {
+	position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    background: #222;
+    border-radius: 10px;
+    border: 2px solid var(--border);
+    width: 400px;
+    padding: 20px;
+    text-align: center;
+    box-sizing: border-box;
+	align-items: center;
+
+	display: flex;
+	flex-direction: column;
+}
+
+.auth-login-logo {
+	border-radius: 250px;
+	width: 150px;
+	height: 150px;
+	margin-bottom: 30px;
+}
+
+.sing-in-label {
+	font-size: 30px;
+	color: white;
+	font-size: bold;
+}
+
+.input-box-section {
+	margin-top: 20px;
+	width: 80%;
+	height: 40px;
+	border: none;
+	border-radius: 10px;
+	padding-left: 20px;
+	outline: none;
+	background-color: rgb(71, 71, 71);
+	color: rgb(255, 255, 255);
+	font-style: oblique;
+}
+
+.input-button-section {
+	margin-top: 30px;
+	margin-bottom: 10px;
+	width: 60%;
+	height: 30px;
+}
+
+.bottom-divider-line {
+	margin-top: 20px;
+	margin-bottom: 20px;
+	width: 100%;
+	height: 2px;
+	border-radius: 5px;
+	background-color: gray;
+}
+
+.bottom-text-label {
+	font-size: 20px;
+	margin-top: 5px;
+	color: grey;
+}
+
+.bottom-text-label a {
+	transition: all .3s ease;
+	color: rgb(165, 165, 165);
+}
+
+.bottom-text-label a:hover {
+	transition: all .3s ease;
+	color: rgb(255, 255, 255);
+}

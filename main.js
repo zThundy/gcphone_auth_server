@@ -1,12 +1,14 @@
 import express from 'express'
 import fs from 'fs'
 import aes256 from 'aes256'
-import bodyParser from 'body-parser'
+// import bodyParser from 'body-parser'
+import path from 'path'
 
 const app = express()
 const port = 80
 
-app.use(bodyParser.urlencoded({ extended: false }));
+// app.use(bodyParser.urlencoded({ extended: false }));
+app.use(express.static(path.join("./html", 'assets')));
 
 const licenses = {
     '185.229.237.255': ['Server di Leo', 'P7xD1gGDWVduYCb7LRuJvvd07EMCnzN2lTYkg5YN'],
@@ -22,7 +24,8 @@ const licenses = {
     '5.181.31.115': ['Loupass69 Server', 'rV168bEWsy82Q8fFDxojNhYxbpWJ2XBQ61IkBHMf'],
     '185.229.237.239': ['Vanquest Server Test', 'oIW37tjgJ9fTeiXxQW4ME3blaXBs9T4j1ZDn6Ipk'],
     '45.14.185.23': ['ExplicitCode Main', 'Ek0RvWP0iMlkf9EivfiXgibiOCUBf8QGhzF5Xw4x'],
-    '5.181.31.152': ['ExplicitCode Test', 'Ek0RvWP0iMlkf9EivfiXgibiOCUBf8QGhzF5Xw4x'] 
+    '5.181.31.152': ['ExplicitCode Test', 'Ek0RvWP0iMlkf9EivfiXgibiOCUBf8QGhzF5Xw4x'],
+    '185.229.237.209': ['Simone.exe', '2BdnylZb6HvXHfj2rC6PWMLVCJFIM0WgbXNbS1i3']
 }
 
 var blacklisted = []

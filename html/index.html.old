@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Welcome Home</title>
+    <link rel="stylesheet" href="index.css" />
+</head>
+
+<body>
+    <!-- HEADER -->
+    <div class="header-container">
+    </div>
+
+
+    <a href="/login">Please Login Here!</a>
+</body>
+
+</html>

@@ -78,3 +78,292 @@
 7/6/2021 | 15:5:25 @ Listening on port 80
 7/6/2021 | 15:5:29 @ Listening on port 80
 7/6/2021 | 15:5:38 @ Listening on port 80
+7/6/2021 | 15:6:11 @ 109.116.199.145 no correct arguments where given
+7/6/2021 | 15:6:12 @ 109.116.199.145 no correct arguments where given
+7/6/2021 | 15:6:13 @ 109.116.199.145 no correct arguments where given
+7/6/2021 | 15:6:13 @ 109.116.199.145 no correct arguments where given
+7/6/2021 | 15:6:13 @ 109.116.199.145 no correct arguments where given
+7/6/2021 | 15:6:13 @ 109.116.199.145 no correct arguments where given
+7/6/2021 | 15:6:14 @ 109.116.199.145 no correct arguments where given
+7/6/2021 | 15:6:14 @ 109.116.199.145 no correct arguments where given
+7/6/2021 | 15:6:31 @ Listening on port 80
+7/6/2021 | 15:6:45 @ Listening on port 80
+7/6/2021 | 15:6:50 @ Listening on port 80
+7/6/2021 | 15:6:57 @ 109.116.199.145 no correct arguments where given
+7/6/2021 | 15:6:58 @ 109.116.199.145 no correct arguments where given
+7/6/2021 | 15:7:6 @ 5.181.31.120 authed successfully
+7/6/2021 | 15:9:41 @ Listening on port 80
+7/6/2021 | 15:9:41 @ 5.181.31.120 authed successfully
+7/6/2021 | 15:9:41 @ 185.25.204.107 authed successfully
+7/6/2021 | 15:9:42 @ 185.229.237.23 authed successfully
+7/6/2021 | 15:9:48 @ 5.181.31.115 authed successfully
+7/6/2021 | 15:12:1 @ 185.229.237.23 authed successfully
+7/6/2021 | 15:13:2 @ 5.181.31.115 authed successfully
+7/6/2021 | 15:13:48 @ 5.181.31.120 authed successfully
+7/6/2021 | 15:14:12 @ 185.25.204.107 authed successfully
+7/6/2021 | 15:18:8 @ 185.25.204.107 authed successfully
+7/6/2021 | 15:18:29 @ 5.181.31.115 authed successfully
+7/6/2021 | 15:18:54 @ 5.181.31.114 authed successfully
+7/6/2021 | 15:20:14 @ 185.229.237.23 authed successfully
+7/6/2021 | 15:20:32 @ Listening on port 80
+7/6/2021 | 15:21:0 @ 5.181.31.120 authed successfully
+7/6/2021 | 15:21:4 @ Listening on port 80
+7/6/2021 | 15:21:22 @ Listening on port 80
+7/6/2021 | 15:21:26 @ 109.116.199.145 no correct arguments where given
+7/6/2021 | 15:21:50 @ Listening on port 80
+7/6/2021 | 15:21:52 @ Listening on port 80
+7/6/2021 | 15:21:56 @ 185.229.237.23 authed successfully
+7/6/2021 | 15:21:57 @ 109.116.199.145 no correct arguments where givenore :)
+7/6/2021 | 15:22:6 @ 185.25.204.107 authed successfully
+7/6/2021 | 15:24:17 @ 5.181.31.114 started successfully
+7/6/2021 | 15:24:20 @ 185.25.204.107 authed successfully
+7/6/2021 | 15:24:40 @ 5.181.31.115 authed successfully
+7/6/2021 | 15:25:1 @ 5.181.31.120 authed successfully
+7/6/2021 | 15:25:26 @ 5.181.31.114 authed successfully
+7/6/2021 | 15:26:45 @ 185.25.204.107 authed successfully
+7/6/2021 | 15:27:25 @ Listening on port 80
+7/6/2021 | 15:27:29 @ Listening on port 80
+7/6/2021 | 15:27:35 @ Listening on port 80
+7/6/2021 | 15:27:46 @ Listening on port 80
+7/6/2021 | 15:27:48 @ Listening on port 80
+7/6/2021 | 15:27:58 @ Listening on port 80
+7/6/2021 | 15:28:3 @ Listening on port 80
+7/6/2021 | 15:29:36 @ 185.229.237.23 authed successfully
+7/6/2021 | 15:30:53 @ 185.25.204.107 authed successfully
+7/6/2021 | 15:31:39 @ 5.181.31.120 authed successfully
+7/6/2021 | 15:32:6 @ 5.181.31.115 authed successfully
+7/6/2021 | 15:33:3 @ 185.229.237.23 authed successfully
+7/6/2021 | 15:33:10 @ Listening on port 80
+7/6/2021 | 15:33:12 @ 185.25.204.107 authed successfully
+7/6/2021 | 15:33:17 @ Listening on port 80
+7/6/2021 | 15:33:20 @ Listening on port 80
+7/6/2021 | 15:33:29 @ Listening on port 80
+7/6/2021 | 15:33:32 @ Listening on port 80
+7/6/2021 | 15:34:8 @ Listening on port 80
+7/6/2021 | 15:34:11 @ Listening on port 80
+7/6/2021 | 15:34:13 @ Listening on port 80
+7/6/2021 | 15:34:18 @ Listening on port 80
+7/6/2021 | 15:34:26 @ Listening on port 80
+7/6/2021 | 15:34:27 @ Listening on port 80
+7/6/2021 | 15:34:29 @ Listening on port 80
+7/6/2021 | 15:34:35 @ 109.116.199.145 no correct arguments where givenore :)
+7/6/2021 | 15:34:50 @ 5.181.31.115 authed successfully
+7/6/2021 | 15:34:56 @ 109.116.199.145 no correct arguments where givenore :)
+7/6/2021 | 15:35:8 @ 62.171.133.183 started successfully
+7/6/2021 | 15:35:9 @ 5.181.31.120 authed successfully
+7/6/2021 | 15:35:29 @ 185.25.204.107 authed successfully
+7/6/2021 | 15:35:57 @ 185.229.237.23 authed successfully
+7/6/2021 | 15:36:30 @ Listening on port 80
+7/6/2021 | 15:36:39 @ 109.116.199.145 no correct arguments where givenore :)
+7/6/2021 | 15:36:52 @ Listening on port 80
+7/6/2021 | 15:36:53 @ 109.116.199.145 no correct arguments where givenore :)
+7/6/2021 | 15:37:25 @ 109.116.199.145 no correct arguments where givenore :)
+7/6/2021 | 15:38:43 @ 5.181.31.120 authed successfully
+7/6/2021 | 15:38:58 @ 185.229.237.23 authed successfully
+7/6/2021 | 15:40:37 @ 185.229.237.23 authed successfully
+7/6/2021 | 15:41:15 @ 185.25.204.107 authed successfully
+7/6/2021 | 15:41:36 @ 62.171.133.183 started successfully
+7/6/2021 | 15:41:53 @ 5.181.31.120 authed successfully
+7/6/2021 | 15:42:13 @ 109.116.199.145 was blacklisted, bot now is no more :)
+7/6/2021 | 15:42:55 @ 185.229.237.23 authed successfully
+7/6/2021 | 15:43:12 @ 185.25.204.107 authed successfully
+7/6/2021 | 15:43:33 @ 5.181.31.115 authed successfully
+7/6/2021 | 15:43:39 @ 62.171.133.183 started successfully
+7/6/2021 | 15:44:5 @ 5.181.31.120 authed successfully
+7/6/2021 | 15:45:42 @ 185.229.237.23 authed successfully
+7/6/2021 | 15:47:3 @ 5.181.31.120 authed successfully
+7/6/2021 | 15:48:19 @ 185.25.204.107 authed successfully
+7/6/2021 | 15:48:37 @ 5.181.31.115 authed successfully
+7/6/2021 | 15:49:12 @ 5.181.31.120 authed successfully
+7/6/2021 | 15:49:19 @ 185.229.237.23 authed successfully
+7/6/2021 | 15:51:20 @ 185.25.204.107 authed successfully
+7/6/2021 | 15:51:44 @ 5.181.31.120 authed successfully
+7/6/2021 | 15:52:0 @ 62.171.133.183 started successfully
+7/6/2021 | 15:53:23 @ 5.181.31.114 authed successfully
+7/6/2021 | 15:53:31 @ Listening on port 80
+7/6/2021 | 15:54:44 @ 185.25.204.107 authed successfully
+7/6/2021 | 15:54:48 @ 185.229.237.23 authed successfully
+7/6/2021 | 15:55:0 @ 5.181.31.115 authed successfully
+7/6/2021 | 15:56:13 @ 185.25.204.107 authed successfully
+7/6/2021 | 15:56:27 @ 5.181.31.120 authed successfully
+7/6/2021 | 15:57:23 @ 185.229.237.23 authed successfully
+7/6/2021 | 15:57:59 @ 185.25.204.107 authed successfully
+7/6/2021 | 15:58:4 @ 5.181.31.114 started successfully
+7/6/2021 | 15:58:49 @ 5.181.31.114 authed successfully
+7/6/2021 | 15:59:33 @ 62.171.133.183 started successfully
+7/6/2021 | 16:0:14 @ 5.181.31.115 started successfully
+7/6/2021 | 16:0:52 @ Listening on port 80
+7/6/2021 | 16:1:16 @ Listening on port 80
+7/6/2021 | 16:2:31 @ 5.181.31.115 authed successfully
+7/6/2021 | 16:2:39 @ 62.171.133.183 started successfully
+7/6/2021 | 16:3:17 @ 5.181.31.120 authed successfully
+7/6/2021 | 16:3:25 @ 185.25.204.107 authed successfully
+7/6/2021 | 16:3:33 @ 185.229.237.23 authed successfully
+7/6/2021 | 16:4:23 @ 5.181.31.115 authed successfully
+7/6/2021 | 16:5:19 @ 185.25.204.107 authed successfully
+7/6/2021 | 16:6:24 @ 5.181.31.115 authed successfully
+7/6/2021 | 16:7:52 @ 185.25.204.107 authed successfully
+7/6/2021 | 16:7:59 @ 5.181.31.115 authed successfully
+7/6/2021 | 16:8:36 @ 185.229.237.23 authed successfully
+7/6/2021 | 16:8:48 @ 5.181.31.120 authed successfully
+7/6/2021 | 16:9:50 @ 185.25.204.107 authed successfully
+7/6/2021 | 16:11:2 @ 5.181.31.115 authed successfully
+7/6/2021 | 16:11:50 @ 185.229.237.23 authed successfully
+7/6/2021 | 16:11:54 @ 5.181.31.120 authed successfully
+7/6/2021 | 16:12:29 @ 185.25.204.107 authed successfully
+7/6/2021 | 16:12:45 @ 62.171.133.183 started successfully
+7/6/2021 | 16:14:1 @ 185.229.237.23 authed successfully
+7/6/2021 | 16:15:9 @ 5.181.31.115 authed successfully
+7/6/2021 | 16:16:6 @ 185.25.204.107 authed successfully
+7/6/2021 | 16:16:34 @ 5.181.31.120 authed successfully
+7/6/2021 | 16:18:32 @ 5.181.31.120 authed successfully
+7/6/2021 | 16:19:6 @ 185.25.204.107 authed successfully
+7/6/2021 | 16:19:10 @ 5.181.31.115 authed successfully
+7/6/2021 | 16:20:37 @ 185.25.204.107 authed successfully
+7/6/2021 | 16:21:20 @ 62.171.133.183 started successfully
+7/6/2021 | 16:21:51 @ 185.229.237.23 authed successfully
+7/6/2021 | 16:22:6 @ 5.181.31.115 authed successfully
+7/6/2021 | 16:23:39 @ 5.181.31.120 authed successfully
+7/6/2021 | 16:24:11 @ 185.25.204.107 authed successfully
+7/6/2021 | 16:25:9 @ 185.229.237.209 has been blocked because of startup failure
+7/6/2021 | 16:26:1 @ 185.229.237.209 was blacklisted, bot now is no more :)
+7/6/2021 | 16:26:8 @ 185.229.237.209 authed successfully
+7/6/2021 | 16:26:14 @ 185.25.204.107 authed successfully
+7/6/2021 | 16:28:9 @ 185.229.237.209 started successfully
+7/6/2021 | 16:29:17 @ 5.181.31.120 authed successfully
+7/6/2021 | 16:29:25 @ 185.25.204.107 authed successfully
+7/6/2021 | 16:30:0 @ 5.181.31.115 authed successfully
+7/6/2021 | 16:31:0 @ 185.229.237.209 authed successfully
+7/6/2021 | 16:31:30 @ 185.229.237.23 authed successfully
+7/6/2021 | 16:32:1 @ 5.181.31.152 authed successfully
+7/6/2021 | 16:32:16 @ 185.25.204.107 authed successfully
+7/6/2021 | 16:32:31 @ 5.181.31.115 authed successfully
+7/6/2021 | 16:34:29 @ 185.25.204.107 authed successfully
+7/6/2021 | 16:36:21 @ 5.181.31.120 authed successfully
+7/6/2021 | 16:36:48 @ 185.229.237.23 authed successfully
+7/6/2021 | 16:36:49 @ 5.181.31.115 authed successfully
+7/6/2021 | 16:37:6 @ 185.229.237.209 started successfully
+7/6/2021 | 16:37:10 @ 185.229.237.209 authed successfully
+7/6/2021 | 16:37:12 @ 185.229.237.209 authed successfully
+7/6/2021 | 16:40:17 @ 185.229.237.23 authed successfully
+7/6/2021 | 16:40:18 @ 185.25.204.107 authed successfully
+7/6/2021 | 16:40:59 @ 185.229.237.209 started successfully
+7/6/2021 | 16:41:44 @ 185.229.237.209 authed successfully
+7/6/2021 | 16:41:57 @ 5.181.31.152 authed successfully
+7/6/2021 | 16:42:12 @ 5.181.31.120 authed successfully
+7/6/2021 | 16:43:3 @ 62.171.133.183 started successfully
+7/6/2021 | 16:43:6 @ 185.25.204.107 authed successfully
+7/6/2021 | 16:43:32 @ 5.181.31.115 authed successfully
+7/6/2021 | 16:43:37 @ 185.229.237.209 authed successfully
+7/6/2021 | 16:44:42 @ 5.181.31.120 authed successfully
+7/6/2021 | 16:46:1 @ 5.181.31.115 authed successfully
+7/6/2021 | 16:46:41 @ 62.171.133.183 started successfully
+7/6/2021 | 16:47:17 @ 185.229.237.23 authed successfully
+7/6/2021 | 16:47:26 @ 5.181.31.152 started successfully
+7/6/2021 | 16:47:27 @ 185.25.204.107 authed successfully
+7/6/2021 | 16:47:37 @ 185.229.237.209 authed successfully
+7/6/2021 | 16:48:58 @ 5.181.31.115 authed successfully
+7/6/2021 | 16:49:28 @ 109.116.199.145 no correct arguments where givenore :)
+7/6/2021 | 16:49:29 @ 5.181.31.120 authed successfully
+7/6/2021 | 16:50:15 @ 80.82.70.228 no correct arguments where given
+7/6/2021 | 16:50:20 @ 5.181.31.152 authed successfully
+7/6/2021 | 16:51:11 @ 185.25.204.107 authed successfully
+7/6/2021 | 16:52:10 @ 5.181.31.120 authed successfully
+7/6/2021 | 16:52:50 @ Listening on port 80
+7/6/2021 | 16:52:50 @ Listening on port 80
+7/6/2021 | 16:52:54 @ 5.181.31.115 authed successfully
+7/6/2021 | 16:53:19 @ 109.116.199.145 no correct arguments where givenore :)
+7/6/2021 | 16:53:35 @ 185.25.204.107 authed successfully
+7/6/2021 | 16:54:13 @ 109.116.199.145 no correct arguments where givenore :)
+7/6/2021 | 16:54:32 @ 109.116.199.145 was blacklisted, bot now is no more :)
+7/6/2021 | 16:54:33 @ 109.116.199.145 no correct arguments where givenore :)
+7/6/2021 | 16:54:57 @ 5.181.31.120 authed successfully
+7/6/2021 | 16:55:46 @ 109.116.199.145 no correct arguments where givenore :)
+7/6/2021 | 16:55:47 @ 109.116.199.145 no correct arguments where givenore :)
+7/6/2021 | 16:55:49 @ 185.229.237.23 authed successfully
+7/6/2021 | 16:56:20 @ 109.116.199.145 no correct arguments where givenore :)
+7/6/2021 | 16:56:42 @ 5.181.31.115 authed successfully
+7/6/2021 | 16:56:49 @ 185.25.204.107 authed successfully
+7/6/2021 | 16:57:5 @ 109.116.199.145 no correct arguments where givenore :)
+7/6/2021 | 16:58:26 @ 5.181.31.152 started successfully
+7/6/2021 | 16:58:27 @ 185.229.237.23 authed successfully
+7/6/2021 | 16:58:31 @ 93.49.255.196 has been blocked because not present in the ip whitelist
+7/6/2021 | 16:59:0 @ 109.116.199.145 no correct arguments where givenore :)
+7/6/2021 | 16:59:0 @ 109.116.199.145 no correct arguments where givenore :)
+7/6/2021 | 16:59:13 @ 185.25.204.107 authed successfully
+7/6/2021 | 16:59:48 @ 109.116.199.145 no correct arguments where givenore :)
+7/6/2021 | 16:59:58 @ 109.116.199.145 no correct arguments where givenore :)
+7/6/2021 | 17:0:52 @ 5.181.31.152 authed successfully
+7/6/2021 | 17:1:8 @ 5.181.31.115 authed successfully
+7/6/2021 | 17:1:14 @ 109.116.199.145 no correct arguments where givenore :)
+7/6/2021 | 17:1:53 @ 185.229.237.23 authed successfully
+7/6/2021 | 17:2:14 @ 109.116.199.145 no correct arguments where givenore :)
+7/6/2021 | 17:2:15 @ 109.116.199.145 no correct arguments where givenore :)
+7/6/2021 | 17:2:26 @ 109.116.199.145 no correct arguments where givenore :)
+7/6/2021 | 17:3:1 @ 109.116.199.145 no correct arguments where givenore :)
+7/6/2021 | 17:3:26 @ 185.25.204.107 authed successfully
+7/6/2021 | 17:3:35 @ 109.116.199.145 no correct arguments where givenore :)
+7/6/2021 | 17:3:36 @ 109.116.199.145 no correct arguments where givenore :)
+7/6/2021 | 17:4:9 @ 5.181.31.152 started successfully
+7/6/2021 | 17:4:19 @ 5.181.31.120 authed successfully
+7/6/2021 | 17:4:23 @ 5.181.31.152 authed successfully
+7/6/2021 | 17:4:29 @ 185.229.237.23 authed successfully
+7/6/2021 | 17:4:53 @ 185.229.237.209 started successfully
+7/6/2021 | 17:5:0 @ 185.229.237.209 authed successfully
+7/6/2021 | 17:5:39 @ 109.116.199.145 no correct arguments where givenore :)
+7/6/2021 | 17:5:43 @ 185.25.204.107 authed successfully
+7/6/2021 | 17:6:58 @ Listening on port 80
+7/6/2021 | 17:7:28 @ Listening on port 80
+7/6/2021 | 17:7:28 @ 5.181.31.120 authed successfully
+7/6/2021 | 17:7:31 @ Listening on port 80
+7/6/2021 | 17:7:34 @ 109.116.199.145 no correct arguments where givenore :)
+7/6/2021 | 17:7:35 @ 109.116.199.145 no correct arguments where givenore :)
+7/6/2021 | 17:7:36 @ 109.116.199.145 no correct arguments where givenore :)
+7/6/2021 | 17:7:39 @ 109.116.199.145 no correct arguments where givenore :)
+7/6/2021 | 17:7:42 @ 109.116.199.145 no correct arguments where givenore :)
+7/6/2021 | 17:8:18 @ 5.181.31.115 authed successfully
+7/6/2021 | 17:8:19 @ Listening on port 80
+7/6/2021 | 17:8:21 @ 109.116.199.145 no correct arguments where givenore :)
+7/6/2021 | 17:8:21 @ 109.116.199.145 no correct arguments where givenore :)
+7/6/2021 | 17:9:22 @ Listening on port 80
+7/6/2021 | 17:9:35 @ 185.229.237.23 authed successfully
+7/6/2021 | 17:9:46 @ 185.229.237.209 authed successfully
+7/6/2021 | 17:9:46 @ 185.25.204.107 authed successfully
+7/6/2021 | 17:9:56 @ 62.171.133.183 authed successfully
+7/6/2021 | 17:9:59 @ 109.116.199.145 no correct arguments where givenore :)
+7/6/2021 | 17:10:39 @ 62.171.133.183 started successfully
+7/6/2021 | 17:10:52 @ 5.181.31.152 started successfully
+7/6/2021 | 17:11:6 @ 185.229.237.23 authed successfully
+7/6/2021 | 17:11:47 @ 109.116.199.145 no correct arguments where givenore :)
+7/6/2021 | 17:12:5 @ 5.181.31.152 started successfully
+7/6/2021 | 17:12:19 @ 185.229.237.209 started successfully
+7/6/2021 | 17:12:22 @ 185.229.237.209 authed successfully
+7/6/2021 | 17:13:7 @ 109.116.199.145 no correct arguments where givenore :)
+7/6/2021 | 17:13:9 @ 109.116.199.145 no correct arguments where givenore :)
+7/6/2021 | 17:13:22 @ 185.25.204.107 authed successfully
+7/6/2021 | 17:13:24 @ 109.116.199.145 no correct arguments where givenore :)
+7/6/2021 | 17:13:44 @ 5.181.31.120 authed successfully
+7/6/2021 | 17:13:55 @ 109.116.199.145 no correct arguments where givenore :)
+7/6/2021 | 17:13:57 @ 5.181.31.115 authed successfully
+7/6/2021 | 17:14:55 @ 5.181.31.152 started successfully
+7/6/2021 | 17:14:56 @ Listening on port 80
+7/6/2021 | 17:15:36 @ 109.116.199.145 no correct arguments where givenore :)
+7/6/2021 | 17:15:37 @ 185.25.204.107 authed successfully
+7/6/2021 | 17:15:39 @ 185.229.237.209 authed successfully
+7/6/2021 | 17:16:15 @ 5.181.31.120 authed successfully
+7/6/2021 | 17:16:52 @ 109.116.199.145 no correct arguments where givenore :)
+7/6/2021 | 17:17:8 @ 109.116.199.145 no correct arguments where givenore :)
+7/6/2021 | 17:17:13 @ 109.116.199.145 no correct arguments where givenore :)
+7/6/2021 | 17:17:13 @ 5.181.31.115 authed successfully
+7/6/2021 | 17:17:22 @ 5.181.31.152 started successfully
+7/6/2021 | 17:18:1 @ 185.229.237.23 authed successfully
+7/6/2021 | 17:18:3 @ 5.181.31.120 authed successfully
+7/6/2021 | 17:19:14 @ 5.181.31.152 authed successfully
+7/6/2021 | 17:19:17 @ Listening on port 80
+7/6/2021 | 17:19:35 @ 185.25.204.107 authed successfully
+7/6/2021 | 17:19:40 @ 109.116.199.145 no correct arguments where givenore :)
+7/6/2021 | 17:20:10 @ 109.116.199.145 was blacklisted, bot now is no more :)
+7/6/2021 | 17:20:13 @ 5.181.31.120 authed successfully
+7/6/2021 | 17:20:29 @ Listening on port 80
+7/6/2021 | 17:20:35 @ 109.116.199.145 started successfully
+7/6/2021 | 17:20:52 @ 109.116.199.145 no correct arguments where given
