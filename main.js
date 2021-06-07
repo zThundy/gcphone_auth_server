@@ -1,16 +1,18 @@
 import express from 'express'
 import fs from 'fs'
 import aes256 from 'aes256'
-// import bodyParser from 'body-parser'
+import bodyParser from 'body-parser'
 import MySQLConnection from './mysql-class.js'
 import path from 'path'
+import crypto from 'crypto'
 
 const app = express()
 const port = 80
+const md5 = crypto.createHash('md5');
 
 const mysql = new MySQLConnection()
 
-// app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join("./html", 'assets')));
 
 const licenses = {
@@ -50,15 +52,22 @@ app.post('/login', (req, res) => {
     // Insert Login Code Here
     let username = req.body.username;
     let password = req.body.password;
-    res.send(`Username: ${username} Password: hidden`);
 });
 
 app.post("/register", (req, res) => {
     let username = req.body.username;
     let password = req.body.password;
-    let r_password = req.body.repeat_password;
+    let r_password = req.body.r_password;
     if (password == r_password) {
-        res.send(username + "\nPassword registered :)")
+        console.log('password matches')
+        console.log(password.length, username.length)
+        if (password.length > 0 && username.length > 0) {
+            console.log('fields are not empty')
+            var hpassword = md5.update(password).digest('hex'); 
+            console.log(hpassword)
+            mysql.makeQuery("INSERT INTO accounts(`username`, `password`) VALUES(?, ?)", [username, hpassword]);
+            res.send(`Username: ${username} Password: hidden`);
+        }
     }
 })
 
