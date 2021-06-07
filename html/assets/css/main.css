@@ -77,21 +77,6 @@ body {
 	background-color: rgb(45, 121, 21);
 	cursor: pointer;
 }
-  
-.ripple {
-	border-radius: 50%;
-	background-color: rgba(255, 255, 255, 0.7);
-	position: absolute;
-	transform: scale(0);
-	animation: ripple 0.6s linear;
-}
-  
-@keyframes ripple{
-	to {
-		transform: scale(2.5);
-		opacity: 0;
-	}
-}
 
 .bottom-divider-line {
 	margin-top: 20px;
@@ -104,7 +89,7 @@ body {
 
 .bottom-text-label {
 	font-size: 20px;
-	margin-top: 5px;
+	margin-top: 8px;
 	color: grey;
 }
 

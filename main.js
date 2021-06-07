@@ -2,10 +2,13 @@ import express from 'express'
 import fs from 'fs'
 import aes256 from 'aes256'
 // import bodyParser from 'body-parser'
+import MySQLConnection from './mysql-class.js'
 import path from 'path'
 
 const app = express()
 const port = 80
+
+const mysql = new MySQLConnection()
 
 // app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join("./html", 'assets')));
@@ -16,7 +19,7 @@ const licenses = {
     '185.229.237.118': ['Server Mariex Test', 'xq2sO6BMkC6D52fEG2S5wL1PyfnSun1IYIc7luTf'],
     '62.171.133.183': ['Server Don Samuele', 'kc6rjUL815yf1uwDH2j8N1qwYzhEqxMq0VCWhDbN'],
     '5.181.31.145': ['Server Don Samuele Test', 'kc6rjUL815yf1uwDH2j8N1qwYzhEqxMq0VCWhDbN'],
-    '109.116.199.145': ['localhost', 'po82TPxrwlsiEW1GRLMpD6BHfpAmpcUVT3Eb2j2P'],
+    // '109.116.199.145': ['localhost', 'po82TPxrwlsiEW1GRLMpD6BHfpAmpcUVT3Eb2j2P'],
     '5.181.31.120': ['Server Fabryy', 'DTyaIN44iwM8JWX3Xa78TXIWkjNMF1Zsri9jmdMh'],
     '185.25.204.107': ['Impero Main', 'owDfEWgmJTp8LFQWN2PL4QkFg3Ej8mywhA97obdU'],
     '185.25.206.161': ['Impero Test', 'owDfEWgmJTp8LFQWN2PL4QkFg3Ej8mywhA97obdU'],
@@ -64,11 +67,22 @@ app.get('/', (req, res) => {
     ip = ip.split(":")
     ip = ip[3]
     console.log(ip)
-    let args = req.url
-    args = args.split("=")
+    let args = req.query
+    // console.log(req)
+    // args = args.split("=")
     // console.log(args)
     // console.log(licenses[ip])
-    args = args[1]
+    // args = args[1]
+
+    // console.log(args.indexOf("startup:") == -1 && args.indexOf("auth") == -1)
+    if (!args.type) {
+        // res.status(403).send("CUNT")
+        // res.sendFile('./index.html', { root: '/home/auth-server/' });
+        res.sendFile('./index.html', { root: '/home/auth-server/html/' })
+        log(ip + ' tryed authing without any query params, so sending index page')
+        // autoBlacklist(ip)
+        return
+    }
 
     if (blacklisted.includes(ip) && !licenses[ip]) {
         log(ip + " his blacklisted OMEGALUL")
@@ -83,16 +97,7 @@ app.get('/', (req, res) => {
         })
     }
 
-    // console.log(args.indexOf("startup:") == -1 && args.indexOf("auth") == -1)
-    if (!args) {
-        // res.status(403).send("CUNT")
-        // res.sendFile('./index.html', { root: '/home/auth-server/' });
-        res.sendFile('./index.html', { root: '/home/auth-server/html/' })
-        log(ip + ' no correct arguments where given')
-        autoBlacklist(ip)
-        return
-    }
-
+    args = args.type
     if (args.indexOf("startup:") == -1 && args.indexOf("auth") == -1) {
         res.status(403).send("CUNT")
         log(ip + ' no correct arguments where given')

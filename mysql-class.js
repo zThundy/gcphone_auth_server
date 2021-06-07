@@ -4,7 +4,7 @@ class MySQLConnection {
     constructor() {
         this.connection = mysql.createConnection({
             host: 'localhost',
-            user: 'root',
+            user: 'remote',
             password: 'Anto-13062000',
             database: 'auth-server'
         });
@@ -15,8 +15,11 @@ class MySQLConnection {
         })
     }
 
-    makeQuery(query, cb) {
-        this.connection.query(query, cb)
+    makeQuery(query, args, cb) {
+        for (var i in args) {
+            args[i] = this.connection.escape(args[i]);
+        }
+        this.connection.query(query, args, cb)
     }
 
     sleep(ms) {
