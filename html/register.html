@@ -1,22 +1,38 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
+
 <html>
 
 <head>
-    <title>Example Login Form</title>
+    <title>zThundy's Dashboard</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="css/main.css" />
 </head>
 
-<body>
-    <form action="/register" method="post">
-        <!-- user input-->
-        Username:<br>
-        <input type="text" name="username" placeholder="Username" required><br><br>
-        Password:<br>
-        <input type="password" name="password" placeholder="Password" required><br><br>
-        Ripeti Password:<br>
-        <input type="password" name="repeat_password" placeholder="Ripeti password" required><br><br>
-        <!-- submit button -->
-        <input type="submit" value="register">
-    </form>
+<body class="preload">
+    <div id="auth-container">
+        <img id="logo-pic" class="auth-login-logo" src="phone_logo.png" />
+        <form action="/register" method="post">
+            <!-- user input-->
+            <span class="sing-in-label">Sign-Up</span>
+            <input class="input-box-section" type="text" name="username" placeholder="Username" required>
+            <input class="input-box-section" type="password" name="password" placeholder="Password" required>
+            <input class="input-box-section" type="password" name="r_password" placeholder="Repeat password" required>
+            <!-- submit button -->
+            <input class="input-button-section" type="submit" value="Register">
+        </form>
+        <span class="bottom-divider-line"></span>
+        <span class="bottom-text-label">Already have an account?</span>
+        <span class="bottom-text-label" style="font-weight: bolder;">Login <a href="/">here</a>!</span>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            setTimeout(() => { $("body").removeClass("preload"); })
+            document.getElementById('logo-pic').setAttribute('draggable', false);
+        });
+    </script>
 </body>
 
 </html>

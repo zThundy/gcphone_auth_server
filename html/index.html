@@ -18,18 +18,38 @@
             <input class="input-box-section" type="text" name="username" placeholder="Username" required>
             <input class="input-box-section" type="password" name="password" placeholder="Password" required>
             <!-- submit button -->
-            <input class="input-button-section" type="submit" value="Login">
+            <input id="input-button" class="input-button-section" type="submit" value="Login">
         </form>
         <span class="bottom-divider-line"></span>
         <span class="bottom-text-label">Haven't got an account?</span>
-        <span class="bottom-text-label" style="font-weight: bolder;">Create one <a href="/login">here</a>!</span>
+        <span class="bottom-text-label" style="font-weight: bolder;">Create one <a href="/register">here</a>!</span>
     </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script>
+        function createRipple(event) {
+            console.log("called")
+            const button = event.currentTarget;
+            console.log(button)
+
+            const circle = document.createElement("span");
+            const diameter = Math.max(button.clientWidth, button.clientHeight);
+            const radius = diameter / 2;
+
+            circle.style.width = circle.style.height = `${diameter}px`;
+            circle.style.left = `${event.clientX - button.offsetLeft - radius}px`;
+            circle.style.top = `${event.clientY - button.offsetTop - radius}px`;
+            circle.classList.add("ripple");
+
+            const ripple = button.getElementsByClassName("ripple")[0];
+            if (ripple) { ripple.remove(); }
+            button.appendChild(circle);
+        }
+
         $(document).ready(function() {
             setTimeout(() => { $("body").removeClass("preload"); })
             document.getElementById('logo-pic').setAttribute('draggable', false);
+            document.getElementById("input-button").addEventListener("click", createRipple);
         });
     </script>
 </body>
