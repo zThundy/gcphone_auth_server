@@ -2,13 +2,9 @@ import express from 'express'
 import fs from 'fs'
 import aes256 from 'aes256'
 import bodyParser from 'body-parser'
-import utils from './utils.js'
 
 const app = express()
 const port = 80
-
-const { log, autoBlacklist } = new utils()
-log("test")
 
 app.use(bodyParser.urlencoded({ extended: false }));
 
@@ -24,7 +20,9 @@ const licenses = {
     '185.25.206.161': ['Impero Test', 'owDfEWgmJTp8LFQWN2PL4QkFg3Ej8mywhA97obdU'],
     '5.181.31.114': ['ItsRobeez Server', 'I772zEdgEjiETyIkJ4eTY8LZhCNbjA5ZMxvs6jRg'],
     '5.181.31.115': ['Loupass69 Server', 'rV168bEWsy82Q8fFDxojNhYxbpWJ2XBQ61IkBHMf'],
-    '185.229.237.239': ['Vanquest Server Test', 'oIW37tjgJ9fTeiXxQW4ME3blaXBs9T4j1ZDn6Ipk']
+    '185.229.237.239': ['Vanquest Server Test', 'oIW37tjgJ9fTeiXxQW4ME3blaXBs9T4j1ZDn6Ipk'],
+    '45.14.185.23': ['ExplicitCode Main', 'Ek0RvWP0iMlkf9EivfiXgibiOCUBf8QGhzF5Xw4x'],
+    '5.181.31.152': ['ExplicitCode Test', 'Ek0RvWP0iMlkf9EivfiXgibiOCUBf8QGhzF5Xw4x'] 
 }
 
 var blacklisted = []
@@ -34,15 +32,29 @@ fs.readFile("./blacklist.txt", 'utf8', (err, data) => {
     blacklisted = JSON.parse(data)
 })
 
-function makeid(length) {
-    var result = [];
-    var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    var charactersLength = characters.length;
-    for (var i = 0; i < length; i++) {
-      result.push(characters.charAt(Math.floor(Math.random() * charactersLength)));
+app.get('/login', (req, res) => {
+    res.sendFile('./login.html', { root: '/home/auth-server/html/' })
+});
+
+app.get('/register', (req, res) => {
+    res.sendFile('./register.html', { root: '/home/auth-server/html/' })
+});
+
+app.post('/login', (req, res) => {
+    // Insert Login Code Here
+    let username = req.body.username;
+    let password = req.body.password;
+    res.send(`Username: ${username} Password: hidden`);
+});
+
+app.post("/register", (req, res) => {
+    let username = req.body.username;
+    let password = req.body.password;
+    let r_password = req.body.repeat_password;
+    if (password == r_password) {
+        res.send(username + "\nPassword registered :)")
     }
-    return result.join('');
-  }
+})
 
 app.get('/', (req, res) => {
     let ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
@@ -71,7 +83,8 @@ app.get('/', (req, res) => {
     // console.log(args.indexOf("startup:") == -1 && args.indexOf("auth") == -1)
     if (!args) {
         // res.status(403).send("CUNT")
-        res.sendFile('./index.html', { root: '/home/auth-server/' });
+        // res.sendFile('./index.html', { root: '/home/auth-server/' });
+        res.sendFile('./index.html', { root: '/home/auth-server/html/' })
         log(ip + ' no correct arguments where given')
         autoBlacklist(ip)
         return
@@ -119,6 +132,48 @@ app.get('/', (req, res) => {
         autoBlacklist(ip)
     }
 })
+
+function log(message) {
+    fs.readFile("log.txt", 'utf8', (err, data) => {
+        var currentdate = new Date(); 
+        var datetime = currentdate.getDate() + "/"
+                + (currentdate.getMonth() + 1)  + "/"
+                + currentdate.getFullYear() + " | "
+                + currentdate.getHours() + ":"
+                + currentdate.getMinutes() + ":"
+                + currentdate.getSeconds() + " @"
+        message = datetime + " " + message
+        data = data + "\n" + message
+        console.log(message)
+
+        fs.writeFile("log.txt", data, (err) => {
+            if (err) throw err;
+        })
+    })
+}
+
+function autoBlacklist(ip) {
+    try {
+        // console.log(this.blacklisted)
+        if (blacklisted.includes(ip)) return;
+        blacklisted.push(ip)
+        fs.writeFile("./blacklist.txt", JSON.stringify(blacklisted), (err) => {
+            if (err) throw err;
+        })
+    } catch(err) {
+        console.error(err)
+    }
+}
+
+function makeid(length) {
+    var result = [];
+    var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    var charactersLength = characters.length;
+    for (var i = 0; i < length; i++) {
+        result.push(characters.charAt(Math.floor(Math.random() * charactersLength)));
+    }
+    return result.join('');
+}
 
 app.listen(port, () => {
     log(`Listening on port ${port}`)
