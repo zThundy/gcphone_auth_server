@@ -2,8 +2,8 @@ import express from 'express'
 import fs from 'fs'
 import aes256 from 'aes256'
 
-import site from './site.js'
-import dashboard from './dashboard.js'
+import site from './routes/site.js'
+import dashboard from './routes/dashboard.js'
 
 const app = express()
 const port = 80

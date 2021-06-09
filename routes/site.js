@@ -2,7 +2,7 @@
 import express from 'express'
 import session from 'express-session'
 import bodyParser from 'body-parser'
-import MySQLConnection from './mysql-class.js'
+import MySQLConnection from '../mysql-class.js'
 import path from 'path'
 import bcrypt from 'bcrypt'
 
@@ -51,8 +51,8 @@ router.post('/login', (req, res) => {
                             var hour = 3600000;
                             req.session.cookie.expires = new Date(Date.now() + hour);
                             req.session.cookie.maxAge = hour;
-                            console.log("started a new session");
-                            console.log(req.session)
+                            // console.log("started a new session");
+                            // console.log(req.session)
                             res.redirect('/dashboard/');
                         } else {
                             res.redirect('/site/login?success=false');
