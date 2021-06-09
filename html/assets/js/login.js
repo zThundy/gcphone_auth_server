@@ -23,6 +23,8 @@ $(document).ready(function () {
     setTimeout(() => {
         $("body").removeClass("preload");
     })
+
+    $("html").on("contextmenu", function(e) { return false; });
     document.getElementById('logo-pic').setAttribute('draggable', false);
     $("#input-button").click(createRipple)
 

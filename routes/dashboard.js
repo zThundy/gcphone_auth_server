@@ -25,8 +25,14 @@ router.get('/register', (req, res) => {
 router.get('/dashboard', (req, res) => {
 })
 
-router.post('/test', (req, res) => {
-    console.log('logout')
+router.post('/sidebar', (req, res) => {
+    // console.log(req.body.logout)
+    // console.log(req.body.action)
+    if (req.body.action == "logout" && req.session) {
+        req.session = null
+        res.redirect("/site/login")
+    }
+    // console.log('logout')
 });
 
 router.post("/register", (req, res) => {

@@ -17,16 +17,16 @@
     <div class="dashboard-container">
         <div class="dashboard-header">
             <div id="sidebar-options-container" class="sidebar-options-container">
-                <form id="form-container" action="/dashboard/test" method="post">
-                    <a class="sidebar-options-close-button" onclick="closeNav()">&times;</a>
+                <form id="form-container" action="/dashboard/sidebar" method="post">
+                    <a id="sidebar-closer" class="sidebar-options-close-button">&times;</a>
                     <a href="#">Home</a>
                     <a href="#">Licenses</a>
                     <a href="#">Account</a>
-                    <a href="#">Logout</a>
+                    <button class="logout-button" type="submit" name="action" value="logout">Logout</button>
                 </form>
             </div>
             <div id="sidebar-opener" class="sidebar-opener">
-                <span><i class="fas fa-bars"></i>MENU</span>
+                <span><i id="sidebar-menu-open-button" class="fas fa-bars"></i>MENU</span>
             </div>
         </div>
     </div>
