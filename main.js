@@ -3,10 +3,12 @@ import fs from 'fs'
 import aes256 from 'aes256'
 
 import site from './site.js'
+import dashboard from './dashboard.js'
 
 const app = express()
 const port = 80
 app.use("/site", site)
+app.use("/dashboard", dashboard)
 
 // const secureKey = "0&l8vUP4zU&8bdgzte3M7zTjFbd&ANkAG@EJWfJ%o1Dt!*&!jZP3wjLUhT*g2o9AKL5FZx&hRql2!piXrz5xs@4idS"
 

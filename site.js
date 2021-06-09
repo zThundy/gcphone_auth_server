@@ -22,53 +22,24 @@ router.use(session({
 router.use(bodyParser.urlencoded({ extended: false }));
 router.use(express.static(path.join("./html", 'assets')));
 
-router.get('/login',
-    bodyParser.urlencoded(),
-    (req, res) => {
-        console.log(req.session)
-        if (req.session.loggedin) {
-            res.send('Welcome back, ' + req.session.username + '!');
-        } else {
-            res.sendFile('./login.html', { root: '/home/auth-server/html/' })
-        }
-    },
-    (req, res) => {
-        req.session.loggedin = true
-        req.session.username = res.locals.username
-        console.log(req.session)
-        res.redirect("/dashboard")
+router.get('/login', (req, res) => {
+    if (req.session.loggedin) {
+        res.redirect('/dashboard/');
+    } else {
+        res.sendFile('./login.html', { root: '/home/auth-server/html/' })
     }
-);
+});
 
 router.get('/register', (req, res) => {
     res.sendFile('./register.html', { root: '/home/auth-server/html/' })
 });
-
-router.get('/dashboard',
-    bodyParser.urlencoded(),
-    (req, res) => {
-        console.log(req.session)
-        if (req.session.loggedin) {
-            res.send('Welcome back, ' + req.session.username + '!');
-        } else {
-            res.send('Please login to view this page!');
-        }
-        res.end();
-    },
-    (req, res) => {
-        req.session.loggedin = true
-        req.session.username = res.locals.username
-        console.log(req.session)
-        res.redirect("/dashboard")
-    }
-)
 
 router.post('/login', (req, res) => {
     // Insert Login Code Here
     let username = req.body.username;
     let password = req.body.password;
     if (username && password) {
-        mysql.makeQuery('SELECT * FROM accounts WHERE username = ?', [username], function(error, results, fields) {
+        mysql.makeQuery('SELECT * FROM accounts WHERE ?', {username: username}, function(error, results, fields) {
             if (results[0] && results.length > 0) {
                 // console.log(results[0])
                 bcrypt.compare(password, results[0].password)
@@ -82,7 +53,7 @@ router.post('/login', (req, res) => {
                             req.session.cookie.maxAge = hour;
                             console.log("started a new session");
                             console.log(req.session)
-                            res.redirect('/site/dashboard');
+                            res.redirect('/dashboard/');
                         } else {
                             res.redirect('/site/login?success=false');
                         }

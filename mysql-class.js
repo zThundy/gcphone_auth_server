@@ -33,6 +33,7 @@ class MySQLConnection {
                 args[i] = args[i][1]
             }
         }
+        console.log(args)
         this.connection.query(query, args, cb) 
     }
 
