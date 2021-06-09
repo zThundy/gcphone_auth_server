@@ -1,19 +1,14 @@
 import express from 'express'
 import fs from 'fs'
 import aes256 from 'aes256'
-import bodyParser from 'body-parser'
-import MySQLConnection from './mysql-class.js'
-import path from 'path'
-import crypto from 'crypto'
+
+import site from './site.js'
 
 const app = express()
 const port = 80
-const md5 = crypto.createHash('md5');
+app.use("/site", site)
 
-const mysql = new MySQLConnection()
-
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(express.static(path.join("./html", 'assets')));
+// const secureKey = "0&l8vUP4zU&8bdgzte3M7zTjFbd&ANkAG@EJWfJ%o1Dt!*&!jZP3wjLUhT*g2o9AKL5FZx&hRql2!piXrz5xs@4idS"
 
 const licenses = {
     '185.229.237.255': ['Server di Leo', 'P7xD1gGDWVduYCb7LRuJvvd07EMCnzN2lTYkg5YN'],
@@ -30,7 +25,8 @@ const licenses = {
     '185.229.237.239': ['Vanquest Server Test', 'oIW37tjgJ9fTeiXxQW4ME3blaXBs9T4j1ZDn6Ipk'],
     '45.14.185.23': ['ExplicitCode Main', 'Ek0RvWP0iMlkf9EivfiXgibiOCUBf8QGhzF5Xw4x'],
     '5.181.31.152': ['ExplicitCode Test', 'Ek0RvWP0iMlkf9EivfiXgibiOCUBf8QGhzF5Xw4x'],
-    '185.229.237.209': ['Simone.exe', '2BdnylZb6HvXHfj2rC6PWMLVCJFIM0WgbXNbS1i3']
+    '185.229.237.209': ['Simone.exe Main', '2BdnylZb6HvXHfj2rC6PWMLVCJFIM0WgbXNbS1i3'],
+    '5.181.31.121': ['Simone.exe Test', '2BdnylZb6HvXHfj2rC6PWMLVCJFIM0WgbXNbS1i3']
 }
 
 var blacklisted = []
@@ -40,35 +36,8 @@ fs.readFile("./blacklist.txt", 'utf8', (err, data) => {
     blacklisted = JSON.parse(data)
 })
 
-app.get('/login', (req, res) => {
-    res.sendFile('./login.html', { root: '/home/auth-server/html/' })
-});
-
-app.get('/register', (req, res) => {
-    res.sendFile('./register.html', { root: '/home/auth-server/html/' })
-});
-
-app.post('/login', (req, res) => {
-    // Insert Login Code Here
-    let username = req.body.username;
-    let password = req.body.password;
-});
-
-app.post("/register", (req, res) => {
-    let username = req.body.username;
-    let password = req.body.password;
-    let r_password = req.body.r_password;
-    if (password == r_password) {
-        console.log('password matches')
-        console.log(password.length, username.length)
-        if (password.length > 0 && username.length > 0) {
-            console.log('fields are not empty')
-            var hpassword = md5.update(password).digest('hex'); 
-            console.log(hpassword)
-            mysql.makeQuery("INSERT INTO accounts(`username`, `password`) VALUES(?, ?)", [username, hpassword]);
-            res.send(`Username: ${username} Password: hidden`);
-        }
-    }
+app.get("/site", (req, res) => {
+    res.redirect("/site/login")
 })
 
 app.get('/', (req, res) => {
@@ -87,7 +56,7 @@ app.get('/', (req, res) => {
     if (!args.type) {
         // res.status(403).send("CUNT")
         // res.sendFile('./index.html', { root: '/home/auth-server/' });
-        res.sendFile('./index.html', { root: '/home/auth-server/html/' })
+        res.redirect("/site/login")
         log(ip + ' tryed authing without any query params, so sending index page')
         // autoBlacklist(ip)
         return
