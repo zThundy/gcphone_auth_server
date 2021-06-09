@@ -9,8 +9,14 @@ router.use(bodyParser.urlencoded({ extended: false }));
 router.use(express.static(path.join("./html", 'assets')));
 
 router.get('/', (req, res) => {
-    if (req.session && req.session.loggedin) {
-        res.sendFile('./home.html', { root: '/home/auth-server/html/dashboard' })
+    if (req.session && req.session.loggedin && req.session.username) {
+        // console.log(req.session.username, req.query.username)
+        if (req.session.username != req.query.username) {
+            req.session = null
+            res.redirect("/site/login")
+        } else {
+            res.sendFile('./home.html', { root: '/home/auth-server/html/dashboard' })
+        }
     } else {
         res.redirect('/site/login')
     }
@@ -36,6 +42,6 @@ router.post('/sidebar', (req, res) => {
 });
 
 router.post("/register", (req, res) => {
-})
+});
 
 export default router
