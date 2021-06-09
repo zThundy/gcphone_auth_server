@@ -1,6 +1,5 @@
 /* SITE */
 import express from 'express'
-import session from 'express-session'
 import bodyParser from 'body-parser'
 import MySQLConnection from '../mysql-class.js'
 import path from 'path'
@@ -10,20 +9,12 @@ const saltRounds = 15
 const router = express.Router()
 const mysql = new MySQLConnection()
 
-router.use(session({
-	secret: 'Yum6IiVGvC5%lguToVH4U6FaLr5PE0t7i3k5JU8RVZZFKeWEX1a8r$SNZvEzf#CLUcZ%4G1E2r9',
-    name: 'sessionId',
-	resave: true,
-	saveUninitialized: true,
-    // cookie: { secure: true },
-    // httpOnly: false,
-    path: '/site/'
-}));
 router.use(bodyParser.urlencoded({ extended: false }));
 router.use(express.static(path.join("./html", 'assets')));
 
 router.get('/login', (req, res) => {
-    if (req.session.loggedin) {
+    // console.log(req.session)
+    if (req.session && req.session.loggedin) {
         res.redirect('/dashboard/');
     } else {
         res.sendFile('./login.html', { root: '/home/auth-server/html/' })
@@ -31,6 +22,7 @@ router.get('/login', (req, res) => {
 });
 
 router.get('/register', (req, res) => {
+    // console.log(req.session)
     res.sendFile('./register.html', { root: '/home/auth-server/html/' })
 });
 
@@ -47,10 +39,6 @@ router.post('/login', (req, res) => {
                         if (pass) {
                             req.session.loggedin = true;
                             req.session.username = username;
-                            // set max session logged in 1 hour
-                            var hour = 3600000;
-                            req.session.cookie.expires = new Date(Date.now() + hour);
-                            req.session.cookie.maxAge = hour;
                             // console.log("started a new session");
                             // console.log(req.session)
                             res.redirect('/dashboard/');

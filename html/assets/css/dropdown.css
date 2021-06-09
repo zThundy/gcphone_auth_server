@@ -55,7 +55,7 @@ body {
     color: white;
 }
 
-.sidebar-opener span {
+.sidebar-opener i {
     position: relative;
-    margin-bottom: 15px;
+    margin-right: 10px;
 }

@@ -26,7 +26,6 @@ $(document).ready(function () {
     document.getElementById('logo-pic').setAttribute('draggable', false);
     $("#input-button").click(createRipple)
 
-    $(".notification-container").css("display", "none");
     if (document.location.search.includes("success=")) {
         var state = document.location.search.split("=");
         if (state[1] && state[1] == "false") {

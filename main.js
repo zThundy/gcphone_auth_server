@@ -1,4 +1,5 @@
 import express from 'express'
+import session from 'cookie-session'
 import fs from 'fs'
 import aes256 from 'aes256'
 
@@ -7,6 +8,19 @@ import dashboard from './routes/dashboard.js'
 
 const app = express()
 const port = 80
+app.set('trust proxy', 1);
+app.use(session({
+	secret: 'Yum6IiVGvC5%lguToVH4U6FaLr5PE0t7i3k5JU8RVZZFKeWEX1a8r$SNZvEzf#CLUcZ%4G1E2r9',
+    cookieName: 'session',
+    ephemeral: true,
+    duration: 30 * 60 * 1000,
+    // cookie: { secure: true },
+    httpOnly: true,
+    secure: false,
+    activeDuration: 5 * 60 * 1000,
+    overwrite: false
+    // path: '/site/'
+}));
 app.use("/site", site)
 app.use("/dashboard", dashboard)
 
