@@ -1,7 +1,6 @@
 /* SITE */
 import express from 'express'
 import bodyParser from 'body-parser'
-import MySQLConnection from './mysql-class.js'
 import path from 'path'
 
 const router = express.Router()
@@ -15,7 +14,6 @@ router.get('/', (req, res) => {
     // } else {
     //     res.redirect('/site/login')
     // }
-    res.end();
 })
 
 router.get('/login', (req, res) => {
@@ -24,8 +22,8 @@ router.get('/login', (req, res) => {
 router.get('/register', (req, res) => {
 });
 
-router.get('/dashboard',
-)
+router.get('/dashboard', (req, res) => {
+})
 
 router.post('/login', (req, res) => {
 });

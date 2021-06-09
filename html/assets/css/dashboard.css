@@ -1,0 +1,18 @@
+body {
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+}
+
+.dashboard-container {
+    position: relative;
+    background-color: #4c4c4c;
+    top: 1%;
+    height: 98%;
+    left: .5%;
+    width: 99%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px;
+}
