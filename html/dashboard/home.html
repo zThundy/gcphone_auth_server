@@ -14,21 +14,24 @@
 </head>
 
 <body class="preload">
-    <div class="dashboard-container">
-        <div class="dashboard-header">
-            <div id="sidebar-options-container" class="sidebar-options-container">
-                <form id="form-container" action="/dashboard/sidebar" method="post">
-                    <a id="sidebar-closer" class="sidebar-options-close-button">&times;</a>
-                    <a href="#">Home</a>
-                    <a href="#">Licenses</a>
-                    <a href="#">Account</a>
-                    <button class="logout-button" type="submit" name="action" value="logout">Logout</button>
-                </form>
-            </div>
-            <div id="sidebar-opener" class="sidebar-opener">
-                <span><i id="sidebar-menu-open-button" class="fas fa-bars"></i>MENU</span>
+    <div id="background-hider">
+        <div class="dashboard-header"></div>
+        <div class="dashboard-container">
+            <div class="dashboard-content-header">
+                <button class="lines-button lines"><span></span></button>
             </div>
         </div>
+    </div>
+    
+    <div id="sidebar-options-container" class="sidebar-options-container">
+        <form id="form-container" action="/dashboard/sidebar" method="post">
+            <!-- <a id="sidebar-closer" class="sidebar-options-close-button">&times;</a> -->
+            <!-- <img class="sidebar-default-logo" src="defaultpic.png" /> -->
+            <a id="random-hyperlink" href="/">Home</a>
+            <a id="random-hyperlink" href="/dashboard/licenses">Licenses</a>
+            <a id="random-hyperlink" href="/dashboard/account">Account</a>
+            <button class="logout-button" type="submit" name="action" value="logout">Logout</button>
+        </form>
     </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>

@@ -2,6 +2,8 @@ import express from 'express'
 import session from 'cookie-session'
 import fs from 'fs'
 import aes256 from 'aes256'
+import favicon from 'serve-favicon'
+import path from 'path'
 
 import site from './routes/site.js'
 import dashboard from './routes/dashboard.js'
@@ -23,6 +25,8 @@ app.use(session({
 }));
 app.use("/site", site)
 app.use("/dashboard", dashboard)
+app.use(favicon(path.join("html", 'assets', 'phone_logo.png')));
+// app.use(express.favicon("./html/assets/phone_logo.ico")); 
 
 // const secureKey = "0&l8vUP4zU&8bdgzte3M7zTjFbd&ANkAG@EJWfJ%o1Dt!*&!jZP3wjLUhT*g2o9AKL5FZx&hRql2!piXrz5xs@4idS"
 
@@ -60,7 +64,7 @@ app.get('/', (req, res) => {
     let ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
     ip = ip.split(":")
     ip = ip[3]
-    console.log(ip)
+    // console.log(ip)
     let args = req.query
     // console.log(req)
     // args = args.split("=")

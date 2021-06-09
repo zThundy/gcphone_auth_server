@@ -26,6 +26,14 @@ router.get('/register', (req, res) => {
     res.sendFile('./register.html', { root: '/home/auth-server/html/' })
 });
 
+router.get('/recover', (req, res) => {
+    if (req.session && req.session.loggedin) {
+        res.redirect('/dashboard/');
+    } else {
+        res.sendFile('./recover.html', { root: '/home/auth-server/html/' })
+    }
+});
+
 router.post('/login', (req, res) => {
     // Insert Login Code Here
     let username = req.body.username;
@@ -91,6 +99,12 @@ router.post("/register", (req, res) => {
         // res.end()
         res.redirect('/site/register?success=false');
     }
-})
+});
+
+
+
+router.post("/recover", (req, res) => {
+    res.redirect('/site/recover?success=false');
+});
 
 export default router
