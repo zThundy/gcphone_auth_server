@@ -17,7 +17,7 @@
         <form id="form-container" action="/site/recover" method="post">
             <!-- user input-->
             <span class="sing-in-label">Recover-Password</span>
-            <input class="input-box-section" type="text" name="username" placeholder="Username" required>
+            <input class="input-box-section" type="text" name="username" placeholder="Email">
             <!-- submit button -->
             <!-- 
             <button id="input-button" class="input-button-section" type="submit" placeholder="Login">
@@ -29,13 +29,8 @@
         <span class="bottom-divider-line"></span>
         <span class="bottom-text-label" style="font-weight: bolder;">Back to <a href="/site/login">login</a> page</span>
     </div>
-    <div style="display: none" class="notification-container">
-        <i id="notification-icon" class="notification-icon"></i>
-        <span class="notification-text" style="font-size: 20px;"><%= msg %></span>
-        <button id="notification-button">
-            <span class="notification-button-label">OK</span>
-        </button>
-    </div>
+    
+    <%- include('partial/notification'); %>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="js/recover.js"></script>

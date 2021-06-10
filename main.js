@@ -1,12 +1,22 @@
-import express from 'express'
-import session from 'cookie-session'
-import fs from 'fs'
-import aes256 from 'aes256'
-import favicon from 'serve-favicon'
-import path from 'path'
+const express = require("express")
+const session = require("cookie-session")
+const fs = require("fs")
+const aes256 = require("aes256")
+const favicon = require("serve-favicon")
+const path = require("path")
 
-import site from './routes/site.js'
-import dashboard from './routes/dashboard.js'
+const site = require("./routes/site.js")
+const dashboard = require("./routes/dashboard.js")
+
+// import express from 'express'
+// import session from 'cookie-session'
+// import fs from 'fs'
+// import aes256 from 'aes256'
+// import favicon from 'serve-favicon'
+// import path from 'path'
+
+// import site from './routes/site.js'
+// import dashboard from './routes/dashboard.js'
 
 const app = express()
 const port = 80

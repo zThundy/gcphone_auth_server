@@ -26,34 +26,46 @@ $(document).ready(function () {
 
     $("html").on("contextmenu", function(e) { return false; });
     document.getElementById('logo-pic').setAttribute('draggable', false);
-    $("#input-button").click(createRipple)
+    // $("#input-button").click(createRipple)
 
-    if (document.location.search.includes("success=")) {
-        var state = document.location.search.split("=");
-        if (state[1] && state[1] == "false") {
-            $("#notification-icon").addClass("fas")
-            $("#notification-icon").addClass("fa-times-circle")
-            $("#notification-icon").css("color", "rgb(191 33 33)")
-            $(".notification-text").text("Username or password is wrong...")
+    // if (document.location.search.includes("success=")) {
+    //     var state = document.location.search.split("=");
+    //     if (state[1] && state[1] == "false") {
+    //         $("#notification-icon").addClass("fas")
+    //         $("#notification-icon").addClass("fa-times-circle")
+    //         $("#notification-icon").css("color", "rgb(191 33 33)")
+    //         $(".notification-text").text("Username or password is wrong...")
+    //         $(".notification-container").css("display", "");
+    //         $(".notification-container").addClass("show");
+    //         setTimeout(() => {
+    //             $(".notification-container").css("opacity", "1");
+    //         }, 200)
+    //         $("#notification-button").click((e) => {
+    //             $(".notification-container").addClass("hide");
+    //             setTimeout(() => {
+    //                 $("#notification-icon").removeClass("fas")
+    //                 $("#notification-icon").removeClass("fa-times-circle")
+    //                 $(".notification-container").removeClass("show");
+    //                 $(".notification-container").css("display", "none");
+    //                 $(".notification-container").css("opacity", "0");
+    //                 $('.notification-container').off('click');
+    //             }, 200);
+    //         })
+    //     }
+    // }
+});
 
-            $(".notification-container").css("display", "");
-            $(".notification-container").addClass("show");
-            setTimeout(() => {
-                $(".notification-container").css("opacity", "1");
-            }, 200)
-
-            $("#notification-button").click((e) => {
-                $(".notification-container").addClass("hide");
-                setTimeout(() => {
-                    $("#notification-icon").removeClass("fas")
-                    $("#notification-icon").removeClass("fa-times-circle")
-                    $(".notification-container").removeClass("show");
-
-                    $(".notification-container").css("display", "none");
-                    $(".notification-container").css("opacity", "0");
-                    $('.notification-container').off('click');
-                }, 200);
-            })
+// this can be used to edit values because i'm reloading value in button
+// $("#notification-button").click(() => {
+//     $("#notification-button").load("/site/button_press/:login");
+// })
+$("#notification-button").click(() => {
+    console.log("button has been clicked")
+    $.ajax({
+        type: 'GET',
+        url: '/site/button_press/:login',
+        success: function(data) {
+            $('.notification-container').css("display", data.display);  
         }
-    }
+    });
 });

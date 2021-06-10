@@ -17,7 +17,7 @@ body {
     border-right: #818181 1px solid;
 }
 
-.sidebar-options-container a {
+.sidebar-options-container a, .sidebar-options-container span {
     padding: 8px 8px 8px 32px;
     text-decoration: none;
     font-size: 25px;
@@ -26,7 +26,7 @@ body {
     transition: 0.3s;
 }
 
-.sidebar-options-container a:hover {
+.sidebar-options-container a:hover, .sidebar-options-container span:hover {
     color: #f1f1f1;
     padding: 8px 8px 8px 42px;
 }

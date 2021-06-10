@@ -55,5 +55,12 @@ $(document).ready(function () {
 });
 
 $("#notification-button").click(() => {
-    jQuery.post("/site/button_press/register");
-})
+    console.log("button has been clicked")
+    $.ajax({
+        type: 'GET',
+        url: '/site/button_press/:register',
+        success: function(data) {
+            $('.notification-container').css("display", data.display);  
+        }
+    });
+});

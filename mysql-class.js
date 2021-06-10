@@ -1,4 +1,5 @@
-import mysql from 'mysql'
+// import mysql from 'mysql'
+const mysql = require("mysql")
 
 class MySQLConnection {
     constructor() {
@@ -48,4 +49,5 @@ class MySQLConnection {
 (async function () {
 })()
 
-export default MySQLConnection
+module.exports = MySQLConnection
+// export default MySQLConnection

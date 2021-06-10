@@ -19,9 +19,9 @@ $(document).ready(function () {
     
     $(document).on('click', ".lines-button", function () {
         $('.lines-button').addClass('close');
-        $("#sidebar-options-container").css("width", "250px");
+        $("#sidebar-options-container").css("width", "350px");
         $("#sidebar-options-container").css("background-color", "rgb(49, 49, 49)");
-        $(".dashboard-username").css("padding-left", "250px");
+        $(".dashboard-username").css("padding-left", "350px");
         // document.getElementById("sidebar-options-container").style.width = "250px";
     });
     $(document).on('click', ".lines-button.close", function () {
