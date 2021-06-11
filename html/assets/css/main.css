@@ -100,7 +100,7 @@ body {
 }
 
 .bottom-divider-line {
-	margin-top: 20px;
+	margin-top: 5px;
 	margin-bottom: 20px;
 	width: 100%;
 	height: 2px;
@@ -122,4 +122,14 @@ body {
 .bottom-text-label a:hover {
 	transition: all .3s ease;
 	color: rgb(255, 255, 255);
+}
+
+.captcha-container {
+	/* position: relative; */
+	/* margin-left: auto; */
+	/* margin-right: auto; */
+	/* width: 100%; */
+	height: auto;
+	margin-top: 5px;
+	margin-bottom: 20px;
 }

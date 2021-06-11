@@ -27,12 +27,15 @@
              -->
             <input id="input-button" class="input-button-section" type="submit" value="Login">
         </form>
+
+        <%- include('partial/captcha'); %>
+
         <span class="bottom-divider-line"></span>
         <span class="bottom-text-label">Haven't got an account?</span>
         <span class="bottom-text-label" style="font-weight: bolder;">Create one <a href="/site/register">here</a>!</span>
         <span class="bottom-text-label" style="font-weight: bolder; font-size: 16px;">Forgot password? Get new one <a href="/site/recover">here</a>!</span>
     </div>
-    
+
     <%- include('partial/notification'); %>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>

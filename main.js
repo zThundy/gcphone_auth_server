@@ -52,6 +52,7 @@ const licenses = {
     '5.181.31.114': ['ItsRobeez Server', 'I772zEdgEjiETyIkJ4eTY8LZhCNbjA5ZMxvs6jRg'],
     '5.181.31.115': ['Loupass69 Server', 'rV168bEWsy82Q8fFDxojNhYxbpWJ2XBQ61IkBHMf'],
     '185.229.237.239': ['Vanquest Server Test', 'oIW37tjgJ9fTeiXxQW4ME3blaXBs9T4j1ZDn6Ipk'],
+    '5.181.31.142': ['Vanquest Server Main', 'oIW37tjgJ9fTeiXxQW4ME3blaXBs9T4j1ZDn6Ipk'],
     '45.14.185.23': ['ExplicitCode Main', 'Ek0RvWP0iMlkf9EivfiXgibiOCUBf8QGhzF5Xw4x'],
     '5.181.31.152': ['ExplicitCode Test', 'Ek0RvWP0iMlkf9EivfiXgibiOCUBf8QGhzF5Xw4x'],
     '185.229.237.209': ['Simone.exe Main', '2BdnylZb6HvXHfj2rC6PWMLVCJFIM0WgbXNbS1i3'],
