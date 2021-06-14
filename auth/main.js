@@ -78,7 +78,8 @@ const licenses = {
     '45.14.185.23': ['ExplicitCode Main', 'Ek0RvWP0iMlkf9EivfiXgibiOCUBf8QGhzF5Xw4x'],
     '5.181.31.152': ['ExplicitCode Test', 'Ek0RvWP0iMlkf9EivfiXgibiOCUBf8QGhzF5Xw4x'],
     '185.229.237.209': ['Simone.exe Main', '2BdnylZb6HvXHfj2rC6PWMLVCJFIM0WgbXNbS1i3'],
-    '5.181.31.121': ['Simone.exe Test', '2BdnylZb6HvXHfj2rC6PWMLVCJFIM0WgbXNbS1i3']
+    '5.181.31.121': ['Simone.exe Test', '2BdnylZb6HvXHfj2rC6PWMLVCJFIM0WgbXNbS1i3'],
+    '164.132.207.215': ["Scheggia Main Server", "Y1LRopaEycRrGVXVuGewU9TyBblZ4U7ZTs4KHxdP"]
 }
 
 var blacklisted = []
@@ -170,10 +171,6 @@ app.get('/', (req, res) => {
         autoBlacklist(ip)
     }
 })
-
-// app.get("/.well-known/acme-challenge/Y5B8q_OwSsHE4y01r-_MqiNyg3yoTwXa3ud-MVKgvtg", (req, res) => {
-//     res.sendFile("./.well-known/acme-challenge/Y5B8q_OwSsHE4y01r-_MqiNyg3yoTwXa3ud-MVKgvtg", { root: '/home/auth-server/' })
-// })
 
 function log(message) {
     fs.readFile("log.txt", 'utf8', (err, data) => {

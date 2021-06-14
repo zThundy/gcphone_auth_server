@@ -14,32 +14,29 @@
 <body class="preload">
     <div id="auth-container">
         <img id="logo-pic" class="auth-login-logo" src="phone_logo.png" />
-        <form id="form-container" action="/site/login" method="post">
+        <form id="form-container" action="/recover" method="post">
             <!-- user input-->
-            <span class="sing-in-label">Sign-In</span>
-            <input class="input-box-section" type="text" name="username" placeholder="Username or Email">
-            <input class="input-box-section" type="password" name="password" placeholder="Password">
+            <span class="sing-in-label">Recover-Password</span>
+            <input class="input-box-section" type="text" name="username" placeholder="Email">
             <!-- submit button -->
             <!-- 
             <button id="input-button" class="input-button-section" type="submit" placeholder="Login">
                 <span class="bottom-text-label">Login</span>
             </button>
              -->
-            <input id="input-button" class="input-button-section" type="submit" value="Login">
-
+            <input id="input-button" class="input-button-section" type="submit" value="Recover">
+            
             <%- include('partial/captcha'); %>
         </form>
 
         <span class="bottom-divider-line"></span>
-        <span class="bottom-text-label">Haven't got an account?</span>
-        <span class="bottom-text-label" style="font-weight: bolder;">Create one <a href="/site/register">here</a>!</span>
-        <span class="bottom-text-label" style="font-weight: bolder; font-size: 16px;">Forgot password? Get new one <a href="/site/recover">here</a>!</span>
+        <span class="bottom-text-label" style="font-weight: bolder;">Back to <a href="/login">login</a> page</span>
     </div>
-
+    
     <%- include('partial/notification'); %>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="js/login.js"></script>
+    <script src="js/recover.js"></script>
 </body>
 
 </html>
