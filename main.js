@@ -1,29 +1,29 @@
 const express = require("express")
-const session = require("cookie-session")
+// const session = require("cookie-session")
 const fs = require("fs")
 const aes256 = require("aes256")
-const favicon = require("serve-favicon")
-const path = require("path")
-const http = require("http")
-const https = require("https")
+// const favicon = require("serve-favicon")
+// const path = require("path")
+// const http = require("http")
+// const https = require("https")
 
 const app = express()
 
-var privateKey = fs.readFileSync('//etc/letsencrypt/archive/phoneauth.it/privkey1.pem');
-var certificate = fs.readFileSync('//etc/letsencrypt/archive/phoneauth.it/cert1.pem');
-var credentials = { key: privateKey, cert: certificate }
+// var privateKey = fs.readFileSync('//etc/letsencrypt/archive/phoneauth.it/privkey1.pem');
+// var certificate = fs.readFileSync('//etc/letsencrypt/archive/phoneauth.it/cert1.pem');
+// var credentials = { key: privateKey, cert: certificate }
 
-var httpServer = http.createServer(app);
-var httpsServer = https.createServer(credentials, app);
+// var httpServer = http.createServer(app);
+// var httpsServer = https.createServer(credentials, app);
 // console.log(privateKey,certificate)
 
-httpServer.listen(80);
-httpsServer.listen(443);
+// httpServer.listen(80);
+// httpsServer.listen(443);
 // const io = require("io")
 // const nodemailer = require("nodemailer")
 
-const site = require("./routes/site.js")
-const dashboard = require("./routes/dashboard.js")
+// const site = require("./routes/site.js")
+// const dashboard = require("./routes/dashboard.js")
 
 // import express from 'express'
 // import session from 'cookie-session'
@@ -39,22 +39,22 @@ const dashboard = require("./routes/dashboard.js")
 // const _io = io.listen(server);
 // const port = 80
 const port = 5000
-app.set('trust proxy', 1);
-app.set('view engine', 'ejs');
-app.use(session({
-	secret: 'Yum6IiVGvC5%lguToVH4U6FaLr5PE0t7i3k5JU8RVZZFKeWEX1a8r$SNZvEzf#CLUcZ%4G1E2r9',
-    cookieName: 'session',
-    maxAge: 30 * 60 * 1000,
-    // maxAge: 1000,
-    // cookie: { secure: true },
-    httpOnly: false,
-    signed: true,
-    overwrite: false
-    // path: '/site/'
-}));
-app.use("/site", site)
-app.use("/dashboard", dashboard)
-app.use(favicon(path.join("html", 'assets', 'phone_logo.png')));
+// app.set('trust proxy', 1);
+// app.set('view engine', 'ejs');
+// app.use(session({
+// 	secret: 'Yum6IiVGvC5%lguToVH4U6FaLr5PE0t7i3k5JU8RVZZFKeWEX1a8r$SNZvEzf#CLUcZ%4G1E2r9',
+//     cookieName: 'session',
+//     maxAge: 30 * 60 * 1000,
+//     // maxAge: 1000,
+//     // cookie: { secure: true },
+//     httpOnly: false,
+//     signed: true,
+//     overwrite: false
+//     // path: '/site/'
+// }));
+// app.use("/site", site)
+// app.use("/dashboard", dashboard)
+// app.use(favicon(path.join("html", 'assets', 'phone_logo.png')));
 // app.use(express.favicon("./html/assets/phone_logo.ico")); 
 
 // const secureKey = "0&l8vUP4zU&8bdgzte3M7zTjFbd&ANkAG@EJWfJ%o1Dt!*&!jZP3wjLUhT*g2o9AKL5FZx&hRql2!piXrz5xs@4idS"
@@ -88,9 +88,9 @@ fs.readFile("./blacklist.txt", 'utf8', (err, data) => {
     blacklisted = JSON.parse(data)
 })
 
-app.get("/site", (req, res) => {
-    res.redirect("/site/login")
-})
+// app.get("/site", (req, res) => {
+//     res.redirect("/site/login")
+// })
 
 app.get('/', (req, res) => {
     let ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
@@ -105,14 +105,14 @@ app.get('/', (req, res) => {
     // args = args[1]
 
     // console.log(args.indexOf("startup:") == -1 && args.indexOf("auth") == -1)
-    if (!args.type) {
-        // res.status(403).send("CUNT")
-        // res.sendFile('./index.html', { root: '/home/auth-server/' });
-        res.redirect("/site/login")
-        log(ip + ' tryed authing without any query params, so sending index page')
-        // autoBlacklist(ip)
-        return
-    }
+    // if (!args.type) {
+    //     // res.status(403).send("CUNT")
+    //     // res.sendFile('./index.html', { root: '/home/auth-server/' });
+    //     res.redirect("/site/login")
+    //     log(ip + ' tryed authing without any query params, so sending index page')
+    //     // autoBlacklist(ip)
+    //     return
+    // }
 
     if (blacklisted.includes(ip) && !licenses[ip]) {
         log(ip + " his blacklisted OMEGALUL")
