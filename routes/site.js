@@ -86,18 +86,18 @@ router.get('/recover', (req, res) => {
 });
 
 router.post('/login', (req, res) => {
-    if (req.body["g-recaptcha-response"] === undefined || req.body["g-recaptcha-response"] === '' || req.body["g-recaptcha-response"] === null) {
-        res.render("login", { display: "", notification: "error", message: "Can't validate reCAPTCHA. Please try again." });
-        return
-    }
+    // if (req.body["g-recaptcha-response"] === undefined || req.body["g-recaptcha-response"] === '' || req.body["g-recaptcha-response"] === null) {
+    //     res.render("login", { display: "", notification: "error", message: "Can't validate reCAPTCHA. Please try again." });
+    //     return
+    // }
     // console.log(req.body)
     const verificationURL = "https://www.google.com/recaptcha/api/siteverify?secret=" + catcha_secretKey + "&response=" + req.body["g-recaptcha-response"] + "&remoteip=" + req.connection.remoteAddress;
     request(verificationURL, function(error, response, body) {
-        body = JSON.parse(body);
-        if (body.success !== undefined && !body.success) {
-            res.render("login", { display: "", notification: "error", message: "Can't validate reCAPTCHA. Please try again." });
-            return
-        }
+        // body = JSON.parse(body);
+        // if (body.success !== undefined && !body.success) {
+        //     res.render("login", { display: "", notification: "error", message: "Can't validate reCAPTCHA. Please try again." });
+        //     return
+        // }
         // Insert Login Code Here
         let username = req.body.username;
         let password = req.body.password;
@@ -125,6 +125,8 @@ router.post('/login', (req, res) => {
                                 // res.redirect('/dashboard/');
                                 // res.redirect('/dashboard/?username=' + req.session.username);
                                 res.redirect("/dashboard/");
+                                // update lastlogin
+                                mysql.makeQuery("UPDATE accounts SET last_login = CURRENT_DATE()", {});
                             } else {
                                 res.render("login", { display: "", notification: "error", message: "Wrong password" })
                                 // res.redirect('/site/login?success=false');
@@ -139,13 +141,12 @@ router.post('/login', (req, res) => {
             res.render("login", { display: "", notification: "error", message: "Username and password required" })
             // res.redirect('/site/login?success=false');
         }
-        res.json({"responseSuccess" : "Sucess"});
     });
 });
 
 router.post("/register", (req, res) => {
     if (req.body["g-recaptcha-response"] === undefined || req.body["g-recaptcha-response"] === '' || req.body["g-recaptcha-response"] === null) {
-        res.render("login", { display: "", notification: "error", message: "Can't validate reCAPTCHA. Please try again." });
+        res.render("register", { display: "", notification: "error", message: "Can't validate reCAPTCHA. Please try again." });
         return
     }
     // console.log(req.body)
@@ -153,7 +154,7 @@ router.post("/register", (req, res) => {
     request(verificationURL, function(error, response, body) {
         body = JSON.parse(body);
         if (body.success !== undefined && !body.success) {
-            res.render("login", { display: "", notification: "error", message: "Can't validate reCAPTCHA. Please try again." });
+            res.render("register", { display: "", notification: "error", message: "Can't validate reCAPTCHA. Please try again." });
             return
         }
         let username = req.body.username;
@@ -226,10 +227,10 @@ router.post("/recover", (req, res) => {
         if (re.test(String(email).toLowerCase())) {
             res.render("recover", { display: "", notification: "error", message: "This function is not implemented (yet)" });
         } else {
-            res.render("register", { display: "", notification: "error", message: "Please submit a valid email" });
+            res.render("recover", { display: "", notification: "error", message: "Please submit a valid email" });
         }
     } else {
-        res.render("register", { display: "", notification: "error", message: "Please submit a valid email" });
+        res.render("recover", { display: "", notification: "error", message: "Please submit a valid email" });
     }
     // res.redirect('/site/recover?success=false');
 });

@@ -19,7 +19,6 @@ body {
     height: 98%;
     left: .5%;
     width: 99%;
-    display: flex;
     border-radius: 20px;
 }
 
@@ -53,5 +52,59 @@ body {
     border-bottom: 1px solid #818181;
     width: 100%;
     height: 100px;
+}
 
+/* LICENSES */
+
+.dashboard-content-body {
+    width: 100%;
+    height: 50%;
+    margin-top: 80px;
+}
+
+#dashboard-liceses-form {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    margin-top: 20px;
+}
+
+#dashboard-liceses-form input {
+    width: 450px;
+    height: 46px;
+    margin-left: 50px;
+    outline: none;
+    border: none;
+    padding-left: 20px;
+    border-radius: 15px;
+    background-color: rgb(190, 190, 190);
+}
+
+#dashboard-liceses-form input:disabled {
+    background-color: rgb(114, 114, 114);
+    color: rgb(65, 65, 65); 
+}
+
+#dashboard-liceses-form button {
+    width: 150px;
+    height: 46px;
+    outline: none;
+    border: none;
+    border-radius: 20px;
+	background-color: rgb(26, 77, 10);
+	transition: all .3s ease;
+    margin-left: 50px;
+}
+
+#dashboard-liceses-form button:hover {
+	transition: all .3s ease;
+	background-color: rgb(45, 121, 21);
+	cursor: pointer;
+}
+
+.dashboard-content-title {
+    font-weight: bold;
+    color: white;
+    font-size: 30px;
+    margin-left: 50px;
 }

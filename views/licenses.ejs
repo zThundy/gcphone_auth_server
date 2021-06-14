@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="css/notification.css" />
     <link rel="stylesheet" href="css/dashboard.css" />
     <link rel="stylesheet" href="css/dropdown.css" />
+    <link rel="stylesheet" href="css/input.css" />
     <script src="https://kit.fontawesome.com/2656c82e02.js" crossorigin="anonymous"></script>
 </head>
 
@@ -22,7 +23,43 @@
             <div class="dashboard-content-header">
                 <button class="lines-button lines"><span></span></button>
             </div>
+
+            <div class="dashboard-content-body">
+                <span class="dashboard-content-title">Licenses</span>
+                <% licenses.forEach((license, i) => { %>
+                    <form id="dashboard-liceses-form" action="/dashboard/change_license:<%= i %>" method="post">
+                        <!-- user input -->
+                        
+                        <div class="col-3">
+                            <input value="<%= license.ip %>" type="text" name="ip_<%= i %>">
+                            <span class="focus-bg"></span>
+                        </div>
+                        <div class="col-3">
+                            <input value="<%= license.license %>" type="text" name="licenza_<%= i %>" disabled>
+                            <span class="focus-bg"></span>
+                        </div>
+
+                        <!-- 
+                            <div class="col-3">
+                                <input class="effect-15" type="text" placeholder="Placeholder Text">
+                                <span class="focus-bg"></span>
+                            </div>
+                        -->
+                        
+                        <button id="dashboard-form-button">
+                            <span>Submit changes</span>
+                        </button>
+                    </form>
+                <% }) %>
+                <form id="dashboard-liceses-form" action="/dashboard/regen_license" method="post">
+                    <button id="dashboard-form-button">
+                        <span>Regenerate license</span>
+                    </button>
+                </form>
+            <div>
         </div>
+
+        <%- include('partial/notification'); %>
     </div>
     
     <%- include('partial/sidebar'); %>
@@ -33,6 +70,17 @@
         $(document).ready(function () {
             setTimeout(() => {
                 $("body").removeClass("preload");
+            });
+    
+            $("#notification-button").click(() => {
+                console.log("button has been clicked")
+                $.ajax({
+                    type: 'GET',
+                    url: '/dashboard/button_press/:licenses',
+                    success: function(data) {
+                        $('.notification-container').css("display", data.display);  
+                    }
+                });
             });
         });
     </script>

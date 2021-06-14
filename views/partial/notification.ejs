@@ -14,4 +14,12 @@
             <span class="notification-button-label">OK</span>
         </button>
     </div>
+<% } else if (notification && notification == "warning") { %>
+    <div class="notification-container">
+        <i style="color: rgb(191 176 33);" id="notification-icon" class="notification-icon fas fa-exclamation-circle"></i>
+        <span class="notification-text" style="font-size: 20px;"><%= message %></span>
+        <button id="notification-button">
+            <span class="notification-button-label">OK</span>
+        </button>
+    </div>
 <% } %>

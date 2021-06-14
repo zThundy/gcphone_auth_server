@@ -4,6 +4,8 @@ const fs = require("fs")
 const aes256 = require("aes256")
 const favicon = require("serve-favicon")
 const path = require("path")
+// const io = require("io")
+// const nodemailer = require("nodemailer")
 
 const site = require("./routes/site.js")
 const dashboard = require("./routes/dashboard.js")
@@ -19,13 +21,18 @@ const dashboard = require("./routes/dashboard.js")
 // import dashboard from './routes/dashboard.js'
 
 const app = express()
+// const http = require('http')
+// const server = http.createServer(app)
+// const _io = io.listen(server);
 const port = 80
+// const port = 5000
 app.set('trust proxy', 1);
 app.set('view engine', 'ejs');
 app.use(session({
 	secret: 'Yum6IiVGvC5%lguToVH4U6FaLr5PE0t7i3k5JU8RVZZFKeWEX1a8r$SNZvEzf#CLUcZ%4G1E2r9',
     cookieName: 'session',
     maxAge: 30 * 60 * 1000,
+    // maxAge: 1000,
     // cookie: { secure: true },
     httpOnly: true,
     signed: true,
@@ -41,16 +48,18 @@ app.use(favicon(path.join("html", 'assets', 'phone_logo.png')));
 
 const licenses = {
     '185.229.237.255': ['Server di Leo', 'P7xD1gGDWVduYCb7LRuJvvd07EMCnzN2lTYkg5YN'],
+    '79.44.58.227': ['Server di Leo Test', 'P7xD1gGDWVduYCb7LRuJvvd07EMCnzN2lTYkg5YN'],
     '185.229.237.23': ['Server Mariex', 'xq2sO6BMkC6D52fEG2S5wL1PyfnSun1IYIc7luTf'],
     '185.229.237.118': ['Server Mariex Test', 'xq2sO6BMkC6D52fEG2S5wL1PyfnSun1IYIc7luTf'],
     '62.171.133.183': ['Server Don Samuele', 'kc6rjUL815yf1uwDH2j8N1qwYzhEqxMq0VCWhDbN'],
     '5.181.31.145': ['Server Don Samuele Test', 'kc6rjUL815yf1uwDH2j8N1qwYzhEqxMq0VCWhDbN'],
-    // '109.116.199.145': ['localhost', 'po82TPxrwlsiEW1GRLMpD6BHfpAmpcUVT3Eb2j2P'],
+    '93.67.236.59': ['localhost', 'po82TPxrwlsiEW1GRLMpD6BHfpAmpcUVT3Eb2j2P'],
     '5.181.31.120': ['Server Fabryy', 'DTyaIN44iwM8JWX3Xa78TXIWkjNMF1Zsri9jmdMh'],
     '185.25.204.107': ['Impero Main', 'owDfEWgmJTp8LFQWN2PL4QkFg3Ej8mywhA97obdU'],
     '185.25.206.161': ['Impero Test', 'owDfEWgmJTp8LFQWN2PL4QkFg3Ej8mywhA97obdU'],
     '5.181.31.114': ['ItsRobeez Server', 'I772zEdgEjiETyIkJ4eTY8LZhCNbjA5ZMxvs6jRg'],
     '5.181.31.115': ['Loupass69 Server', 'rV168bEWsy82Q8fFDxojNhYxbpWJ2XBQ61IkBHMf'],
+    '45.14.185.130': ['Loupass69 Server Test', 'rV168bEWsy82Q8fFDxojNhYxbpWJ2XBQ61IkBHMf'],
     '185.229.237.239': ['Vanquest Server Test', 'oIW37tjgJ9fTeiXxQW4ME3blaXBs9T4j1ZDn6Ipk'],
     '5.181.31.142': ['Vanquest Server Main', 'oIW37tjgJ9fTeiXxQW4ME3blaXBs9T4j1ZDn6Ipk'],
     '45.14.185.23': ['ExplicitCode Main', 'Ek0RvWP0iMlkf9EivfiXgibiOCUBf8QGhzF5Xw4x'],
@@ -190,6 +199,12 @@ function makeid(length) {
     }
     return result.join('');
 }
+
+// http.get("http://phoneauth.it", {
+//     lookup: function() {
+//         console.log("lookup func")
+//     }
+// });
 
 app.listen(port, () => {
     log(`Listening on port ${port}`)
