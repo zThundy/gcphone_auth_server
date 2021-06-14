@@ -25,37 +25,39 @@
             </div>
 
             <div class="dashboard-content-body">
-                <span class="dashboard-content-title">Licenses</span>
-                <% licenses.forEach((license, i) => { %>
-                    <form id="dashboard-liceses-form" action="/dashboard/change_license:<%= i %>" method="post">
-                        <!-- user input -->
-                        
-                        <div class="col-3">
-                            <input value="<%= license.ip %>" type="text" name="ip_<%= i %>">
-                            <span class="focus-bg"></span>
-                        </div>
-                        <div class="col-3">
-                            <input value="<%= license.license %>" type="text" name="licenza_<%= i %>" disabled>
-                            <span class="focus-bg"></span>
-                        </div>
-
-                        <!-- 
+                <% if (confirmed == 1) { %>
+                    <span class="dashboard-content-title">Licenses</span>
+                    <% licenses.forEach((license, i) => { %>
+                        <form id="dashboard-liceses-form" action="/dashboard/change_license:<%= i %>" method="post">
+                            <!-- user input -->
+                            
                             <div class="col-3">
-                                <input class="effect-15" type="text" placeholder="Placeholder Text">
+                                <input value="<%= license.ip %>" type="text" name="ip_<%= i %>">
                                 <span class="focus-bg"></span>
                             </div>
-                        -->
-                        
+                            <div class="col-3">
+                                <input value="<%= license.license %>" type="text" name="licenza_<%= i %>" disabled>
+                                <span class="focus-bg"></span>
+                            </div>
+
+                            <!-- 
+                                <div class="col-3">
+                                    <input class="effect-15" type="text" placeholder="Placeholder Text">
+                                    <span class="focus-bg"></span>
+                                </div>
+                            -->
+                            
+                            <button id="dashboard-form-button">
+                                <span>Submit changes</span>
+                            </button>
+                        </form>
+                    <% }) %>
+                    <form id="dashboard-liceses-form" action="/dashboard/regen_license" method="post">
                         <button id="dashboard-form-button">
-                            <span>Submit changes</span>
+                            <span>Regenerate license</span>
                         </button>
                     </form>
-                <% }) %>
-                <form id="dashboard-liceses-form" action="/dashboard/regen_license" method="post">
-                    <button id="dashboard-form-button">
-                        <span>Regenerate license</span>
-                    </button>
-                </form>
+                <% } %>
             <div>
         </div>
 

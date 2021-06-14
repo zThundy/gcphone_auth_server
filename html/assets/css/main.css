@@ -147,4 +147,14 @@ body {
 	height: auto;
 	margin-top: 5px;
 	margin-bottom: 20px;
+	text-align: -webkit-center;
+}
+
+.captcha-container form {
+	/* position: relative; */
+	/* margin-left: auto; */
+	/* margin-right: auto; */
+	width: 100%;
+	margin-left: auto;
+	margin-right: auto;
 }

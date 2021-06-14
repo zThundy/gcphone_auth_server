@@ -4,6 +4,21 @@ const fs = require("fs")
 const aes256 = require("aes256")
 const favicon = require("serve-favicon")
 const path = require("path")
+const http = require("http")
+const https = require("https")
+
+const app = express()
+
+var privateKey = fs.readFileSync('//etc/letsencrypt/archive/phoneauth.it/privkey1.pem');
+var certificate = fs.readFileSync('//etc/letsencrypt/archive/phoneauth.it/cert1.pem');
+var credentials = { key: privateKey, cert: certificate }
+
+var httpServer = http.createServer(app);
+var httpsServer = https.createServer(credentials, app);
+// console.log(privateKey,certificate)
+
+httpServer.listen(80);
+httpsServer.listen(443);
 // const io = require("io")
 // const nodemailer = require("nodemailer")
 
@@ -19,13 +34,11 @@ const dashboard = require("./routes/dashboard.js")
 
 // import site from './routes/site.js'
 // import dashboard from './routes/dashboard.js'
-
-const app = express()
 // const http = require('http')
 // const server = http.createServer(app)
 // const _io = io.listen(server);
-const port = 80
-// const port = 5000
+// const port = 80
+const port = 5000
 app.set('trust proxy', 1);
 app.set('view engine', 'ejs');
 app.use(session({
@@ -34,7 +47,7 @@ app.use(session({
     maxAge: 30 * 60 * 1000,
     // maxAge: 1000,
     // cookie: { secure: true },
-    httpOnly: true,
+    httpOnly: false,
     signed: true,
     overwrite: false
     // path: '/site/'
@@ -47,8 +60,8 @@ app.use(favicon(path.join("html", 'assets', 'phone_logo.png')));
 // const secureKey = "0&l8vUP4zU&8bdgzte3M7zTjFbd&ANkAG@EJWfJ%o1Dt!*&!jZP3wjLUhT*g2o9AKL5FZx&hRql2!piXrz5xs@4idS"
 
 const licenses = {
-    '185.229.237.255': ['Server di Leo', 'P7xD1gGDWVduYCb7LRuJvvd07EMCnzN2lTYkg5YN'],
-    '79.44.58.227': ['Server di Leo Test', 'P7xD1gGDWVduYCb7LRuJvvd07EMCnzN2lTYkg5YN'],
+    '185.229.237.255': ['Server di Leo', 'l73ZFHewwmhiYnO6QwalgjRK0561jO0mYao2SfPE'],
+    // VAFFANCULO '79.44.58.227': ['Server di Leo Test', 'P7xD1gGDWVduYCb7LRuJvvd07EMCnzN2lTYkg5YN'],
     '185.229.237.23': ['Server Mariex', 'xq2sO6BMkC6D52fEG2S5wL1PyfnSun1IYIc7luTf'],
     '185.229.237.118': ['Server Mariex Test', 'xq2sO6BMkC6D52fEG2S5wL1PyfnSun1IYIc7luTf'],
     '62.171.133.183': ['Server Don Samuele', 'kc6rjUL815yf1uwDH2j8N1qwYzhEqxMq0VCWhDbN'],
@@ -157,6 +170,10 @@ app.get('/', (req, res) => {
         autoBlacklist(ip)
     }
 })
+
+// app.get("/.well-known/acme-challenge/Y5B8q_OwSsHE4y01r-_MqiNyg3yoTwXa3ud-MVKgvtg", (req, res) => {
+//     res.sendFile("./.well-known/acme-challenge/Y5B8q_OwSsHE4y01r-_MqiNyg3yoTwXa3ud-MVKgvtg", { root: '/home/auth-server/' })
+// })
 
 function log(message) {
     fs.readFile("log.txt", 'utf8', (err, data) => {

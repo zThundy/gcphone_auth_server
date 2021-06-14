@@ -16,7 +16,7 @@ const ipformat = /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|
 // router.set("views", "./dashboard")
 
 router.get('/', (req, res) => {
-    if (req.session && req.session.loggedin && req.session.username && req.session.email && req.session.userId) {
+    if (req.session && req.session.loggedin && req.session.username && req.session.email && req.session.userId && req.session.isConfirmed) {
         // console.log(req.session.username, req.query.username)
         res.render('home', { username: req.session.username, email: req.session.email, notification: "none", message: "none" })
     } else {
@@ -26,7 +26,7 @@ router.get('/', (req, res) => {
 })
 
 router.get('/licenses', (req, res) => {
-    if (req.session && req.session.loggedin && req.session.username && req.session.email && req.session.userId) {
+    if (req.session && req.session.loggedin && req.session.username && req.session.email && req.session.userId && req.session.isConfirmed) {
         // console.log(req.session.username, req.query.username)
         mysql.makeQuery('SELECT * FROM accounts WHERE ?', { id: req.session.userId }, function(error, results, fields) {
             if (error) {
@@ -40,8 +40,9 @@ router.get('/licenses', (req, res) => {
                     // notifica di errore da fare per questa pagina
                     return
                 }
+                // console.log(results.length)
                 req.session.licenses = results
-                res.render('licenses', { username: req.session.username, email: req.session.email, licenses: results, notification: "none", message: "none" });
+                res.render('licenses', { confirmed: req.session.isConfirmed, username: req.session.username, email: req.session.email, licenses: results, notification: "none", message: "none" });
             })
         });
     } else {
@@ -51,7 +52,7 @@ router.get('/licenses', (req, res) => {
 });
 
 router.get('/account', (req, res) => {
-    if (req.session && req.session.loggedin && req.session.username && req.session.email && req.session.userId) {
+    if (req.session && req.session.loggedin && req.session.username && req.session.email && req.session.userId && req.session.isConfirmed) {
         // console.log(req.session.username, req.query.username)
         res.render('account', { username: req.session.username, email: req.session.email })
     } else {
@@ -87,7 +88,7 @@ router.post('/sidebar', (req, res) => {
 router.post("/change_license:value", (req, res) => {
     // console.log(req.params.value)
     // console.log(id)
-    if (req.session && req.session.loggedin && req.session.username && req.session.email && req.session.userId) {
+    if (req.session && req.session.loggedin && req.session.username && req.session.email && req.session.userId && req.session.isConfirmed) {
         let id = req.params.value.split(":")[1];
         if (req.session.licenses && req.session.licenses[id]) {
             let query_id = req.session.licenses[id].id;
@@ -95,13 +96,13 @@ router.post("/change_license:value", (req, res) => {
             if (new_ip.match(ipformat)) {
                 mysql.makeQuery("UPDATE licenses SET ip = ? WHERE id = ?", [new_ip, query_id])
                 req.session.licenses[id].ip = new_ip;
-                res.render('licenses', { username: req.session.username, email: req.session.email, licenses: req.session.licenses, notification: "success", message: "IP updated successfully!" });
+                res.render('licenses', { confirmed: req.session.isConfirmed, username: req.session.username, email: req.session.email, licenses: req.session.licenses, notification: "success", message: "IP updated successfully!" });
             } else {
-                res.render('licenses', { username: req.session.username, email: req.session.email, licenses: req.session.licenses, notification: "error", message: "Plase type a valid ip address" });
+                res.render('licenses', { confirmed: req.session.isConfirmed, username: req.session.username, email: req.session.email, licenses: req.session.licenses, notification: "error", message: "Plase type a valid ip address" });
                 // res.redirect("/dashboard")
             }
         } else {
-            res.render('licenses', { username: req.session.username, email: req.session.email, licenses: req.session.licenses, notification: "error", message: "There was an error on updating this entry. Please try again" });
+            res.render('licenses', { confirmed: req.session.isConfirmed, username: req.session.username, email: req.session.email, licenses: req.session.licenses, notification: "error", message: "There was an error on updating this entry. Please try again" });
             // res.redirect("/dashboard")
         }
     } else {
@@ -114,7 +115,7 @@ router.post("/regen_license", (req, res) => {
     var newLicense = makeid(40);
     let errored = false
     let date = new Date()
-    if (req.session && req.session.loggedin && req.session.username && req.session.email && req.session.userId) {
+    if (req.session && req.session.loggedin && req.session.username && req.session.email && req.session.userId && req.session.isConfirmed) {
         if (req.session.licenses) {
             for (var i in req.session.licenses) {
                 let license = req.session.licenses[i];
@@ -130,7 +131,7 @@ router.post("/regen_license", (req, res) => {
                         mysql.makeQuery("UPDATE licenses SET license = ?, last_update = CURRENT_TIME() WHERE id = ?", [license.license, license.id], function(err, _, _) {
                             if (err && !errored) {
                                 // console.log(err)
-                                res.render('licenses', { username: req.session.username, email: req.session.email, licenses: req.session.licenses, notification: "error", message: "There was an error on updating your license. Please try again" });
+                                res.render('licenses', { confirmed: req.session.isConfirmed, username: req.session.username, email: req.session.email, licenses: req.session.licenses, notification: "error", message: "There was an error on updating your license. Please try again" });
                                 // console.log("i'm here in error!")
                                 errored = true
                                 return
@@ -139,20 +140,20 @@ router.post("/regen_license", (req, res) => {
 
                         if (errored) { return }
                     } else {
-                        res.render('licenses', { username: req.session.username, email: req.session.email, licenses: req.session.licenses, notification: "error", message: "Please wait a day to regenerate your license key" });
+                        res.render('licenses', { confirmed: req.session.isConfirmed, username: req.session.username, email: req.session.email, licenses: req.session.licenses, notification: "error", message: "Please wait a day to regenerate your license key" });
                         return
                     }
                 } else {
                     // console.log("license does not exists")
-                    res.render('licenses', { username: req.session.username, email: req.session.email, licenses: req.session.licenses, notification: "error", message: "There was an error on updating your license. Please try again" });
+                    res.render('licenses', { confirmed: req.session.isConfirmed, username: req.session.username, email: req.session.email, licenses: req.session.licenses, notification: "error", message: "There was an error on updating your license. Please try again" });
                     return
                 }
             }
             // console.log("sending sucess :)")
-            res.render('licenses', { username: req.session.username, email: req.session.email, licenses: req.session.licenses, notification: "success", message: "Licenses updated successfully" });
+            res.render('licenses', { confirmed: req.session.isConfirmed, username: req.session.username, email: req.session.email, licenses: req.session.licenses, notification: "success", message: "Licenses updated successfully" });
             // console.log("success sent")
         } else {
-            res.render('licenses', { username: req.session.username, email: req.session.email, licenses: req.session.licenses, notification: "error", message: "There was an error on updating your license. Please try again" });
+            res.render('licenses', { confirmed: req.session.isConfirmed, username: req.session.username, email: req.session.email, licenses: req.session.licenses, notification: "error", message: "There was an error on updating your license. Please try again" });
             // res.redirect("/dashboard")
         }
     } else {
