@@ -1,10 +1,31 @@
 /* SITE */
-const express = require("express")
-const bodyParser = require("body-parser")
-const MySQLConnection = require("../mysql-class.js")
-const path = require("path")
-const bcrypt = require("bcrypt")
-const request = require("request")
+const express = require("express");
+const bodyParser = require("body-parser");
+const MySQLConnection = require("../mysql-class.js");
+const getEmail = require("../email.js");
+const path = require("path");
+const bcrypt = require("bcrypt");
+const request = require("request");
+
+const nodemailer = require("nodemailer");
+const smtpTransport = require('nodemailer-smtp-transport');
+
+const transporter = nodemailer.createTransport(smtpTransport({
+    host: "ssl0.ovh.net",
+    port: "587",
+    secureConnection: true,
+    auth: {
+        user: "registration@phoneauth.it",
+        pass: "Anto-13062000"
+    }
+}));
+
+var mailOptions = {
+    from: "registration@phoneauth.it",
+    to: "",
+    subject: "Confirm your email address",
+    html: "there is no content. this is a test email"
+};
 
 // import express from 'express'
 // import bodyParser from 'body-parser'
@@ -12,7 +33,7 @@ const request = require("request")
 // import path from 'path'
 // import bcrypt from 'bcrypt'
 
-const saltRounds = 20
+const saltRounds = 5
 const router = express.Router()
 const mysql = new MySQLConnection()
 const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -28,7 +49,12 @@ router.get('/login', (req, res) => {
     // console.log(req.session)
     if (req.session && req.session.loggedin && req.session.username && req.session.email && req.session.userId && req.session.isConfirmed) {
         // res.redirect('/dashboard/');
-        res.redirect("/dashboard/");
+        if (req.session.isConfirmed == 0) {
+            res.render('login', { display: "", notification: "warning", message: "Your accout is not confirmed yet" });
+            req.session = null;
+        } else {
+            res.redirect("/dashboard/");
+        }
         // res.redirect('/dashboard/?username=' + req.session.username);
     } else {
         res.render("login", { display: "", notification: "none", message: "none", captcha: res.recaptcha })
@@ -73,11 +99,16 @@ router.get('/register', (req, res) => {
 });
 
 router.get('/recover', (req, res) => {
-    if (req.session && req.session.loggedin && req.session.username && req.session.email && req.session.userId && req.session.isConfirmed) {
+    if (req.session && req.session.loggedin && req.session.username && req.session.email && req.session.userId) {
         // res.redirect('/dashboard/');
         // res.render('home', { username: req.session.username, email: req.session.email })
         // res.redirect('/dashboard/?username=' + req.session.username);
-        res.redirect("/dashboard/");
+        if (req.session.isConfirmed == 0) {
+            res.render('recover', { display: "", notification: "warning", message: "Your accout is not confirmed yet" });
+            req.session = null;
+        } else {
+            res.redirect("/dashboard/");
+        }
     } else {
         res.render("recover", { display: "", notification: "none", message: "none" });
         // res.render("recover", { message: "test message" })
@@ -127,6 +158,7 @@ router.post('/login', (req, res) => {
                         req.session.userId = results[0].id;
                         // console.log(results[0].is_confirmed)
                         req.session.isConfirmed = results[0].is_confirmed;
+                        req.session.isBuyer = results[0].is_buyer;
                         // console.log("started a new session");
                         // console.log(req.session)
                         // res.redirect('/dashboard/');
@@ -186,9 +218,33 @@ router.post("/register", (req, res) => {
                                             return
                                         }
                                         // console.log(result[0].insertId)
-                                        mysql.makeQuery("INSERT INTO licenses(account_id) VALUES(?)", [result.insertId])
-                                        mysql.makeQuery("INSERT INTO licenses(account_id) VALUES(?)", [result.insertId])
-                                        res.render("register", { display: "", notification: "success", message: "User " + username + " [" + email + "] registered succesfully" });
+                                        mysql.makeQuery("INSERT INTO licenses(account_id) VALUES(?)", [result.insertId], function(err, _, _) {
+                                            if (err) throw err;
+                                            mysql.makeQuery("INSERT INTO licenses(account_id) VALUES(?)", [result.insertId], function(err, _, _) {
+                                                if (err) throw err;
+
+                                                const verification_id = makeid(100)
+                                                mailOptions.to = email
+                                                mailOptions.html = getEmail(verification_id)
+                                                transporter.sendMail(mailOptions, (err, info) => {
+                                                    transporter.close();
+                                                    if (err) {
+                                                        res.render("register", { display: "", notification: "error", message: "There was an error on sending the verification email." });
+                                                        // console.log("there was and error", err)
+                                                    } else {
+                                                        res.render("login", { display: "", notification: "success", message: "A verification email has been sent to you email account." });
+
+                                                        mysql.makeQuery("INSERT INTO registration(account_id, registration_code) VALUES(?, ?)", [result.insertId, verification_id], function(err, result, _) {
+                                                            if (err) {
+                                                                res.render("register", { display: "", notification: "error", message: "There was an error generating the registration code. Please contant an admin" });
+                                                                return
+                                                            }
+                                                        })
+                                                        // console.log("everything went ok!", info)
+                                                    }
+                                                });
+                                            })
+                                        })
                                     });
                                     // res.sendFile('./login.html', { root: '/home/auth-server/html/' })
                                     // res.redirect('/site/register?success=true');
@@ -231,6 +287,30 @@ router.post("/register", (req, res) => {
     });
 });
 
+router.get("/c", (req, res) => {
+    res.redirect("https://phoneauth.it/")
+})
+
+router.get("/c/:value", (req, res) => {
+    // console.log("called")
+    let query = req.params.value.split(":")[1];
+    mysql.makeQuery("SELECT * FROM registration WHERE registration_code = ?", [query], function(err, result, fields) {
+        if (result[0]) {
+            // res.redirect("/login/")
+            // res.render("login", { display: "", notification: "success", message: "Account verified" });
+            res.redirect("https://phoneauth.it/")
+            mysql.makeQuery("UPDATE accounts SET is_confirmed = ? WHERE id = ?", [1, result[0].account_id])
+            mysql.makeQuery("DELETE FROM registration WHERE id = ?", [result[0].id])
+        } else {
+            // res.redirect("/login/")
+            // res.render("login", { display: "", notification: "error", message: "Cannot verify account" });
+            res.redirect("https://phoneauth.it/")
+        }
+        res.end()
+    });
+    // console.log(query)
+});
+
 router.post("/recover", (req, res) => {
     let email = req.body.username
     if (email.length > 0) {
@@ -244,5 +324,42 @@ router.post("/recover", (req, res) => {
     }
     // res.redirect('/site/recover?success=false');
 });
+
+/*
+mysql.makeQuery("SELECT * FROM accounts", {}, (err, result) => {
+    for (var i in result) {
+        let email = result[i].email
+        let account_id = result[i].id
+        const verification_id = makeid(100)
+        mailOptions.to = email
+        mailOptions.html = getEmail(verification_id)
+        transporter.sendMail(mailOptions, (err, info) => {
+            transporter.close();
+            if (err) {
+                console.log("there was and error", err)
+            } else {
+                console.log("email ok", info)
+
+                mysql.makeQuery("INSERT INTO registration(account_id, registration_code) VALUES(?, ?)", [account_id, verification_id], function(err, result, _) {
+                    if (err) {
+                        console.log(err)
+                        return
+                    }
+                })
+            }
+        });
+    }
+})
+*/
+
+function makeid(length) {
+    var result = [];
+    var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    var charactersLength = characters.length;
+    for (var i = 0; i < length; i++) {
+        result.push(characters.charAt(Math.floor(Math.random() * charactersLength)));
+    }
+    return result.join('');
+}
 
 module.exports = router;
