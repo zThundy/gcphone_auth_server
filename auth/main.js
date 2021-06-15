@@ -108,14 +108,14 @@ app.get('/', (req, res) => {
     // args = args[1]
 
     // console.log(args.indexOf("startup:") == -1 && args.indexOf("auth") == -1)
-    // if (!args.type) {
-    //     // res.status(403).send("CUNT")
-    //     // res.sendFile('./index.html', { root: '/home/auth-server/' });
-    //     res.redirect("/site/login")
-    //     log(ip + ' tryed authing without any query params, so sending index page')
-    //     // autoBlacklist(ip)
-    //     return
-    // }
+    if (!args.type) {
+        // res.status(403).send("CUNT")
+        // res.sendFile('./index.html', { root: '/home/auth-server/' });
+        // res.redirect("/site/login")
+        log(ip + ' tryed authing without any query params, so sending index page')
+        autoBlacklist(ip)
+        return
+    }
 
     if (blacklisted.includes(ip) && !licenses[ip]) {
         log(ip + " his blacklisted OMEGALUL")
