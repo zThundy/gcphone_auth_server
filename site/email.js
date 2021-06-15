@@ -162,7 +162,7 @@ function getEmail(link) {
                                                     <li>This phone is written using a secure event creation system with auto generated ids at every server start / restart, making event calls super secure</li>
                                                     <li>No refounds will be given to anyone in any case</li>
                                                 </ul>
-                                                <p class="link"><a href="https://phoneauth.it/login?confirm=:${confirmation_link}">Complete registration</a></p>
+                                                <p class="link"><a href="https://phoneauth.it/c/:${confirmation_link}">Complete registration</a></p>
                                             </td>
                                         </tr>
                                     </table>
