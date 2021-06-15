@@ -1,0 +1,199 @@
+body {
+    /* font-family: "Lato", sans-serif; */
+    font-family: "Segoe UI", sans-serif;
+}
+
+.sidebar-options-container {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 2;
+    top: 0;
+    left: 0;
+    background-color: rgb(49, 49, 49);
+    overflow-x: hidden;
+    transition: 0.3s;
+    padding-top: 60px;
+    border-right: #818181 1px solid;
+}
+
+.sidebar-options-container a, .sidebar-options-container span {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+}
+
+.sidebar-options-container a:hover, .sidebar-options-container span:hover {
+    color: #f1f1f1;
+    padding: 8px 8px 8px 42px;
+}
+
+.sidebar-options-container .sidebar-options-close-button {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+    cursor: pointer;
+}
+
+@media screen and (max-height: 450px) {
+    .sidebar-options-container {
+        padding-top: 15px;
+    }
+
+    .sidebar-options-container a {
+        font-size: 18px;
+    }
+}
+
+.sidebar-opener {
+    width: 130px;
+    margin-top: 20px;
+    margin-left: 30px;
+    font-size: 30px;
+    color: white;
+}
+
+.sidebar-opener i {
+    position: relative;
+    margin-right: 10px;
+}
+
+.logout-button {
+    text-decoration: none;
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: rgb(185, 0, 0);
+    display: block;
+    transition: 0.3s;
+    cursor: pointer;
+
+    background: none;
+    outline: none;
+    border: none;
+}
+
+.logout-button:hover {
+    color: rgb(255, 0, 0);
+    padding: 8px 8px 8px 42px;
+}
+
+.sidebar-default-logo {
+    width: 100px;
+    height: 100px;
+    padding: 8px 8px 8px 65px;
+}
+
+/* MENU LINES ANIMATION */
+
+.lines-button {
+    z-index: 1;
+    top: 10px;
+    right: 5px;
+    position: relative;
+    float: right;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+    width: 96px;
+    height: 56px;
+    font-size: 0;
+    text-indent: -9999px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    box-shadow: none;
+    border-radius: none;
+    border: none;
+    cursor: pointer;
+    -webkit-transition: background 0.3s;
+    transition: background 0.3s;
+}
+
+.lines-button:focus {
+    outline: none;
+}
+
+.lines-button span {
+    display: block;
+    position: absolute;
+    left: 18px;
+    right: 18px;
+    height: 8px;
+    background: #818181;
+    border-radius: 0.57143rem;
+}
+
+.lines-button span::before,
+.lines-button span::after {
+    position: absolute;
+    display: block;
+    left: 0;
+    width: 100%;
+    height: 8px;
+    background-color: #818181;
+    border-radius: 0.57143rem;
+    content: "";
+}
+
+.lines-button span::before {
+    top: -15px;
+}
+
+.lines-button span::after {
+    bottom: -15px;
+}
+
+.lines {
+    background: none;
+}
+
+.lines span {
+    -webkit-transition: background 0s 0.3s;
+    transition: background 0s 0.3s;
+}
+
+.lines span::before,
+.lines span::after {
+    -webkit-transition-duration: 0.3s, 0.3s;
+    transition-duration: 0.3s, 0.3s;
+}
+
+.lines span::before {
+    -webkit-transition-property: top, -webkit-transform;
+    transition-property: top, transform;
+}
+
+.lines span::after {
+    -webkit-transition-property: bottom, -webkit-transform;
+    transition-property: bottom, transform;
+}
+
+.lines.close {
+    background: none;
+}
+
+.lines.close span {
+    visibility: hidden;
+}
+
+.lines.close span::before {
+    top: 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+    visibility: visible;
+}
+
+.lines.close span::after {
+    bottom: 0;
+    -webkit-transform: rotate(-45deg);
+    -ms-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+    visibility: visible;
+}

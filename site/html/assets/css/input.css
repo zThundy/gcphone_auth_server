@@ -1,0 +1,46 @@
+/*= input focus effects css
+=========================== */
+:focus {
+    outline: none;
+}
+
+/* necessary to give position: relative to parent. */
+input[type="text"] {
+    color: #333;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.effect-15~.focus-bg:before,
+.effect-15~.focus-bg:after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 0;
+    height: 0;
+    background-color: #616161;
+    transition: 0.3s;
+    z-index: -1;
+}
+
+.effect-15:focus~.focus-bg:before {
+    transition: 0.3s;
+    left: 0;
+    top: 0;
+    height: 100%;
+}
+
+.effect-15~.focus-bg:after {
+    left: auto;
+    right: 50%;
+    top: auto;
+    bottom: 50%;
+}
+
+.effect-15:focus~.focus-bg:after {
+    transition: 0.3s;
+    height: 100%;
+    bottom: 0;
+    right: 0;
+}
