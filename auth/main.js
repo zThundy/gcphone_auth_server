@@ -61,7 +61,7 @@ const port = 5000
 
 const licenses = {
     '185.229.237.255': ['Server di Il_bomber98', 'wciLUG2p35HlylU18IZ0vK5Q6aK9jXmR62NAvzuJ'],
-    '79.44.58.227': ['Server di Leo Test', 'P7xD1gGDWVduYCb7LRuJvvd07EMCnzN2lTYkg5YN'],
+    '79.12.235.17': ['Server di Leo', 'P7xD1gGDWVduYCb7LRuJvvd07EMCnzN2lTYkg5YN'],
     '185.229.237.23': ['Server Mariex', 'xq2sO6BMkC6D52fEG2S5wL1PyfnSun1IYIc7luTf'],
     '185.229.237.118': ['Server Mariex Test', 'xq2sO6BMkC6D52fEG2S5wL1PyfnSun1IYIc7luTf'],
     '62.171.133.183': ['Server Don Samuele', 'kc6rjUL815yf1uwDH2j8N1qwYzhEqxMq0VCWhDbN'],

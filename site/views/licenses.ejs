@@ -17,7 +17,7 @@
 <body class="preload">
     <div id="background-hider">
         <div class="dashboard-header">
-            <span class="dashboard-username">Welcome <%= username %></span>
+            <span class="dashboard-username">Welcome <%= account.username %></span>
         </div>
         <div class="dashboard-container">
             <div class="dashboard-content-header">
@@ -25,35 +25,20 @@
             </div>
 
             <div class="dashboard-content-body">
-                <% if (confirmed == 1) { %>
+                <% if (account.confirmed == 1) { %>
                     <span class="dashboard-content-title">Licenses</span>
-                    <% licenses.forEach((license, i) => { %>
+                    <% account.licenses.forEach((license, i) => { %>
                         <form id="dashboard-liceses-form" action="/dashboard/change_license:<%= i %>" method="post">
-                            <!-- user input -->
+                            <input value="<%= license.ip %>" type="text" name="ip_<%= i %>">
+                            <input value="<%= license.license %>" type="text" name="licenza_<%= i %>" disabled>
                             
-                            <div class="col-3">
-                                <input value="<%= license.ip %>" type="text" name="ip_<%= i %>">
-                                <span class="focus-bg"></span>
-                            </div>
-                            <div class="col-3">
-                                <input value="<%= license.license %>" type="text" name="licenza_<%= i %>" disabled>
-                                <span class="focus-bg"></span>
-                            </div>
-
-                            <!-- 
-                                <div class="col-3">
-                                    <input class="effect-15" type="text" placeholder="Placeholder Text">
-                                    <span class="focus-bg"></span>
-                                </div>
-                            -->
-                            
-                            <button id="dashboard-form-button">
-                                <span>Submit changes</span>
+                            <button class="dashboard-form-button-accept">
+                                <span>Submit request</span>
                             </button>
                         </form>
                     <% }) %>
                     <form id="dashboard-liceses-form" action="/dashboard/regen_license" method="post">
-                        <button id="dashboard-form-button">
+                        <button class="dashboard-form-button-accept">
                             <span>Regenerate license</span>
                         </button>
                     </form>

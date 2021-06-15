@@ -159,6 +159,7 @@ router.post('/login', (req, res) => {
                         // console.log(results[0].is_confirmed)
                         req.session.isConfirmed = results[0].is_confirmed;
                         req.session.isBuyer = results[0].is_buyer;
+                        req.session.admin = results[0].admin;
                         // console.log("started a new session");
                         // console.log(req.session)
                         // res.redirect('/dashboard/');

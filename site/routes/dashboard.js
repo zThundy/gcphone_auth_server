@@ -22,7 +22,14 @@ router.get('/', (req, res) => {
             res.render('login', { display: "", notification: "warning", message: "Your accout is not confirmed yet" });
             req.session = null;
         } else {
-            res.render('home', { username: req.session.username, email: req.session.email, notification: "none", message: "none" })
+            res.render('home', {
+                account: {
+                    confirmed: req.session.isBuyer || req.session.admin,
+                    username: req.session.username,
+                    email: req.session.email,
+                    admin: req.session.admin
+                }, notification: "none", message: "none" }
+            );
         }
     } else {
         res.render('login', { display: "", notification: "warning", message: "The session expired" });
@@ -37,21 +44,39 @@ router.get('/licenses', (req, res) => {
             res.render('login', { display: "", notification: "warning", message: "Your accout is not confirmed yet" });
             req.session = null;
         } else {
-            mysql.makeQuery('SELECT * FROM accounts WHERE ?', { id: req.session.userId }, function(error, results, fields) {
+            mysql.makeQuery('SELECT * FROM accounts WHERE ?', { id: req.session.userId }, function(error, _, _) {
                 if (error) {
                     res.render("login", { display: "", notification: "error", message: "There was an error restoring the session" });
                     req.session = null;
                     return
                 }
                 // console.log("sono qui :)")
-                mysql.makeQuery("SELECT * FROM licenses WHERE ?", { account_id: req.session.userId }, function(error, results, fiels) {
+                mysql.makeQuery("SELECT * FROM licenses WHERE ?", { account_id: req.session.userId }, function(error, results, _) {
                     if (error) {
                         // notifica di errore da fare per questa pagina
                         return
                     }
-                    // console.log(results.length)
+                    // let licenses = []
+                    // for (var i in results) {
+                    //     licenses.push({
+                    //         id: results[i].id,
+                    //         account_id: results[i].account_id,
+                    //         ip: results[i].id,
+                    //         license: results[i].license,
+                    //         last_update: results[i].last_update
+                    //     })
+                    // }
+                    // console.log(account)
                     req.session.licenses = results
-                    res.render('licenses', { confirmed: req.session.isBuyer, username: req.session.username, email: req.session.email, licenses: results, notification: "none", message: "none" });
+                    res.render('licenses', {
+                        account: {
+                            confirmed: req.session.isBuyer || req.session.admin,
+                            username: req.session.username,
+                            email: req.session.email,
+                            licenses: results,
+                            admin: req.session.admin
+                        }, notification: "none", message: "none" }
+                    );
                 })
             });
         }
@@ -68,11 +93,13 @@ router.get('/account', (req, res) => {
             res.render('login', { display: "", notification: "warning", message: "Your accout is not confirmed yet" });
             req.session = null;
         } else {
-            res.render('account', { account: {
-                username: req.session.username,
-                email: req.session.email,
-                isConfirmed: req.session.isBuyer
-            }, username: req.session.username, email: req.session.email })
+            res.render('account', {
+                account: {
+                    username: req.session.username,
+                    email: req.session.email,
+                    admin: req.session.admin
+                }, notification: "none", message: "none" }
+            );
         }
     } else {
         res.render('login', { display: "", notification: "warning", message: "The session expired" });
@@ -119,13 +146,37 @@ router.post("/change_license:value", (req, res) => {
                 if (new_ip.match(ipformat)) {
                     mysql.makeQuery("UPDATE licenses SET ip = ? WHERE id = ?", [new_ip, query_id])
                     req.session.licenses[id].ip = new_ip;
-                    res.render('licenses', { confirmed: req.session.isBuyer, username: req.session.username, email: req.session.email, licenses: req.session.licenses, notification: "success", message: "IP updated successfully!" });
+                    res.render('licenses', {
+                        account: {
+                            confirmed: req.session.isBuyer || req.session.admin,
+                            username: req.session.username,
+                            email: req.session.email,
+                            licenses: req.session.licenses,
+                            admin: req.session.admin
+                        }, notification: "success", message: "IP updated successfully!" }
+                    );
                 } else {
-                    res.render('licenses', { confirmed: req.session.isBuyer, username: req.session.username, email: req.session.email, licenses: req.session.licenses, notification: "error", message: "Plase type a valid ip address" });
+                    res.render('licenses', {
+                        account: {
+                            confirmed: req.session.isBuyer || req.session.admin,
+                            username: req.session.username,
+                            email: req.session.email,
+                            licenses: req.session.licenses,
+                            admin: req.session.admin
+                        }, notification: "error", message: "Plase type a valid ip address" }
+                    );
                     // res.redirect("/dashboard")
                 }
             } else {
-                res.render('licenses', { confirmed: req.session.isBuyer, username: req.session.username, email: req.session.email, licenses: req.session.licenses, notification: "error", message: "There was an error on updating this entry. Please try again" });
+                res.render('licenses', {
+                    account: {
+                        confirmed: req.session.isBuyer || req.session.admin,
+                        username: req.session.username,
+                        email: req.session.email,
+                        licenses: req.session.licenses,
+                        admin: req.session.admin
+                    }, notification: "error", message: "There was an error on updating this entry. Please try again" }
+                );
                 // res.redirect("/dashboard")
             }
         }
@@ -159,7 +210,15 @@ router.post("/regen_license", (req, res) => {
                             mysql.makeQuery("UPDATE licenses SET license = ?, last_update = CURRENT_TIME() WHERE id = ?", [license.license, license.id], function(err, _, _) {
                                 if (err && !errored) {
                                     // console.log(err)
-                                    res.render('licenses', { confirmed: req.session.isBuyer, username: req.session.username, email: req.session.email, licenses: req.session.licenses, notification: "error", message: "There was an error on updating your license. Please try again" });
+                                    res.render('licenses', {
+                                        account: {
+                                            confirmed: req.session.isBuyer || req.session.admin,
+                                            username: req.session.username,
+                                            email: req.session.email,
+                                            licenses: req.session.licenses,
+                                            admin: req.session.admin
+                                        }, notification: "error", message: "There was an error on updating your license. Please try again" }
+                                    );
                                     // console.log("i'm here in error!")
                                     errored = true
                                     return
@@ -168,20 +227,52 @@ router.post("/regen_license", (req, res) => {
 
                             if (errored) { return }
                         } else {
-                            res.render('licenses', { confirmed: req.session.isBuyer, username: req.session.username, email: req.session.email, licenses: req.session.licenses, notification: "error", message: "Please wait a day to regenerate your license key" });
+                            res.render('licenses', {
+                                account: {
+                                    confirmed: req.session.isBuyer || req.session.admin,
+                                    username: req.session.username,
+                                    email: req.session.email,
+                                    licenses: req.session.licenses,
+                                    admin: req.session.admin
+                                }, notification: "error", message: "Please wait a day to regenerate your license key" }
+                            );
                             return
                         }
                     } else {
                         // console.log("license does not exists")
-                        res.render('licenses', { confirmed: req.session.isBuyer, username: req.session.username, email: req.session.email, licenses: req.session.licenses, notification: "error", message: "There was an error on updating your license. Please try again" });
+                        res.render('licenses', {
+                            account: {
+                                confirmed: req.session.isBuyer || req.session.admin,
+                                username: req.session.username,
+                                email: req.session.email,
+                                licenses: req.session.licenses,
+                                admin: req.session.admin
+                            }, notification: "error", message: "There was an error on updating your license. Please try again" }
+                        );
                         return
                     }
                 }
                 // console.log("sending sucess :)")
-                res.render('licenses', { confirmed: req.session.isBuyer, username: req.session.username, email: req.session.email, licenses: req.session.licenses, notification: "success", message: "Licenses updated successfully" });
+                res.render('licenses', {
+                    account: {
+                        confirmed: req.session.isBuyer || req.session.admin,
+                        username: req.session.username,
+                        email: req.session.email,
+                        licenses: req.session.licenses,
+                        admin: req.session.admin
+                    }, notification: "success", message: "Licenses updated successfully"
+                });
                 // console.log("success sent")
             } else {
-                res.render('licenses', { confirmed: req.session.isBuyer, username: req.session.username, email: req.session.email, licenses: req.session.licenses, notification: "error", message: "There was an error on updating your license. Please try again" });
+                res.render('licenses', {
+                    account: {
+                        confirmed: req.session.isBuyer || req.session.admin,
+                        username: req.session.username,
+                        email: req.session.email,
+                        licenses: req.session.licenses,
+                        admin: req.session.admin
+                    }, notification: "error", message: "There was an error on updating your license. Please try again" }
+                );
                 // res.redirect("/dashboard")
             }
         }
@@ -193,6 +284,48 @@ router.post("/regen_license", (req, res) => {
 
 router.post("/account/update_account", (req, res) => {
 
+})
+
+router.get("/admin", (req, res) => {
+    if (req.session && req.session.loggedin && req.session.username && req.session.email && req.session.userId) {
+        if (req.session.isConfirmed == 0) {
+            res.render('login', { display: "", notification: "warning", message: "Your accout is not confirmed yet" });
+            req.session = null;
+        } else {
+            mysql.makeQuery("SELECT * FROM pending_requests", {}, function(err, result, _) {
+                if (err) {
+                    res.render('admin', {
+                        account: {
+                            confirmed: req.session.isBuyer || req.session.admin,
+                            username: req.session.username,
+                            email: req.session.email,
+                            admin: req.session.admin
+                        }, notification: "error", message: "There was an error getting the requests" }
+                    );
+                    return
+                }
+                res.render('admin', {
+                    account: {
+                        confirmed: req.session.isBuyer || req.session.admin,
+                        username: req.session.username,
+                        email: req.session.email,
+                        admin: req.session.admin,
+                        requests: result
+                    }, notification: "none", message: "none" }
+                );
+            });
+        }
+    } else {
+        res.render('login', { display: "", notification: "warning", message: "The session expired" });
+    }
+})
+
+router.post("/accept_request:value", (req, res) => {
+    console.log("cazzi miei")
+    console.log(req.params)
+    console.log(req.body)
+    // console.log(req)
+    res.redirect("https://phoneauth.it/dashboard/admin")
 })
 
 router.get("/button_press/:variable", (req, res) => {
