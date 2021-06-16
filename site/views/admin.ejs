@@ -27,13 +27,14 @@
                 <span class="dashboard-content-title">Admin panel</span>
                 <% account.requests.forEach((request, i) => { %>
                     <form id="dashboard-liceses-form" action="/dashboard/accept_request:<%= i %>" method="post">
-                        <input value="<%= request.old_ip %>" type="text" name="old_ip_<%= i %>" disabled>
-                        <input value="<%= request.new_ip %>" type="text" name="new_ip_<%= i %>" disabled>
+                        <input style="width: 250px" value="<%= request.old_ip %>" type="text" name="old_ip_<%= i %>">
+                        <input style="width: 250px" value="<%= request.new_ip %>" type="text" name="new_ip_<%= i %>">
+                        <input style="width: 250px" value="<%= request.index %>" type="text" name="index_<%= i %>">
                         
-                        <button value="accept" class="dashboard-form-button-accept">
-                            <span value="accept">Accept</span>
+                        <button name="button_value" value="accept" class="dashboard-form-button-accept">
+                            <span>Accept</span>
                         </button>
-                        <button value="deny" class="dashboard-form-button-deny">
+                        <button name="button_value" value="deny" class="dashboard-form-button-deny">
                             <span>Deny</span>
                         </button>
                     </form>

@@ -144,8 +144,9 @@ router.post("/change_license:value", (req, res) => {
                 let query_id = req.session.licenses[id].id;
                 let new_ip = req.body["ip_" + id];
                 if (new_ip.match(ipformat)) {
-                    mysql.makeQuery("UPDATE licenses SET ip = ? WHERE id = ?", [new_ip, query_id])
-                    req.session.licenses[id].ip = new_ip;
+                    // mysql.makeQuery("UPDATE licenses SET ip = ? WHERE id = ?", [new_ip, query_id])
+                    mysql.makeQuery("INSERT INTO pending_requests(`index`, `old_ip`, `new_ip`, `account_id`) VALUES(?, ?, ?, ?)", [query_id, req.session.licenses[id].ip, new_ip, req.session.userId])
+                    // req.session.licenses[id].ip = new_ip;
                     res.render('licenses', {
                         account: {
                             confirmed: req.session.isBuyer || req.session.admin,
@@ -153,7 +154,7 @@ router.post("/change_license:value", (req, res) => {
                             email: req.session.email,
                             licenses: req.session.licenses,
                             admin: req.session.admin
-                        }, notification: "success", message: "IP updated successfully!" }
+                        }, notification: "success", message: "IP change has been requested to the admins!" }
                     );
                 } else {
                     res.render('licenses', {
@@ -321,11 +322,31 @@ router.get("/admin", (req, res) => {
 })
 
 router.post("/accept_request:value", (req, res) => {
-    console.log("cazzi miei")
-    console.log(req.params)
-    console.log(req.body)
+    // console.log("cazzi miei")
+    // console.log(req.params)
+    // console.log(req.body)
+    let id = req.params.value.split(":")[1]
+    if (req.body.button_value == "accept") {
+        // console.log(req.body["old_ip_" + id], req.body["new_ip_" + id])
+        mysql.makeQuery("DELETE FROM pending_requests WHERE old_ip = ? AND new_ip = ?", [req.body["old_ip_" + id], req.body["new_ip_" + id]], function(err, result, _) {
+            if (err) throw err;
+            // console.log("ok")
+            mysql.makeQuery("UPDATE licenses SET ip = ? WHERE id = ?", [req.body["new_ip_" + id], req.body["index_" + id]], function(_, _, _) {
+                if (err) throw err;
+                res.redirect("https://phoneauth.it/dashboard/admin")
+                // console.log("ok 2")
+            })
+        })
+    }
+    if (req.body.button_value == "deny") {
+        mysql.makeQuery("DELETE FROM pending_requests WHERE old_ip = ? AND new_ip = ?", [req.body["old_ip_" + id], req.body["new_ip_" + id]], function(err, result, _) {
+            if (err) throw err;
+        // console.log("ok")
+            res.redirect("https://phoneauth.it/dashboard/admin")
+            // console.log("ok 2")
+        })
+    }
     // console.log(req)
-    res.redirect("https://phoneauth.it/dashboard/admin")
 })
 
 router.get("/button_press/:variable", (req, res) => {

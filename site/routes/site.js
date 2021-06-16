@@ -316,7 +316,8 @@ router.post("/recover", (req, res) => {
     let email = req.body.username
     if (email.length > 0) {
         if (re.test(String(email).toLowerCase())) {
-            res.render("recover", { display: "", notification: "error", message: "This function is not implemented (yet)" });
+            res.redirect("https://www.youtube.com/watch?v=dQw4w9WgXcQ")
+            // res.render("recover", { display: "", notification: "error", message: "This function is not implemented (yet)" });
         } else {
             res.render("recover", { display: "", notification: "error", message: "Please submit a valid email" });
         }
