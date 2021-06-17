@@ -64,8 +64,8 @@ const licenses = {
     '79.12.235.17': ['Server di Leo', 'P7xD1gGDWVduYCb7LRuJvvd07EMCnzN2lTYkg5YN'],
     '185.229.237.23': ['Server Mariex', 'xq2sO6BMkC6D52fEG2S5wL1PyfnSun1IYIc7luTf'],
     '185.229.237.118': ['Server Mariex Test', 'xq2sO6BMkC6D52fEG2S5wL1PyfnSun1IYIc7luTf'],
-    '62.171.133.183': ['Server Don Samuele', 'kc6rjUL815yf1uwDH2j8N1qwYzhEqxMq0VCWhDbN'],
-    '5.181.31.145': ['Server Don Samuele Test', 'kc6rjUL815yf1uwDH2j8N1qwYzhEqxMq0VCWhDbN'],
+    '62.171.133.183': ['Server Don Samuele Test', 'kc6rjUL815yf1uwDH2j8N1qwYzhEqxMq0VCWhDbN'],
+    '5.181.31.145': ['Server Don Samuele', 'kc6rjUL815yf1uwDH2j8N1qwYzhEqxMq0VCWhDbN'],
     '93.67.236.59': ['localhost', 'po82TPxrwlsiEW1GRLMpD6BHfpAmpcUVT3Eb2j2P'],
     '5.181.31.120': ['Server Fabryy', 'DTyaIN44iwM8JWX3Xa78TXIWkjNMF1Zsri9jmdMh'],
     '185.25.204.107': ['Impero Main', 'owDfEWgmJTp8LFQWN2PL4QkFg3Ej8mywhA97obdU'],
@@ -81,6 +81,7 @@ const licenses = {
     '5.181.31.121': ['Simone.exe Test', '2BdnylZb6HvXHfj2rC6PWMLVCJFIM0WgbXNbS1i3'],
     '164.132.207.215': ["Scheggia Main Server", "Y1LRopaEycRrGVXVuGewU9TyBblZ4U7ZTs4KHxdP"],
     '5.181.31.90': ["Server Fil_52", "W8OlREdk8UrWvjgy7MwW016ZLRrFXiUpT7pxJyUo"],
+    '185.25.205.96': ["Server Fil_52 Test", "W8OlREdk8UrWvjgy7MwW016ZLRrFXiUpT7pxJyUo"],
     '149.202.89.29': ["Doc Server", "JiuIP4haI39YGDNo4YlFdMjqGPC37ntZJs4J5n4c"]
 }
 
@@ -109,10 +110,10 @@ app.get('/', (req, res) => {
 
     // console.log(args.indexOf("startup:") == -1 && args.indexOf("auth") == -1)
     if (!args.type) {
-        // res.status(403).send("CUNT")
+        res.status(403).send("CUNT")
         // res.sendFile('./index.html', { root: '/home/auth-server/' });
         // res.redirect("/site/login")
-        log(ip + ' tryed authing without any query params, so sending index page')
+        log(ip + ' tryed authing without any query params')
         autoBlacklist(ip)
         return
     }
