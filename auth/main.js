@@ -82,7 +82,9 @@ const licenses = {
     '164.132.207.215': ["Scheggia Main Server", "Y1LRopaEycRrGVXVuGewU9TyBblZ4U7ZTs4KHxdP"],
     '5.181.31.90': ["Server Fil_52", "W8OlREdk8UrWvjgy7MwW016ZLRrFXiUpT7pxJyUo"],
     '185.25.205.96': ["Server Fil_52 Test", "W8OlREdk8UrWvjgy7MwW016ZLRrFXiUpT7pxJyUo"],
-    '149.202.89.29': ["Doc Server", "JiuIP4haI39YGDNo4YlFdMjqGPC37ntZJs4J5n4c"]
+    '149.202.89.29': ["Doc Server", "JiuIP4haI39YGDNo4YlFdMjqGPC37ntZJs4J5n4c"],
+    '5.181.31.171': ["Server Packy Anderson", "JfJpQC5YVTrfVbLE429N29FVjQkHK1I9JxcsL3mO"],
+    '5.181.31.104': ["Spino Server", "4Rxa7TmKO8xaQXa5fHUqr0xZ6KaQjH8nGWHGGHiU"]
 }
 
 var blacklisted = []
