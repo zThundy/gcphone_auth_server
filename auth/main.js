@@ -84,7 +84,8 @@ const licenses = {
     '185.25.205.96': ["Server Fil_52 Test", "W8OlREdk8UrWvjgy7MwW016ZLRrFXiUpT7pxJyUo"],
     '149.202.89.29': ["Doc Server", "JiuIP4haI39YGDNo4YlFdMjqGPC37ntZJs4J5n4c"],
     '5.181.31.171': ["Server Packy Anderson", "JfJpQC5YVTrfVbLE429N29FVjQkHK1I9JxcsL3mO"],
-    '5.181.31.104': ["Spino Server", "4Rxa7TmKO8xaQXa5fHUqr0xZ6KaQjH8nGWHGGHiU"]
+    '5.181.31.104': ["Spino Server", "4Rxa7TmKO8xaQXa5fHUqr0xZ6KaQjH8nGWHGGHiU"],
+    '185.229.237.182': ["Crast Game Server", "iJEMPIWjyD5qC2guHaxt4F1HB2qUAJ7jpW7OU8YA"]
 }
 
 var blacklisted = []
