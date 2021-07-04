@@ -63,11 +63,13 @@ const licenses = {
     '5.88.108.132': ['localhost', 'po82TPxrwlsiEW1GRLMpD6BHfpAmpcUVT3Eb2j2P'],
     '185.229.237.255': ['Server di Il_bomber98', 'wciLUG2p35HlylU18IZ0vK5Q6aK9jXmR62NAvzuJ'],
     '79.12.235.17': ['Server di Leo', 'P7xD1gGDWVduYCb7LRuJvvd07EMCnzN2lTYkg5YN'],
+    '5.181.31.154': ["Server di Leo Test", "P7xD1gGDWVduYCb7LRuJvvd07EMCnzN2lTYkg5YN"],
     '185.229.237.23': ['Server Mariex', 'xq2sO6BMkC6D52fEG2S5wL1PyfnSun1IYIc7luTf'],
     '185.229.237.118': ['Server Mariex Test', 'xq2sO6BMkC6D52fEG2S5wL1PyfnSun1IYIc7luTf'],
     '62.171.133.183': ['Server Don Samuele Test', 'kc6rjUL815yf1uwDH2j8N1qwYzhEqxMq0VCWhDbN'],
     '5.181.31.145': ['Server Don Samuele', 'kc6rjUL815yf1uwDH2j8N1qwYzhEqxMq0VCWhDbN'],
     '5.181.31.120': ['Server Fabryy', 'DTyaIN44iwM8JWX3Xa78TXIWkjNMF1Zsri9jmdMh'],
+    '5.181.31.226': ['Server Fabryy Test', 'DTyaIN44iwM8JWX3Xa78TXIWkjNMF1Zsri9jmdMh'],
     '185.25.204.107': ['Impero Main', 'owDfEWgmJTp8LFQWN2PL4QkFg3Ej8mywhA97obdU'],
     '185.25.206.161': ['Impero Test', 'owDfEWgmJTp8LFQWN2PL4QkFg3Ej8mywhA97obdU'],
     '5.181.31.114': ['ItsRobeez Server', 'I772zEdgEjiETyIkJ4eTY8LZhCNbjA5ZMxvs6jRg'],
@@ -84,8 +86,9 @@ const licenses = {
     '185.25.205.96': ["Server Fil_52 Test", "W8OlREdk8UrWvjgy7MwW016ZLRrFXiUpT7pxJyUo"],
     '149.202.89.29': ["Doc Server", "JiuIP4haI39YGDNo4YlFdMjqGPC37ntZJs4J5n4c"],
     '5.181.31.218': ["Server Packy Anderson", "JfJpQC5YVTrfVbLE429N29FVjQkHK1I9JxcsL3mO"],
-    '5.181.31.104': ["Spino Server", "4Rxa7TmKO8xaQXa5fHUqr0xZ6KaQjH8nGWHGGHiU"],
-    '185.229.237.182': ["Crast Game Server", "iJEMPIWjyD5qC2guHaxt4F1HB2qUAJ7jpW7OU8YA"]
+    '5.181.31.171': ["Spino Server", "4Rxa7TmKO8xaQXa5fHUqr0xZ6KaQjH8nGWHGGHiU"],
+    '185.229.237.182': ["Crast Game Server", "iJEMPIWjyD5qC2guHaxt4F1HB2qUAJ7jpW7OU8YA"],
+    '37.183.105.30': ["Malik test server", "stca8mKtP22dfmeB9SRT59DTX4Sp6Nyqm4w3zk3a"]
 }
 
 var blacklisted = []
