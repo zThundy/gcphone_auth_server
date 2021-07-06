@@ -61,6 +61,7 @@ const port = 5000
 
 const licenses = {
     '5.88.108.132': ['localhost', 'po82TPxrwlsiEW1GRLMpD6BHfpAmpcUVT3Eb2j2P'],
+    '87.5.67.183': ["gasaferic", "dioporco"],
     '185.229.237.255': ['Server di Il_bomber98', 'wciLUG2p35HlylU18IZ0vK5Q6aK9jXmR62NAvzuJ'],
     '79.12.235.17': ['Server di Leo', 'P7xD1gGDWVduYCb7LRuJvvd07EMCnzN2lTYkg5YN'],
     '5.181.31.154': ["Server di Leo Test", "P7xD1gGDWVduYCb7LRuJvvd07EMCnzN2lTYkg5YN"],
@@ -89,6 +90,7 @@ const licenses = {
     '5.181.31.171': ["Spino Server", "4Rxa7TmKO8xaQXa5fHUqr0xZ6KaQjH8nGWHGGHiU"],
     '185.229.237.182': ["Crast Game Server", "iJEMPIWjyD5qC2guHaxt4F1HB2qUAJ7jpW7OU8YA"],
     '37.183.105.30': ["Malik test server", "stca8mKtP22dfmeB9SRT59DTX4Sp6Nyqm4w3zk3a"],
+    '5.181.31.122': ["Malik main Server", "stca8mKtP22dfmeB9SRT59DTX4Sp6Nyqm4w3zk3a"],
     '5.181.31.146': ["ImClod server", "qScuvrAePm2VDY7Q7T2WXkvjqcsfNU3CSy6FTyQz"]
 }
 
