@@ -3,12 +3,7 @@ const mysql = require("mysql");
 class MySQL {
     constructor(config) {
         this.config = config;
-        this.connection = mysql.createConnection({
-            host: this.config.host,
-            user: this.config.username,
-            database: this.config.database,
-            password: this.config.password
-        });
+        this.connection = mysql.createConnection(this.config);
         
         this.connection.connect(err => {
             if (err) throw err;
