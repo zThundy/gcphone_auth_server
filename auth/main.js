@@ -60,14 +60,14 @@ const port = 5000
 // const secureKey = "0&l8vUP4zU&8bdgzte3M7zTjFbd&ANkAG@EJWfJ%o1Dt!*&!jZP3wjLUhT*g2o9AKL5FZx&hRql2!piXrz5xs@4idS"
 
 const licenses = {
-    '5.88.108.132': ['localhost', 'po82TPxrwlsiEW1GRLMpD6BHfpAmpcUVT3Eb2j2P'],
+    '188.217.221.76': ['localhost', 'po82TPxrwlsiEW1GRLMpD6BHfpAmpcUVT3Eb2j2P'],
     '87.5.67.183': ["gasaferic", "dioporco"],
     '185.229.237.255': ['Server di Il_bomber98', 'wciLUG2p35HlylU18IZ0vK5Q6aK9jXmR62NAvzuJ'],
     '79.12.235.17': ['Server di Leo', 'P7xD1gGDWVduYCb7LRuJvvd07EMCnzN2lTYkg5YN'],
     '5.181.31.154': ["Server di Leo Test", "P7xD1gGDWVduYCb7LRuJvvd07EMCnzN2lTYkg5YN"],
     '185.229.237.23': ['Server Mariex', 'xq2sO6BMkC6D52fEG2S5wL1PyfnSun1IYIc7luTf'],
     '185.229.237.118': ['Server Mariex Test', 'xq2sO6BMkC6D52fEG2S5wL1PyfnSun1IYIc7luTf'],
-    '62.171.133.183': ['Server Don Samuele Test', 'kc6rjUL815yf1uwDH2j8N1qwYzhEqxMq0VCWhDbN'],
+    '2.32.22.100': ['Server Don Samuele Test', 'kc6rjUL815yf1uwDH2j8N1qwYzhEqxMq0VCWhDbN'],
     '5.181.31.145': ['Server Don Samuele', 'kc6rjUL815yf1uwDH2j8N1qwYzhEqxMq0VCWhDbN'],
     '5.181.31.120': ['Server Fabryy', 'DTyaIN44iwM8JWX3Xa78TXIWkjNMF1Zsri9jmdMh'],
     '5.181.31.226': ['Server Fabryy Test', 'DTyaIN44iwM8JWX3Xa78TXIWkjNMF1Zsri9jmdMh'],
@@ -91,7 +91,10 @@ const licenses = {
     '185.229.237.182': ["Crast Game Server", "iJEMPIWjyD5qC2guHaxt4F1HB2qUAJ7jpW7OU8YA"],
     '37.183.105.30': ["Malik test server", "stca8mKtP22dfmeB9SRT59DTX4Sp6Nyqm4w3zk3a"],
     '5.181.31.122': ["Malik main Server", "stca8mKtP22dfmeB9SRT59DTX4Sp6Nyqm4w3zk3a"],
-    '5.181.31.146': ["ImClod server", "qScuvrAePm2VDY7Q7T2WXkvjqcsfNU3CSy6FTyQz"]
+    '5.181.31.146': ["ImClod server", "qScuvrAePm2VDY7Q7T2WXkvjqcsfNU3CSy6FTyQz"],
+    '5.94.240.74': ["MattkLaurence server", "g5pwuxQPaf7krRTQ7BwPcxmCABn2WDja3rz7TbDr"],
+    '79.12.145.35': ["LordXenaroth server test", "Mqu0O4TlnRucXdx9ojZBTyDU20t1cbRxzwtES25L"],
+    '5.181.31.229': ["LordXenaroth server main", "Mqu0O4TlnRucXdx9ojZBTyDU20t1cbRxzwtES25L"]
 }
 
 var blacklisted = []
