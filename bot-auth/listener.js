@@ -1,7 +1,6 @@
 const fs = require("fs");
 const c = require("./colors");
 const colors = new c();
-const discord = require("discord.js");
 
 const utils = require("./utils");
 
@@ -42,7 +41,7 @@ class Listener {
                     var cmd = message.content.substr(this.config.bot_info.command_prefix.length, message.content.length);
                     // check if the command is correct and exists with the public listener
                     if (this.commands[cmd] && this.commands[cmd].onMessage) {
-                        this.commands[cmd].onMessage(message, message.channel, message.guild, this.connection);
+                        this.commands[cmd].onMessage(message, message.channel, message.guild, {conn: this.connection});
                         console.log(colors.changeBackground("green", "Command/listener " + cmd + " executed"));
                     } else {
                         console.log(colors.changeBackground("red", "Command/listener " + cmd + " not found"));
@@ -55,7 +54,7 @@ class Listener {
                 var cmd = message.content.substr(this.config.bot_info.command_prefix.length, message.content.length);
                 // check if the command is correct and exists with the private listener
                 if (this.commands[cmd] && this.commands[cmd].onPrivateMessage) {
-                    this.commands[cmd].onPrivateMessage(message, message.channel);
+                    this.commands[cmd].onPrivateMessage(message, message.channel, false, {conn: this.connection});
                     console.log(colors.changeBackground("green", "Private command/listener " + cmd + " executed"));
                 } else {
                     console.log(colors.changeBackground("red", "Private command/listener " + cmd + " not found"));
@@ -66,6 +65,22 @@ class Listener {
 
         this.client.on("guildMemberUpdate", (oldMember, newMember) => {
             console.log("member updated");
+        })
+
+        this.client.on("clickButton", async (button) => {
+            for (var index in this.commands) {
+                if (this.commands[index].onbuttonClick && this.commands[index].definedButtons && this.commands[index].definedButtons.find(btn => btn === button.id)) {
+                    this.connection.query("SELECT * FROM licenses WHERE discord_id = ?", [button.clicker.id], (err, r, fields) => {
+                        if (r && r[0]) {
+                            this.commands[index].onbuttonClick(button, button.message, button.channel, {conn: this.connection, account_id: r[0].id });
+                        } else {
+                            button.message.edit(utils.noEmbed("There was an error 😰"));
+                            button.reply.defer();
+                        }
+                    })
+                    break;
+                }
+            }
         })
     }
 }
