@@ -1,6 +1,6 @@
 const discord = require("discord.js");
 
-module.exports.yesEmbed = (message) => {
+module.exports.yesEmbed = (message, channel) => {
     /**
      * @param {message} message the message you want to visualize as success embed
     */
@@ -9,10 +9,14 @@ module.exports.yesEmbed = (message) => {
         .setTitle(message)
         .setTimestamp()
         .setFooter('Made with ❤️ by zThundy__')
-    return embed;
+    channel.send(embed).then(msg => {
+        setTimeout(() => {
+            msg.delete();
+        }, 10000);
+    });
 }
 
-module.exports.noEmbed = (message) => {
+module.exports.noEmbed = (message, channel) => {
     /**
      * @param {message} message the message you want to visualize as errored embed
     */
@@ -21,7 +25,11 @@ module.exports.noEmbed = (message) => {
         .setTitle(message)
         .setTimestamp()
         .setFooter('Made with ❤️ by zThundy__')
-    return embed;
+    channel.send(embed).then(msg => {
+        setTimeout(() => {
+            msg.delete();
+        }, 10000);
+    });
 }
 
 module.exports.createLicense = (length) => {

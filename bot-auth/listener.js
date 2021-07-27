@@ -22,6 +22,7 @@ class Listener {
                 var cmd_name = file.substr(0, file.length - 3);
                 // add the command to the commands list for future calls
                 this.commands[cmd_name] = require("./commands/" + cmd_name);
+                if (this.commands[cmd_name].init) { this.commands[cmd_name].init(this.client, this.connection); }
                 console.log("Registered command " + colors.changeColor("green", cmd_name));
             })
         })
@@ -29,6 +30,8 @@ class Listener {
 
     start() {
         this.client.on("message", (message) => {
+            // check if the message contains the command prefix
+            if (message.content.indexOf(this.config.bot_info.command_prefix) == -1) return;
             // check if the sender of the message is a bot or not
             // if it is, them ignore everything happens
             if (message.author.bot) return;
@@ -36,16 +39,16 @@ class Listener {
             if (message.channel.type === "text") {
                 if (message.guild.id !== this.config.guild_info.guild_id) return; // maybe implement autodestruction of bot in the wrong guild?
                 // check if message is coming from the correct channel defined in config.js
-                if (message.channel.id === this.config.guild_info.channel_id && message.content.indexOf(this.config.bot_info.command_prefix) == 0) {
+                if (message.channel.id === this.config.guild_info.channel_id) {
                     // subtract from the content of the message the prefix
                     var cmd = message.content.substr(this.config.bot_info.command_prefix.length, message.content.length);
                     // check if the command is correct and exists with the public listener
                     if (this.commands[cmd] && this.commands[cmd].onMessage) {
-                        this.commands[cmd].onMessage(message, message.channel, message.guild, {conn: this.connection});
+                        this.commands[cmd].onMessage(message, message.channel, message.guild, {conn: this.connection, client: this.client});
                         console.log(colors.changeBackground("green", "Command/listener " + cmd + " executed"));
                     } else {
                         console.log(colors.changeBackground("red", "Command/listener " + cmd + " not found"));
-                        message.channel.send(utils.noEmbed("Command not found 🤨"));
+                        utils.noEmbed("Command not found 🤨", message.channel);
                     }
                 }
             // check if message is coming from dm's
@@ -54,33 +57,17 @@ class Listener {
                 var cmd = message.content.substr(this.config.bot_info.command_prefix.length, message.content.length);
                 // check if the command is correct and exists with the private listener
                 if (this.commands[cmd] && this.commands[cmd].onPrivateMessage) {
-                    this.commands[cmd].onPrivateMessage(message, message.channel, false, {conn: this.connection});
+                    this.commands[cmd].onPrivateMessage(message, message.channel, false, {conn: this.connection, client: this.client});
                     console.log(colors.changeBackground("green", "Private command/listener " + cmd + " executed"));
                 } else {
                     console.log(colors.changeBackground("red", "Private command/listener " + cmd + " not found"));
-                    message.channel.send(utils.noEmbed("Command not found 🤨"));
+                    utils.noEmbed("Command not found 🤨", message.channel);
                 }
             }
         })
 
         this.client.on("guildMemberUpdate", (oldMember, newMember) => {
             console.log("member updated");
-        })
-
-        this.client.on("clickButton", async (button) => {
-            for (var index in this.commands) {
-                if (this.commands[index].onbuttonClick && this.commands[index].definedButtons && this.commands[index].definedButtons.find(btn => btn === button.id)) {
-                    this.connection.query("SELECT * FROM licenses WHERE discord_id = ?", [button.clicker.id], (err, r, fields) => {
-                        if (r && r[0]) {
-                            this.commands[index].onbuttonClick(button, button.message, button.channel, {conn: this.connection, account_id: r[0].id });
-                        } else {
-                            button.message.edit(utils.noEmbed("There was an error 😰"));
-                            button.reply.defer();
-                        }
-                    })
-                    break;
-                }
-            }
         })
     }
 }
