@@ -92,9 +92,10 @@ const licenses = {
     '37.183.105.30': ["Malik test server", "stca8mKtP22dfmeB9SRT59DTX4Sp6Nyqm4w3zk3a"],
     '5.181.31.122': ["Malik main Server", "stca8mKtP22dfmeB9SRT59DTX4Sp6Nyqm4w3zk3a"],
     '5.181.31.146': ["ImClod server", "qScuvrAePm2VDY7Q7T2WXkvjqcsfNU3CSy6FTyQz"],
-    '5.94.240.74': ["MattkLaurence server", "g5pwuxQPaf7krRTQ7BwPcxmCABn2WDja3rz7TbDr"],
+    '93.70.80.140': ["MattkLaurence server", "g5pwuxQPaf7krRTQ7BwPcxmCABn2WDja3rz7TbDr"],
     '79.12.145.35': ["LordXenaroth server test", "Mqu0O4TlnRucXdx9ojZBTyDU20t1cbRxzwtES25L"],
-    '5.181.31.229': ["LordXenaroth server main", "Mqu0O4TlnRucXdx9ojZBTyDU20t1cbRxzwtES25L"]
+    '5.181.31.229': ["LordXenaroth server main", "Mqu0O4TlnRucXdx9ojZBTyDU20t1cbRxzwtES25L"],
+    '5.181.31.103': ["Filoceste server main", "DaVgkHrjQP9uLVlFOTAOq4ZJmG1y5U0ba8zloDFj"]
 }
 
 var blacklisted = []
