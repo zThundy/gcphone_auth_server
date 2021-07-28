@@ -31,7 +31,7 @@ class Listener {
     start() {
         this.client.on("message", (message) => {
             // check if the message contains the command prefix
-            if (message.content.indexOf(this.config.bot_info.command_prefix) == -1) return;
+            if (message.content.indexOf(this.config.bot_info.command_prefix) == -1 || message.content.indexOf(this.config.bot_info.command_prefix) > 0) return;
             // check if the sender of the message is a bot or not
             // if it is, them ignore everything happens
             if (message.author.bot) return;
@@ -66,9 +66,9 @@ class Listener {
             }
         })
 
-        this.client.on("guildMemberUpdate", (oldMember, newMember) => {
-            console.log("member updated");
-        })
+        // this.client.on("guildMemberUpdate", (oldMember, newMember) => {
+        //     console.log("member updated");
+        // })
     }
 }
 

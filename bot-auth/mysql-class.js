@@ -13,9 +13,9 @@ class MySQL {
     }
 
     startKeepAlive() {
-        setInterval(this.startKeepAlive, 600000);
-        this.connection.query("SELECT NULL");
         console.log("Fired Keep-Alive");
+        setInterval(() => { this.startKeepAlive() }, 600000);
+        this.connection.query("SELECT NULL");
     }
 }
 
