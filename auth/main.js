@@ -87,7 +87,7 @@ const licenses = {
     '185.25.205.96': ["Server Fil_52 Test", "W8OlREdk8UrWvjgy7MwW016ZLRrFXiUpT7pxJyUo"],
     '149.202.89.29': ["Doc Server", "JiuIP4haI39YGDNo4YlFdMjqGPC37ntZJs4J5n4c"],
     '5.181.31.218': ["Server Packy Anderson", "JfJpQC5YVTrfVbLE429N29FVjQkHK1I9JxcsL3mO"],
-    '5.181.31.171': ["Spino Server", "4Rxa7TmKO8xaQXa5fHUqr0xZ6KaQjH8nGWHGGHiU"],
+    '5.181.31.236': ["Spino Server", "4Rxa7TmKO8xaQXa5fHUqr0xZ6KaQjH8nGWHGGHiU"],
     '185.229.237.182': ["Crast Game Server", "iJEMPIWjyD5qC2guHaxt4F1HB2qUAJ7jpW7OU8YA"],
     '37.183.105.30': ["Malik test server", "stca8mKtP22dfmeB9SRT59DTX4Sp6Nyqm4w3zk3a"],
     '5.181.31.122': ["Malik main Server", "stca8mKtP22dfmeB9SRT59DTX4Sp6Nyqm4w3zk3a"],
@@ -95,7 +95,9 @@ const licenses = {
     '93.70.80.140': ["MattkLaurence server", "g5pwuxQPaf7krRTQ7BwPcxmCABn2WDja3rz7TbDr"],
     '79.12.145.35': ["LordXenaroth server test", "Mqu0O4TlnRucXdx9ojZBTyDU20t1cbRxzwtES25L"],
     '5.181.31.229': ["LordXenaroth server main", "Mqu0O4TlnRucXdx9ojZBTyDU20t1cbRxzwtES25L"],
-    '5.181.31.103': ["Filoceste server main", "DaVgkHrjQP9uLVlFOTAOq4ZJmG1y5U0ba8zloDFj"]
+    '5.181.31.103': ["Filoceste server main", "DaVgkHrjQP9uLVlFOTAOq4ZJmG1y5U0ba8zloDFj"],
+    '193.70.1.58': ["Samu Evos server", "p6QD38fe1tDOPnmv4qccGjh2N4E0tFtPjVnwvElF"],
+    '5.181.31.162': ["Samu Evos Test Server", "p6QD38fe1tDOPnmv4qccGjh2N4E0tFtPjVnwvElF"]
 }
 
 var blacklisted = []
