@@ -7,6 +7,7 @@ const { MessageButton, MessageActionRow } = require("discord-buttons");
 const buttons = [];
 const listeningForMessage = [];
 const ipformat = /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
+const day_ms = 86400000;
 
 const updateRequest = () => {
     const options = {
@@ -159,6 +160,9 @@ exports.onPrivateMessage = (message, channel, guild, _extradata) => {
     buttons["yes_change_license"] = (extradata, message, edit) => {
         _extradata.conn.query("SELECT * FROM licenses WHERE discord_id = ?", [extradata.clicker.id], (err, r, fields) => {
             if (err) throw err;
+            let date = new Date(r[0].last_update);
+            let current_date = new Date();
+            if (Number(current_date - date) < day_ms) return utils.noEmbed("You can regenerate a license only after 5 days 😰", channel);
             let new_license = utils.createLicense(40);
             _extradata.conn.query("UPDATE licenses SET license = ? WHERE discord_id = ?", [new_license, extradata.clicker.id], (err, l, _) => {
                 if (err) throw err;
