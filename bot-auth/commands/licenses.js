@@ -162,7 +162,7 @@ exports.onPrivateMessage = (message, channel, guild, _extradata) => {
             if (err) throw err;
             let date = new Date(r[0].last_update);
             let current_date = new Date();
-            if (Number(current_date - date) < day_ms) return utils.noEmbed("You can regenerate a license only after 5 days 😰", channel);
+            if (Number(current_date - date) < Number(day_ms * 5)) return utils.noEmbed("You can regenerate a license only after 5 days 😰", channel);
             let new_license = utils.createLicense(40);
             _extradata.conn.query("UPDATE licenses SET license = ? WHERE discord_id = ?", [new_license, extradata.clicker.id], (err, l, _) => {
                 if (err) throw err;

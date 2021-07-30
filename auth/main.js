@@ -80,7 +80,7 @@ const licenses = {
     '5.181.31.142': ['Vanquest Server Main', 'oIW37tjgJ9fTeiXxQW4ME3blaXBs9T4j1ZDn6Ipk'],
     '45.14.185.23': ['ExplicitCode Main', 'Ek0RvWP0iMlkf9EivfiXgibiOCUBf8QGhzF5Xw4x'],
     '5.181.31.152': ['ExplicitCode Test', 'Ek0RvWP0iMlkf9EivfiXgibiOCUBf8QGhzF5Xw4x'],
-    '185.229.237.209': ['Simone.exe Main', '2BdnylZb6HvXHfj2rC6PWMLVCJFIM0WgbXNbS1i3'],
+    '164.132.203.223': ['Simone.exe Main', '2BdnylZb6HvXHfj2rC6PWMLVCJFIM0WgbXNbS1i3'],
     '5.181.31.121': ['Simone.exe Test', '2BdnylZb6HvXHfj2rC6PWMLVCJFIM0WgbXNbS1i3'],
     '164.132.207.215': ["Scheggia Main Server", "Y1LRopaEycRrGVXVuGewU9TyBblZ4U7ZTs4KHxdP"],
     '5.181.31.90': ["Server Fil_52", "W8OlREdk8UrWvjgy7MwW016ZLRrFXiUpT7pxJyUo"],
