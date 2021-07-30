@@ -30,8 +30,6 @@ class Listener {
 
     start() {
         this.client.on("message", (message) => {
-            // check if the message contains the command prefix
-            if (message.content.indexOf(this.config.bot_info.command_prefix) == -1 || message.content.indexOf(this.config.bot_info.command_prefix) > 0) return;
             // check if the sender of the message is a bot or not
             // if it is, them ignore everything happens
             if (message.author.bot) return;
@@ -40,6 +38,12 @@ class Listener {
                 if (message.guild.id !== this.config.guild_info.guild_id) return; // maybe implement autodestruction of bot in the wrong guild?
                 // check if message is coming from the correct channel defined in config.js
                 if (message.channel.id === this.config.guild_info.channel_id) {
+                    // check again if message contains the command prefix, if not then delete the message and do
+                    // not execute anything
+                    if (message.content.indexOf(this.config.bot_info.command_prefix) == -1 || message.content.indexOf(this.config.bot_info.command_prefix) > 0) {
+                        utils.noEmbed("Please send a valid message 🤨", message.channel);
+                        return message.delete();
+                    }
                     // subtract from the content of the message the prefix
                     var cmd = message.content.substr(this.config.bot_info.command_prefix.length, message.content.length);
                     // check if the command is correct and exists with the public listener
@@ -49,10 +53,13 @@ class Listener {
                     } else {
                         console.log(colors.changeBackground("red", "Command/listener " + cmd + " not found"));
                         utils.noEmbed("Command not found 🤨", message.channel);
+                        message.delete();
                     }
                 }
             // check if message is coming from dm's
             } else if (message.channel.type === "dm") {
+                // check if dm message contains the command prefix else don't do anything
+                if (message.content.indexOf(this.config.bot_info.command_prefix) == -1 || message.content.indexOf(this.config.bot_info.command_prefix) > 0) return;
                 // subtract from the content of the message the prefix
                 var cmd = message.content.substr(this.config.bot_info.command_prefix.length, message.content.length);
                 // check if the command is correct and exists with the private listener
@@ -62,6 +69,7 @@ class Listener {
                 } else {
                     console.log(colors.changeBackground("red", "Private command/listener " + cmd + " not found"));
                     utils.noEmbed("Command not found 🤨", message.channel);
+                    message.delete();
                 }
             }
         })
