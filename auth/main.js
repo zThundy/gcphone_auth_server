@@ -73,15 +73,15 @@ const licenses = {
     '5.181.31.226': ['Server Fabryy Test', 'DTyaIN44iwM8JWX3Xa78TXIWkjNMF1Zsri9jmdMh'],
     '185.25.204.107': ['Impero Main', 'owDfEWgmJTp8LFQWN2PL4QkFg3Ej8mywhA97obdU'],
     '185.25.206.161': ['Impero Test', 'owDfEWgmJTp8LFQWN2PL4QkFg3Ej8mywhA97obdU'],
-    '5.181.31.114': ['ItsRobeez Server', 'I772zEdgEjiETyIkJ4eTY8LZhCNbjA5ZMxvs6jRg'],
+    '185.229.237.121': ['ItsRobeez Server', 'I772zEdgEjiETyIkJ4eTY8LZhCNbjA5ZMxvs6jRg'],
     '5.181.31.115': ['Loupass69 Server', 'rV168bEWsy82Q8fFDxojNhYxbpWJ2XBQ61IkBHMf'],
     '5.181.31.108': ['Loupass69 Server Test', 'rV168bEWsy82Q8fFDxojNhYxbpWJ2XBQ61IkBHMf'],
     '185.229.237.239': ['Vanquest Server Test', 'oIW37tjgJ9fTeiXxQW4ME3blaXBs9T4j1ZDn6Ipk'],
     '5.181.31.142': ['Vanquest Server Main', 'oIW37tjgJ9fTeiXxQW4ME3blaXBs9T4j1ZDn6Ipk'],
     '45.14.185.23': ['ExplicitCode Main', 'Ek0RvWP0iMlkf9EivfiXgibiOCUBf8QGhzF5Xw4x'],
     '5.181.31.152': ['ExplicitCode Test', 'Ek0RvWP0iMlkf9EivfiXgibiOCUBf8QGhzF5Xw4x'],
-    '164.132.203.223': ['Simone.exe Main', '2BdnylZb6HvXHfj2rC6PWMLVCJFIM0WgbXNbS1i3'],
-    '5.181.31.121': ['Simone.exe Test', '2BdnylZb6HvXHfj2rC6PWMLVCJFIM0WgbXNbS1i3'],
+    '164.132.203.223': ['SaToX Main', '2BdnylZb6HvXHfj2rC6PWMLVCJFIM0WgbXNbS1i3'],
+    '5.181.31.121': ['SaToX Test', '2BdnylZb6HvXHfj2rC6PWMLVCJFIM0WgbXNbS1i3'],
     '164.132.207.215': ["Scheggia Main Server", "Y1LRopaEycRrGVXVuGewU9TyBblZ4U7ZTs4KHxdP"],
     '5.181.31.90': ["Server Fil_52", "W8OlREdk8UrWvjgy7MwW016ZLRrFXiUpT7pxJyUo"],
     '185.25.205.96': ["Server Fil_52 Test", "W8OlREdk8UrWvjgy7MwW016ZLRrFXiUpT7pxJyUo"],
@@ -96,8 +96,10 @@ const licenses = {
     '79.12.145.35': ["LordXenaroth server test", "Mqu0O4TlnRucXdx9ojZBTyDU20t1cbRxzwtES25L"],
     '5.181.31.229': ["LordXenaroth server main", "Mqu0O4TlnRucXdx9ojZBTyDU20t1cbRxzwtES25L"],
     '5.181.31.103': ["Filoceste server main", "DaVgkHrjQP9uLVlFOTAOq4ZJmG1y5U0ba8zloDFj"],
-    '193.70.1.58': ["Samu Evos server", "p6QD38fe1tDOPnmv4qccGjh2N4E0tFtPjVnwvElF"],
-    '5.181.31.162': ["Samu Evos Test Server", "p6QD38fe1tDOPnmv4qccGjh2N4E0tFtPjVnwvElF"]
+    '5.181.31.66': ["Edo server", "p6QD38fe1tDOPnmv4qccGjh2N4E0tFtPjVnwvElF"],
+    '138.201.255.68': ["Vuitton Server", "gcMLa7mgfJ7q8oK4NdRkB7KLnxSEjBbJ7n6yQsyy"],
+    '193.70.1.58': ["Samu Evos Server", "7PXfdR4XeHY3ExXcyi6YBQFraTrJFLdeAMxemFBE"],
+    '5.181.31.162': ["Samu Evos Test Server", "7PXfdR4XeHY3ExXcyi6YBQFraTrJFLdeAMxemFBE"]
 }
 
 var blacklisted = []
@@ -158,7 +160,7 @@ app.get('/', (req, res) => {
         if (args.indexOf("startup:") == 0) {
             if (licenses[ip][1] == args.split(":")[1]) {
                 res.status(200).send("Correct auth :)")
-                log(ip + ' started successfully')
+                log(ip + ' started successfully | ' + licenses[ip][0])
             } else {
                 res.status(403).send("CUNT")
                 log(ip + ' has been blocked because of startup failure')
@@ -178,7 +180,7 @@ app.get('/', (req, res) => {
             var encrypted = aes256.encrypt(licenses[ip][1], string)
             // console.log(encrypted)
             res.status(200).send(encrypted)
-            log(ip + ' authed successfully')
+            log(ip + ' authed successfully | ' + licenses[ip][0])
             // console.log(ip)
             // console.log(args)
             // console.log(licenses[ip])
