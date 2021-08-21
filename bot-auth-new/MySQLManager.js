@@ -57,7 +57,7 @@ class MySQLManager {
 
     updateSettingsByUserId(user_id, settings) {
         if (this.connection == undefined) { throw this.langManager.getString("CONNECTION_NOT_AVAILABLE"); }
-        this.connection.query(this.getPreparedStatement("UPDATE licenses SET settings = ? WHERE user_id = ?", [user_id, settings]), function (err, result, fields) {
+        this.connection.query(this.getPreparedStatement("UPDATE licenses SET settings = ? WHERE user_id = ?", [settings, user_id]), function (err, result, fields) {
             if (err) throw err;
         });
     }
