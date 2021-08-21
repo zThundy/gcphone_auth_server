@@ -60,10 +60,10 @@ const port = 5000
 // const secureKey = "0&l8vUP4zU&8bdgzte3M7zTjFbd&ANkAG@EJWfJ%o1Dt!*&!jZP3wjLUhT*g2o9AKL5FZx&hRql2!piXrz5xs@4idS"
 
 const licenses = {
-    '188.217.221.76': ['localhost', 'po82TPxrwlsiEW1GRLMpD6BHfpAmpcUVT3Eb2j2P'],
+    '37.183.248.215': ['localhost', 'po82TPxrwlsiEW1GRLMpD6BHfpAmpcUVT3Eb2j2P'],
     '87.5.67.183': ["gasaferic", "dioporco"],
     '185.229.237.255': ['Server di Il_bomber98', 'wciLUG2p35HlylU18IZ0vK5Q6aK9jXmR62NAvzuJ'],
-    '79.12.235.17': ['Server di Leo', 'P7xD1gGDWVduYCb7LRuJvvd07EMCnzN2lTYkg5YN'],
+    '51.178.68.203': ['Server di Leo', 'P7xD1gGDWVduYCb7LRuJvvd07EMCnzN2lTYkg5YN'],
     '5.181.31.154': ["Server di Leo Test", "P7xD1gGDWVduYCb7LRuJvvd07EMCnzN2lTYkg5YN"],
     '185.229.237.23': ['Server Mariex', 'xq2sO6BMkC6D52fEG2S5wL1PyfnSun1IYIc7luTf'],
     '185.229.237.118': ['Server Mariex Test', 'xq2sO6BMkC6D52fEG2S5wL1PyfnSun1IYIc7luTf'],
@@ -73,7 +73,7 @@ const licenses = {
     '5.181.31.226': ['Server Fabryy Test', 'DTyaIN44iwM8JWX3Xa78TXIWkjNMF1Zsri9jmdMh'],
     '185.25.204.107': ['Impero Main', 'owDfEWgmJTp8LFQWN2PL4QkFg3Ej8mywhA97obdU'],
     '185.25.206.161': ['Impero Test', 'owDfEWgmJTp8LFQWN2PL4QkFg3Ej8mywhA97obdU'],
-    '185.229.237.121': ['ItsRobeez Server', 'I772zEdgEjiETyIkJ4eTY8LZhCNbjA5ZMxvs6jRg'],
+    '5.181.31.214': ['ItsRobeez Server', 'I772zEdgEjiETyIkJ4eTY8LZhCNbjA5ZMxvs6jRg'],
     '5.181.31.115': ['Loupass69 Server', 'rV168bEWsy82Q8fFDxojNhYxbpWJ2XBQ61IkBHMf'],
     '5.181.31.108': ['Loupass69 Server Test', 'rV168bEWsy82Q8fFDxojNhYxbpWJ2XBQ61IkBHMf'],
     '185.229.237.239': ['Vanquest Server Test', 'oIW37tjgJ9fTeiXxQW4ME3blaXBs9T4j1ZDn6Ipk'],
@@ -99,7 +99,8 @@ const licenses = {
     '5.181.31.66': ["Edo server", "p6QD38fe1tDOPnmv4qccGjh2N4E0tFtPjVnwvElF"],
     '138.201.255.68': ["Vuitton Server", "gcMLa7mgfJ7q8oK4NdRkB7KLnxSEjBbJ7n6yQsyy"],
     '193.70.1.58': ["Samu Evos Server", "7PXfdR4XeHY3ExXcyi6YBQFraTrJFLdeAMxemFBE"],
-    '5.181.31.162': ["Samu Evos Test Server", "7PXfdR4XeHY3ExXcyi6YBQFraTrJFLdeAMxemFBE"]
+    '5.181.31.162': ["Samu Evos Test Server", "7PXfdR4XeHY3ExXcyi6YBQFraTrJFLdeAMxemFBE"],
+    '164.132.203.150': ["Marco-Ombra Server", "6yN6oJsrRBYPH9nz3ejks7jiqMH4sNNjL3xTc37s"]
 }
 
 var blacklisted = []
