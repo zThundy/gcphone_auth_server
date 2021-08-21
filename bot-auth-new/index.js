@@ -16,7 +16,6 @@ var authServerSocket;
 const io = require('socket.io')(6969);
 
 io.on('connection', (IOSocket) => {
-  if (IOSocket.handshake.auth.token == config.authToken) { IOSocket.disconnect(); return; }
   authServerSocket = IOSocket;
   eventEmitter.emit('onIPUpdate');
 });
@@ -26,6 +25,14 @@ var mysqlConnectionParams = config.mysql;
 
 const TokenManager = require('./token/TokenManager');
 
+// Anti-Spam
+
+const interactionDelay = new Map();
+interactionDelay.set("button", []);
+interactionDelay.set("contextMenu", []);
+
+interactionDelay.set("command", []);
+
 // Commands Classes
 
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
@@ -33,6 +40,9 @@ const commands = new Map();
 for (const file of commandFiles) {
   const command = require(`./commands/${file}`);
   commands.set(command.data.name.toLowerCase().replaceAll(" ", ""), command);
+  if (command.data.spamDelay) {
+    interactionDelay.get("command").set(command.data.name.toLowerCase().replaceAll(" ", ""), []);
+  }
 }
 
 // Room Classes
@@ -81,7 +91,7 @@ client.once("ready", () => {
 
   saveConfig();
 
-  /*console.log("Cleaning commands for guild", config.authoritativeDiscord + "...");
+  console.log("Cleaning commands for guild", config.authoritativeDiscord + "...");
 
   currentServer.commands.fetch().then(() => {
     for (var command of currentServer.commands.cache) {
@@ -116,7 +126,7 @@ client.once("ready", () => {
       console.log("Loaded permissions for guild", config.authoritativeDiscord);
     });
 
-  });*/
+  });
 
   roomChannels = getRoomChannels();
 
@@ -128,12 +138,6 @@ client.once("ready", () => {
   
 })
 
-interactionDelay = new Map();
-interactionDelay.set("button", []);
-interactionDelay.set("contextMenu", []);
-
-interactionDelay.set("command", []);
-
 client.on('interactionCreate', async (interaction) => {
   // console.log(interaction);
   if (interaction.isButton()) {
@@ -142,21 +146,34 @@ client.on('interactionCreate', async (interaction) => {
     interactionDelay.get("button").push(interaction.member.user.id);
     setTimeout(() => { interactionDelay.get("button").splice(interactionDelay.get("button").indexOf(interaction.member.user.id), 1) }, 2000)
   } else if (interaction.isCommand()) {
-    if (interactionDelay.get("command").includes(interaction.member.user.id)) { return; }
+    interactionDelay.get("command").set(command.data.name.toLowerCase().replaceAll(" ", ""), []);
 
     if (interaction.commandName == "ip") {
       if (!roomChannels.includes(interaction.channelId)) { await interaction.reply({content: "Non puoi eseguire questo comando qui!", ephemeral: true}); return; }
+      if (interactionDelay.get("command").get(interaction.commandName).includes(interaction.member.user.id)) { await interaction.reply({content: "Non puoi eseguire questo comando per altri " + utils.getRemainingTime(Date.now(), interactionDelay.get("command").get(interaction.commandName)[interaction.member.user.id]), ephemeral: true}); return; }
+
       commands.get(interaction.commandName).execute(interaction, roomManager.getRoomByChannelId(interaction.channelId), eventEmitter);
+      interactionDelay.get("command").get(interaction.commandName)[interaction.member.user.id] = Date.now() + commands.get(interaction.commandName).spamDelay * 1000;
+
+      setTimeout(() => { interactionDelay.get("command").splice(interactionDelay.get("command").indexOf(interaction.member.user.id), 1) }, commands.get(interaction.commandName).spamDelay * 1000)
     } else if (interaction.commandName == "token") {
       if (config.licenseManagerTicketChannel != interaction.channelId) { await interaction.reply({content: "Non puoi eseguire questo comando qui!", ephemeral: true}); return; }
+      if (interactionDelay.get("command").get(interaction.commandName).includes(interaction.member.user.id)) { await interaction.reply({content: "Non puoi eseguire questo comando per altri " + utils.getRemainingTime(Date.now(), interactionDelay.get("command").get(interaction.commandName)[interaction.member.user.id]), ephemeral: true}); return; }
+
       commands.get(interaction.commandName).execute(interaction, { tokenManager: tokenManager, roomManager: roomManager });
+      interactionDelay.get("command").get(interaction.commandName)[interaction.member.user.id] = Date.now() + commands.get(interaction.commandName).spamDelay * 1000;
+
+      setTimeout(() => { interactionDelay.get("command").splice(interactionDelay.get("command").indexOf(interaction.member.user.id), 1) }, commands.get(interaction.commandName).spamDelay * 1000)
     } else if (interaction.commandName == "activate") {
       if (config.licenseManagerTicketChannel != interaction.channelId) { await interaction.reply({content: "Non puoi eseguire questo comando qui!", ephemeral: true}); return; }
+      if (interactionDelay.get("command").get(interaction.commandName).includes(interaction.member.user.id)) { await interaction.reply({content: "Non puoi eseguire questo comando per altri " + utils.getRemainingTime(Date.now(), interactionDelay.get("command").get(interaction.commandName)[interaction.member.user.id]), ephemeral: true}); return; }
+
       commands.get(interaction.commandName).execute(interaction, tokenManager);
+      interactionDelay.get("command").get(interaction.commandName)[interaction.member.user.id] = Date.now() + commands.get(interaction.commandName).spamDelay * 1000;
+
+      setTimeout(() => { interactionDelay.get("command").splice(interactionDelay.get("command").indexOf(interaction.member.user.id), 1) }, commands.get(interaction.commandName).spamDelay * 1000)
     }
-    
-    interactionDelay.get("command").push(interaction.member.user.id);
-    setTimeout(() => { interactionDelay.get("command").splice(interactionDelay.get("command").indexOf(interaction.member.user.id), 1) }, 25)
+
   } else if (interaction.isContextMenu()) {
     if (interactionDelay.get("contextMenu").includes(interaction.member.user.id)) { return; }
 
@@ -244,6 +261,7 @@ eventEmitter.on('onIPUpdate', function() {
     if (utils.validateIPaddress(currentSettings.getValue("secondIP").ip)) { JSONData.authServerIPs[currentSettings.getValue("secondIP").ip] = [currentSettings.getValue("secondIP").name, room[1].license]; }
   }
   // console.log(JSONData.authServerIPs);
+  // authServerSocket.emit('updateIPTables', aes256.encrypt(config.authToken, "test")); PER TESTING
   authServerSocket.emit('updateIPTables', aes256.encrypt(config.authToken, JSON.stringify(JSONData.authServerIPs)));
 });
 

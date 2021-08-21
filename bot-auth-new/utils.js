@@ -105,28 +105,25 @@ class Utils {
       }
     }
   }
-  
-  updateMessageField(message, role, updatedArray) {
-    message.embeds[0].fields = this.updateField(message.embeds[0].fields, role, this.getInServizioListString(updatedArray))
-    message.edit(message.embeds[0])
-  }
 
-  getElapsedTime(startMillis, stopMillis) {
+  getRemainingTime(startMillis, stopMillis) {
     var elapsedTime = stopMillis - startMillis;
-    var elapsedTimeFormatted = { days: 0, hours: 0, minutes: 0 }
-    elapsedTimeFormatted.minutes = Math.floor((elapsedTime / 1000) / 60);
+    var elapsedTimeFormatted = { hours: 0, minutes: 0, seconds: 0 }
+    elapsedTimeFormatted.seconds = Math.floor((elapsedTime / 1000));
+    if (elapsedTimeFormatted.seconds > 59) { elapsedTimeFormatted.minutes = Math.floor(elapsedTimeFormatted.seconds / 60); elapsedTimeFormatted.seconds = elapsedTimeFormatted.seconds % 60; }
     if (elapsedTimeFormatted.minutes > 59) { elapsedTimeFormatted.hours = Math.floor(elapsedTimeFormatted.minutes / 60); elapsedTimeFormatted.minutes = elapsedTimeFormatted.minutes % 60; }
     if (elapsedTimeFormatted.hours > 23) { elapsedTimeFormatted.days = Math.floor(elapsedTimeFormatted.hours / 24); elapsedTimeFormatted.hours = elapsedTimeFormatted.hours % 24; }
-    elapsedTimeFormatted.days = elapsedTimeFormatted.days == 1 ? elapsedTimeFormatted.days + " Giorno" : elapsedTimeFormatted.days + " Giorni"
     elapsedTimeFormatted.hours = elapsedTimeFormatted.hours == 1 ? elapsedTimeFormatted.hours + " Ora" : elapsedTimeFormatted.hours + " Ore"
     elapsedTimeFormatted.minutes = elapsedTimeFormatted.minutes == 1 ? elapsedTimeFormatted.minutes + " Minuto" : elapsedTimeFormatted.minutes + " Minuti"
+    elapsedTimeFormatted.seconds = elapsedTimeFormatted.seconds == 1 ? elapsedTimeFormatted.seconds + " Secondo" : elapsedTimeFormatted.seconds + " Secondi"
     return elapsedTimeFormatted;
   }
+
   // colorHex, title, description, thumbnail, timestamp, footer
 
   defaultEmbedData = {
     thumbnail: "https://cdn.discordapp.com/attachments/858349668197859378/876171558157160478/smurf-funny.gif",
-    footer: "Bot fatto da Gasaferic cor core"
+    footer: "Bot fatto da Gasaferic cor core 🥵 🥵 🥵"
   }
   
   getEmbedMessage(embedData) {
