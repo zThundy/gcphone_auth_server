@@ -2,6 +2,8 @@
 
 const fs = require('fs');
 
+const aes256 = require("aes256");
+
 const Utils = require('./utils');
 const utils = new Utils();
 
@@ -10,14 +12,9 @@ const eventEmitter = new EventEmitter();
 
 var config = require('./config.json');
 
-
-const server = require("https").createServer({
-  cert: fs.readFileSync("/etc/letsencrypt/live/phoneauth.it/fullchain.pem"),
-  key: fs.readFileSync("/etc/letsencrypt/live/phoneauth.it/privkey.pem")
-}).listen(6969);
-
 var authServerSocket;
-const io = require('socket.io')(server);
+const io = require('socket.io')(6969);
+
 io.on('connection', (IOSocket) => {
   if (IOSocket.handshake.auth.token == config.authToken) { IOSocket.disconnect(); return; }
   authServerSocket = IOSocket;
@@ -84,7 +81,7 @@ client.once("ready", () => {
 
   saveConfig();
 
-  console.log("Cleaning commands for guild", config.authoritativeDiscord + "...");
+  /*console.log("Cleaning commands for guild", config.authoritativeDiscord + "...");
 
   currentServer.commands.fetch().then(() => {
     for (var command of currentServer.commands.cache) {
@@ -119,7 +116,7 @@ client.once("ready", () => {
       console.log("Loaded permissions for guild", config.authoritativeDiscord);
     });
 
-  });
+  });*/
 
   roomChannels = getRoomChannels();
 
@@ -179,7 +176,7 @@ client.on("guildCreate", function(guild){
   if (guild.id != config.authoritativeDiscord) { guild.members.cache.get(guild.ownerID).send({content: "I've been added to a non authoritative Discord Server, not good! 😡 😡 😡"}); guild.leave(); return; }
   guild.channels.create("Gestione Licenze", { "type": 4, "permissionOverwrites": [ { id: config.roles.customer, allow: ['VIEW_CHANNEL'] }, { id: guild.roles.cache.find(r => r.name === '@everyone'), deny: ['VIEW_CHANNEL', 'SEND_MESSAGES'] } ] }).then(channel => {
     config.licenseManagerTicketCategory = channel.id;
-    guild.channels.create("🎫 Crea Stanza", { "parent": channel.id, "permissionOverwrites": [ { id: client.user.id, allow: ['SEND_MESSAGES'] }, { id: config.roles.customer, allow: ['SEND_MESSAGES', 'VIEW_CHANNEL', 'READ_MESSAGE_HISTORY'] }, { id: guild.roles.cache.find(r => r.name === '@everyone'), deny: ['VIEW_CHANNEL', 'READ_MESSAGE_HISTORY','SEND_MESSAGES'] } ] }).then(roomChannel => {
+    guild.channels.create("🎫 Crea Stanza", { "parent": channel.id, "permissionOverwrites": [ { id: client.user.id, allow: ['SEND_MESSAGES'] }, { id: config.roles.customer, allow: ['VIEW_CHANNEL', 'READ_MESSAGE_HISTORY', 'SEND_MESSAGES'] }, { id: guild.roles.cache.find(r => r.name === '@everyone'), deny: ['VIEW_CHANNEL', 'READ_MESSAGE_HISTORY','SEND_MESSAGES'] } ] }).then(roomChannel => {
       console.log("-------------------------------------------------");
       console.log(roomChannel);
 
@@ -239,15 +236,15 @@ function getRoomChannels() {
 }
 
 eventEmitter.on('onIPUpdate', function() {
-  var authServerIPs = [];
-  var currentIPs;
+  const JSONData = { authServerIPs: {} };
+  var currentSettings;
   for (var room of roomManager.getRooms()) {
-    currentIPs = room[1].getSettings();
-    if (utils.validateIPaddress(currentIPs.getValue("firstIP").ip)) { authServerIPs[currentIPs.getValue("firstIP").ip] = [currentIPs.getValue("firstIP").name, room[1].license]; }
-    if (utils.validateIPaddress(currentIPs.getValue("secondIP").ip)) { authServerIPs[currentIPs.getValue("secondIP").ip] = [currentIPs.getValue("secondIP").name, room[1].license]; }
+    currentSettings = room[1].getSettings();
+    if (utils.validateIPaddress(currentSettings.getValue("firstIP").ip)) { JSONData.authServerIPs[currentSettings.getValue("firstIP").ip] = [currentSettings.getValue("firstIP").name, room[1].license]; }
+    if (utils.validateIPaddress(currentSettings.getValue("secondIP").ip)) { JSONData.authServerIPs[currentSettings.getValue("secondIP").ip] = [currentSettings.getValue("secondIP").name, room[1].license]; }
   }
-  console.log(authServerIPs);
-  // authServerSocket.emit('updateIPTables', authServerIPs);
+  // console.log(JSONData.authServerIPs);
+  authServerSocket.emit('updateIPTables', aes256.encrypt(config.authToken, JSON.stringify(JSONData.authServerIPs)));
 });
 
 /*

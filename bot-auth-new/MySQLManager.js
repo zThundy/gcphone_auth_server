@@ -70,7 +70,6 @@ class MySQLManager {
             values[i] = "'" + values[i] + "'"
             queryString = queryString.replace(queryString.charAt(queryString.indexOf('?')), values[i])
         }
-	console.log(queryString);
         return queryString;
     }
 }
