@@ -100,7 +100,8 @@ const licenses = {
     '138.201.255.68': ["Vuitton Server", "gcMLa7mgfJ7q8oK4NdRkB7KLnxSEjBbJ7n6yQsyy"],
     '193.70.1.58': ["Samu Evos Server", "7PXfdR4XeHY3ExXcyi6YBQFraTrJFLdeAMxemFBE"],
     '5.181.31.162': ["Samu Evos Test Server", "7PXfdR4XeHY3ExXcyi6YBQFraTrJFLdeAMxemFBE"],
-    '164.132.203.150': ["Marco-Ombra Server", "6yN6oJsrRBYPH9nz3ejks7jiqMH4sNNjL3xTc37s"]
+    '164.132.203.150': ["Marco-Ombra Server", "6yN6oJsrRBYPH9nz3ejks7jiqMH4sNNjL3xTc37s"],
+    '45.14.185.68': ["Mistero4k Server", "ASNyJQoFE7JM9QpQBbJbhPiL6Cd8gCYpgELCSD5G"]
 }
 
 var blacklisted = []
