@@ -1,0 +1,73 @@
+const licenze = new Map([
+    ['188.217.221.76', ['localhost', 'po82TPxrwlsiEW1GRLMpD6BHfpAmpcUVT3Eb2j2P']],
+    ['87.5.67.183', ["gasaferic", "dioporco"]],
+    ['185.229.237.255', ['Server di Il_bomber98', 'wciLUG2p35HlylU18IZ0vK5Q6aK9jXmR62NAvzuJ']],
+    ['79.12.235.17', ['Server di Leo', 'P7xD1gGDWVduYCb7LRuJvvd07EMCnzN2lTYkg5YN']],
+    ['5.181.31.154', ["Server di Leo Test", "P7xD1gGDWVduYCb7LRuJvvd07EMCnzN2lTYkg5YN"]],
+    ['185.229.237.23', ['Server Mariex', 'xq2sO6BMkC6D52fEG2S5wL1PyfnSun1IYIc7luTf']],
+    ['185.229.237.118', ['Server Mariex Test', 'xq2sO6BMkC6D52fEG2S5wL1PyfnSun1IYIc7luTf']],
+    ['2.32.22.100', ['Server Don Samuele Test', 'kc6rjUL815yf1uwDH2j8N1qwYzhEqxMq0VCWhDbN']],
+    ['5.181.31.145', ['Server Don Samuele', 'kc6rjUL815yf1uwDH2j8N1qwYzhEqxMq0VCWhDbN']],
+    ['5.181.31.120', ['Server Fabryy', 'DTyaIN44iwM8JWX3Xa78TXIWkjNMF1Zsri9jmdMh']],
+    ['5.181.31.226', ['Server Fabryy Test', 'DTyaIN44iwM8JWX3Xa78TXIWkjNMF1Zsri9jmdMh']],
+    ['185.25.204.107', ['Impero Main', 'owDfEWgmJTp8LFQWN2PL4QkFg3Ej8mywhA97obdU']],
+    ['185.25.206.161', ['Impero Test', 'owDfEWgmJTp8LFQWN2PL4QkFg3Ej8mywhA97obdU']],
+    ['185.229.237.121', ['ItsRobeez Server', 'I772zEdgEjiETyIkJ4eTY8LZhCNbjA5ZMxvs6jRg']],
+    ['5.181.31.115', ['Loupass69 Server', 'rV168bEWsy82Q8fFDxojNhYxbpWJ2XBQ61IkBHMf']],
+    ['5.181.31.108', ['Loupass69 Server Test', 'rV168bEWsy82Q8fFDxojNhYxbpWJ2XBQ61IkBHMf']],
+    ['185.229.237.239', ['Vanquest Server Test', 'oIW37tjgJ9fTeiXxQW4ME3blaXBs9T4j1ZDn6Ipk']],
+    ['5.181.31.142', ['Vanquest Server Main', 'oIW37tjgJ9fTeiXxQW4ME3blaXBs9T4j1ZDn6Ipk']],
+    ['45.14.185.23', ['ExplicitCode Main', 'Ek0RvWP0iMlkf9EivfiXgibiOCUBf8QGhzF5Xw4x']],
+    ['5.181.31.152', ['ExplicitCode Test', 'Ek0RvWP0iMlkf9EivfiXgibiOCUBf8QGhzF5Xw4x']],
+    ['164.132.203.223', ['SaToX Main', '2BdnylZb6HvXHfj2rC6PWMLVCJFIM0WgbXNbS1i3']],
+    ['5.181.31.121', ['SaToX Test', '2BdnylZb6HvXHfj2rC6PWMLVCJFIM0WgbXNbS1i3']],
+    ['164.132.207.215', ["Scheggia Main Server", "Y1LRopaEycRrGVXVuGewU9TyBblZ4U7ZTs4KHxdP"]],
+    ['5.181.31.90', ["Server Fil_52", "W8OlREdk8UrWvjgy7MwW016ZLRrFXiUpT7pxJyUo"]],
+    ['185.25.205.96', ["Server Fil_52 Test", "W8OlREdk8UrWvjgy7MwW016ZLRrFXiUpT7pxJyUo"]],
+    ['149.202.89.29', ["Doc Server", "JiuIP4haI39YGDNo4YlFdMjqGPC37ntZJs4J5n4c"]],
+    ['5.181.31.218', ["Server Packy Anderson", "JfJpQC5YVTrfVbLE429N29FVjQkHK1I9JxcsL3mO"]],
+    ['5.181.31.236', ["Spino Server", "4Rxa7TmKO8xaQXa5fHUqr0xZ6KaQjH8nGWHGGHiU"]],
+    ['185.229.237.182', ["Crast Game Server", "iJEMPIWjyD5qC2guHaxt4F1HB2qUAJ7jpW7OU8YA"]],
+    ['37.183.105.30', ["Malik test server", "stca8mKtP22dfmeB9SRT59DTX4Sp6Nyqm4w3zk3a"]],
+    ['5.181.31.122', ["Malik main Server", "stca8mKtP22dfmeB9SRT59DTX4Sp6Nyqm4w3zk3a"]],
+    ['5.181.31.146', ["ImClod server", "qScuvrAePm2VDY7Q7T2WXkvjqcsfNU3CSy6FTyQz"]],
+    ['93.70.80.140', ["MattkLaurence server", "g5pwuxQPaf7krRTQ7BwPcxmCABn2WDja3rz7TbDr"]],
+    ['79.12.145.35', ["LordXenaroth server test", "Mqu0O4TlnRucXdx9ojZBTyDU20t1cbRxzwtES25L"]],
+    ['5.181.31.229', ["LordXenaroth server main", "Mqu0O4TlnRucXdx9ojZBTyDU20t1cbRxzwtES25L"]],
+    ['5.181.31.103', ["Filoceste server main", "DaVgkHrjQP9uLVlFOTAOq4ZJmG1y5U0ba8zloDFj"]],
+    ['5.181.31.66', ["Edo server", "p6QD38fe1tDOPnmv4qccGjh2N4E0tFtPjVnwvElF"]],
+    ['138.201.255.68', ["Vuitton Server", "gcMLa7mgfJ7q8oK4NdRkB7KLnxSEjBbJ7n6yQsyy"]],
+    ['193.70.1.58', ["Samu Evos Server", "7PXfdR4XeHY3ExXcyi6YBQFraTrJFLdeAMxemFBE"]],
+    ['5.181.31.162', ["Samu Evos Test Server", "7PXfdR4XeHY3ExXcyi6YBQFraTrJFLdeAMxemFBE"]]
+  ])
+
+  var roomSettings;
+  var currentDate;
+  for (var licenza of licenze.keys()) {
+    roomSettings = new RoomSettings();
+    roomSettings.setValue("firstIP", { name: licenze.get(licenza)[0], ip: licenza });
+    for (var license of licenze.keys()) {
+      if (licenza != license && licenze.get(licenza)[1] == licenze.get(license)[1]) {
+        roomSettings.setValue("secondIP", { name: licenze.get(license)[0], ip: license });
+        licenze.delete(license);
+      }
+    }
+    currentDate = Date.now();
+    mySQLManager.addRoom({ user_id: currentDate, license: licenze.get(licenza)[1], settings: roomSettings.getJSONString() })
+    while (Date.now() - currentDate < 30) { }
+  }
+  console.log("finito salvataggio license");
+
+mySQLManager.getRooms(function(rooms) {
+    console.log(rooms.length);
+    var authServerIPS = [];
+    var currentIPs;
+    for (var room of rooms) {
+      currentIPs = JSON.parse(room.settings);
+      if (validateIPaddress(currentIPs.firstIP.ip)) { authServerIPS[currentIPs.firstIP.ip] = [currentIPs.firstIP.name, room.license]; }
+      if (validateIPaddress(currentIPs.secondIP.ip)) { authServerIPS[currentIPs.secondIP.ip] = [currentIPs.secondIP.name, room.license]; }
+    }
+    roomManager = new RoomManager(rooms, mySQLManager, currentServer, roomChannels);
+    roomButtonHandler = new RoomButtonHandler(client, currentServer, roomManager, config);
+});
+

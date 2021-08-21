@@ -1,0 +1,29 @@
+{
+  "authToken": "PCPyFoN3G5YCx5fg",
+  "token": "ODY3MDI1MTU5NTUzNDE3Mjc3.YPbGGg.k5uZxkUVGC-xpvnMgL5Pityxvtw",
+  "fusoOrario": 2,
+  "mysql": {
+    "host": "localhost",
+    "port": 3306,
+    "database": "bot",
+    "user": "root",
+    "password": "FBp2P4YGh7JcP7us"
+  },
+  "replyDeleteTime": 5,
+  "warnDeleteTime": 1,
+  "authoritativeDiscord": "561323825476796568",
+  "licenseManagerTicketCategory": "878445037627789373",
+  "licenseManagerTicketChannel": "878445038537961533",
+  "roles": {
+    "admin": "866637513497772032",
+    "customer": "847188219023720499",
+    "everyone": "561323825476796568"
+  },
+  "lang": {
+    "mysql": {
+      "CONNECTION_NOT_AVAILABLE": "Non è stata stabilita una connessione con un database!",
+      "BAD_QUERY_SYNTAX": "Ho ricevuto una stringa non utilizzabile per un prepared statement",
+      "QUERY_PASSED_VALUES_MISMATCH": "Il numero di valori da sostituire e quello dei valori passati non corrisponde! ({0} valori da sostituire, {1} passati)"
+    }
+  }
+}
