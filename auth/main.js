@@ -2,6 +2,7 @@ const express = require("express")
 // const session = require("cookie-session")
 const fs = require("fs")
 const aes256 = require("aes256")
+const io = require("socket.io-client")
 // const favicon = require("serve-favicon")
 // const path = require("path")
 // const http = require("http")
@@ -59,7 +60,8 @@ const port = 5000
 
 // const secureKey = "0&l8vUP4zU&8bdgzte3M7zTjFbd&ANkAG@EJWfJ%o1Dt!*&!jZP3wjLUhT*g2o9AKL5FZx&hRql2!piXrz5xs@4idS"
 
-const licenses = {
+/*
+var licenses = {
     '37.183.248.215': ['localhost', 'po82TPxrwlsiEW1GRLMpD6BHfpAmpcUVT3Eb2j2P'],
     '87.5.67.183': ["gasaferic", "dioporco"],
     '185.229.237.255': ['Server di Il_bomber98', 'wciLUG2p35HlylU18IZ0vK5Q6aK9jXmR62NAvzuJ'],
@@ -103,6 +105,37 @@ const licenses = {
     '164.132.203.150': ["Marco-Ombra Server", "6yN6oJsrRBYPH9nz3ejks7jiqMH4sNNjL3xTc37s"],
     '45.14.185.68': ["Mistero4k Server", "ASNyJQoFE7JM9QpQBbJbhPiL6Cd8gCYpgELCSD5G"]
 }
+*/
+var licenses = {}
+
+// ca: fs.readFileSync('./cert.pem', 'utf8')
+const socket = io("http://phoneauth.it:6969")
+const token = "HGx3YmgEkoPMpGh9q6LSSKPTECxoCtCd4moLMme5"
+
+socket.on('updateIPTables', jsonString => {
+    // console.log(jsonString)
+    if (jsonString == undefined || jsonString == "") {
+        log("Error retreiving licenses from database: jsonString is undefined or empty; using cached ones")
+        licenses = require("./cached_licenses.json")
+        return
+    }
+    try {
+        var authServerIPs = JSON.parse(aes256.decrypt(token, jsonString))
+        if (Object.keys(authServerIPs).length > 0) {
+            licenses = authServerIPs
+            log("Got licenses from the database")
+            fs.writeFile("./cached_licenses.json", JSON.stringify(authServerIPs, null, 2), (err) => {
+                if (err) throw err;
+            })
+        }
+    } catch(error) {
+        // console.log(error)
+        log("Error retreiving licenses from database: " + error + "; using cached ones")
+        licenses = require("./cached_licenses.json")
+    }
+})
+
+
 
 var blacklisted = []
 fs.readFile("./blacklist.txt", 'utf8', (err, data) => {
