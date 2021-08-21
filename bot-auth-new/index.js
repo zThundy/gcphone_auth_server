@@ -179,7 +179,7 @@ client.on("guildCreate", function(guild){
   if (guild.id != config.authoritativeDiscord) { guild.members.cache.get(guild.ownerID).send({content: "I've been added to a non authoritative Discord Server, not good! 😡 😡 😡"}); guild.leave(); return; }
   guild.channels.create("Gestione Licenze", { "type": 4, "permissionOverwrites": [ { id: config.roles.customer, allow: ['VIEW_CHANNEL'] }, { id: guild.roles.cache.find(r => r.name === '@everyone'), deny: ['VIEW_CHANNEL', 'SEND_MESSAGES'] } ] }).then(channel => {
     config.licenseManagerTicketCategory = channel.id;
-    guild.channels.create("🎫 Crea Stanza", { "parent": channel.id, "permissionOverwrites": [ { id: client.user.id, allow: ['SEND_MESSAGES'] }, { id: config.roles.customer, allow: ['VIEW_CHANNEL', 'READ_MESSAGE_HISTORY'] }, { id: guild.roles.cache.find(r => r.name === '@everyone'), deny: ['VIEW_CHANNEL', 'READ_MESSAGE_HISTORY','SEND_MESSAGES'] } ] }).then(roomChannel => {
+    guild.channels.create("🎫 Crea Stanza", { "parent": channel.id, "permissionOverwrites": [ { id: client.user.id, allow: ['SEND_MESSAGES'] }, { id: config.roles.customer, allow: ['SEND_MESSAGES', 'VIEW_CHANNEL', 'READ_MESSAGE_HISTORY'] }, { id: guild.roles.cache.find(r => r.name === '@everyone'), deny: ['VIEW_CHANNEL', 'READ_MESSAGE_HISTORY','SEND_MESSAGES'] } ] }).then(roomChannel => {
       console.log("-------------------------------------------------");
       console.log(roomChannel);
 
