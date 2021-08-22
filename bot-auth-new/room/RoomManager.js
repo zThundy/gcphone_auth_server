@@ -32,7 +32,7 @@ class RoomManager {
     createRoomForID(userId) {
         this.currentServer.members.fetch(userId).then(() => {
             this.currentServer.channels.create("licenza-" + this.currentServer.members.cache.get(userId).user.username, { "parent": this.config.licenseManagerTicketCategory, "permissionOverwrites": [ { id: this.client.user.id, allow: ['SEND_MESSAGES'] }, { id: this.config.roles.admin, allow: ['VIEW_CHANNEL', 'READ_MESSAGE_HISTORY', 'SEND_MESSAGES'] }, { id: userId, allow: ['VIEW_CHANNEL', 'READ_MESSAGE_HISTORY', 'SEND_MESSAGES'] }, { id: this.currentServer.roles.cache.find(r => r.name === '@everyone'), deny: ['VIEW_CHANNEL', 'READ_MESSAGE_HISTORY','SEND_MESSAGES'] } ] }).then(roomChannel => {
-                var license = this.utils.getRandomString(48);
+                var license = this.utils.getRandomString(40);
                 var roomSettings = new RoomSettings();
                 this.mySQLManager.getRoomByUserId(userId, function(roomData) {
                     if (roomData.length == 0) {

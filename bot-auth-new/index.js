@@ -149,11 +149,13 @@ client.once("ready", () => {
 client.on('interactionCreate', async (interaction) => {
   // console.log(interaction);
   if (interaction.isButton()) {
+    log({ action: interaction.type, content: interaction.member.user.username + " ha utilizzato un bottone (" + interaction.customId + ")"});
     if (interactionDelay.get("button").includes(interaction.member.user.id)) { return; }
     if (interaction.customId == "creaStanza") { roomButtonHandler.handleButton(interaction); }
     interactionDelay.get("button").push(interaction.member.user.id);
     setTimeout(() => { interactionDelay.get("button").splice(interactionDelay.get("button").indexOf(interaction.member.user.id), 1) }, 2000)
   } else if (interaction.isCommand()) {
+    log({ action: interaction.type, content: interaction.member.user.username + " ha utilizzato un comando (" + interaction.commandName + ")"});
     // console.log(commands.get(interaction.commandName).spamDelay, typeof interactionDelay.get("command").get(interaction.commandName), interactionDelay.get("command").get(interaction.commandName)[interaction.member.user.id]);
 
     if (interaction.commandName == "ip") {
@@ -183,6 +185,7 @@ client.on('interactionCreate', async (interaction) => {
     }
 
   } else if (interaction.isContextMenu()) {
+    log({ action: interaction.type, content: interaction.member.user.username + " ha utilizzato un comando da un context menu (" + interaction.commandName + ")"});
     if (interactionDelay.get("contextMenu").includes(interaction.member.user.id)) { return; }
 
     if (interaction.commandName == "Attiva Token") {
@@ -279,6 +282,12 @@ client.on("roleUpdate", function(oldRole, newRole) {
 });
 
 */
+
+const fusoOrario = 2;
+function log(data) {
+  var currentDate = new Date(Date.now() + (fusoOrario * (60 * 60 * 1000)));
+  fs.appendFileSync("./logs_" + (currentDate.getDate() + "-" + (currentDate.getMonth() + 1) + "-" + currentDate.getFullYear()) + ".txt", ("[" + currentDate.getHours() + ":" + currentDate.getMinutes() + ":" + currentDate.getSeconds() + "]") + " > " + data.action + ": " + data.content + "\n", 'utf8');
+}
 
 function saveConfig() {
   var configContentString = JSON.stringify(config, null, 2); // "\t" per i tabs
