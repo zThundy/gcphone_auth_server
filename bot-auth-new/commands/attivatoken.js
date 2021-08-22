@@ -37,7 +37,7 @@ module.exports = {
             type: 'ROLE',
             permission: true
         }
-    ],
+    ]
 };
 
 

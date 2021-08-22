@@ -14,6 +14,7 @@ class MySQLManager {
         this.connection.connect(function(err) {
             if (err) throw err;
             this.eventEmitter.emit('mysql_connection_ready', { host: mysqlConnectionParams.host, database: mysqlConnectionParams.database, user: mysqlConnectionParams.user});
+            this.keepAlive();
         }.bind(this));
     }
 
@@ -67,10 +68,15 @@ class MySQLManager {
         if ((valuesToReplace = queryString.split('?').length - 1) < 1) { throw this.langManager.getString("BAD_QUERY_SYNTAX"); }
         if (valuesToReplace != values.length) { throw this.langManager.getString("QUERY_PASSED_VALUES_MISMATCH", valuesToReplace, values.length); }
         for (var i = 0; i < valuesToReplace; i++) {
-            values[i] = "'" + values[i] + "'"
+            values[i] = "'" + values[i].replaceAll("'", "\\\'") + "'"
             queryString = queryString.replace(queryString.charAt(queryString.indexOf('?')), values[i])
         }
         return queryString;
+    }
+
+    keepAlive() {
+        if (this.connection == undefined) { throw this.langManager.getString("CONNECTION_NOT_AVAILABLE"); }
+        this.connection.query("SELECT 1", function (err, result, fields) { setTimeout(() => this.keepAlive(), 14400000); }.bind(this)); // 14400000
     }
 }
 

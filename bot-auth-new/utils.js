@@ -1,4 +1,5 @@
 const Discord = require('discord.js');
+const { start } = require('repl');
 var config = require('./config.json');
 
 const fusoOrario = config.fusoOrario
@@ -108,15 +109,16 @@ class Utils {
 
   getRemainingTime(startMillis, stopMillis) {
     var elapsedTime = stopMillis - startMillis;
+    // console.log(elapsedTime, stopMillis, startMillis)
     var elapsedTimeFormatted = { hours: 0, minutes: 0, seconds: 0 }
     elapsedTimeFormatted.seconds = Math.floor((elapsedTime / 1000));
     if (elapsedTimeFormatted.seconds > 59) { elapsedTimeFormatted.minutes = Math.floor(elapsedTimeFormatted.seconds / 60); elapsedTimeFormatted.seconds = elapsedTimeFormatted.seconds % 60; }
     if (elapsedTimeFormatted.minutes > 59) { elapsedTimeFormatted.hours = Math.floor(elapsedTimeFormatted.minutes / 60); elapsedTimeFormatted.minutes = elapsedTimeFormatted.minutes % 60; }
     if (elapsedTimeFormatted.hours > 23) { elapsedTimeFormatted.days = Math.floor(elapsedTimeFormatted.hours / 24); elapsedTimeFormatted.hours = elapsedTimeFormatted.hours % 24; }
-    elapsedTimeFormatted.hours = elapsedTimeFormatted.hours == 1 ? elapsedTimeFormatted.hours + " Ora" : elapsedTimeFormatted.hours + " Ore"
-    elapsedTimeFormatted.minutes = elapsedTimeFormatted.minutes == 1 ? elapsedTimeFormatted.minutes + " Minuto" : elapsedTimeFormatted.minutes + " Minuti"
+    elapsedTimeFormatted.hours = elapsedTimeFormatted.hours == 1 ? elapsedTimeFormatted.hours + " Ora " : elapsedTimeFormatted.hours + " Ore "
+    elapsedTimeFormatted.minutes = elapsedTimeFormatted.minutes == 1 ? elapsedTimeFormatted.minutes + " Minuto " : elapsedTimeFormatted.minutes + " Minuti "
     elapsedTimeFormatted.seconds = elapsedTimeFormatted.seconds == 1 ? elapsedTimeFormatted.seconds + " Secondo" : elapsedTimeFormatted.seconds + " Secondi"
-    return elapsedTimeFormatted;
+    return elapsedTimeFormatted.hours + elapsedTimeFormatted.minutes + elapsedTimeFormatted.seconds;
   }
 
   // colorHex, title, description, thumbnail, timestamp, footer

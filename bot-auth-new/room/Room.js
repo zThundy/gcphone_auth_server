@@ -56,7 +56,6 @@ class Room {
     }
 
     saveSettings() {
-	console.log(this.userId, this.settings.getJSONString());
         this.mySQLManager.updateSettingsByUserId(this.userId, this.settings.getJSONString());
         this.sendInfoEmbed();
     }

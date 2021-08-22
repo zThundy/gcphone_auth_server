@@ -31,6 +31,7 @@ module.exports = {
           permission: true
         }
     ],
+    spamDelay: 5,
 	async execute(interaction, data) {
         var option = interaction.options._hoistedOptions[0];
         if (interaction.options._subcommand == "generate") {

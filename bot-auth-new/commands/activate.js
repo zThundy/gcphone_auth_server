@@ -26,6 +26,7 @@ module.exports = {
             permission: true
         }
     ],
+    spamDelay: 120,
 	async execute(interaction, tokenManager) {
         var option = interaction.options._hoistedOptions[0];
         if (tokenManager.activateToken(interaction.member.user.id, option.value)) {

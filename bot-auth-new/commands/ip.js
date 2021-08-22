@@ -38,6 +38,7 @@ module.exports = {
             permission: true
         }
     ],
+    spamDelay: 43200,
 	async execute(interaction, room, eventEmitter) {
         if (utils.validateIPaddress(interaction.options._hoistedOptions[2].value)) {
             room.getSettings().setValue(interaction.options._hoistedOptions[0].value, { name: interaction.options._hoistedOptions[1].value, ip: interaction.options._hoistedOptions[2].value })
