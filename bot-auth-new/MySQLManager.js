@@ -76,7 +76,7 @@ class MySQLManager {
 
     keepAlive() {
         if (this.connection == undefined) { throw this.langManager.getString("CONNECTION_NOT_AVAILABLE"); }
-        this.connection.query("SELECT 1", function (err, result, fields) { setTimeout(() => this.keepAlive(), 14400000); }.bind(this)); // 14400000
+        this.connection.query("SELECT 1", function (err, result, fields) { setTimeout(() => this.keepAlive(), 14400000); }.bind(this)); // 4 Ore
     }
 }
 
