@@ -20,7 +20,7 @@
     "g5pwuxQPaf7krRTQ7BwPcxmCABn2WDja3rz7TbDr"
   ],
   "5.88.218.68": [
-    "Server Test",
+    "test",
     "kc6rjUL815yf1uwDH2j8N1qwYzhEqxMq0VCWhDbN"
   ],
   "5.181.31.145": [
@@ -59,8 +59,12 @@
     "Server Fabryy Test",
     "DTyaIN44iwM8JWX3Xa78TXIWkjNMF1Zsri9jmdMh"
   ],
-  "192.168.2.1": [
-    "t",
+  "192.168.20.2": [
+    "per update table",
+    "po82TPxrwlsiEW1GRLMpD6BHfpAmpcUVT3Eb2j2P"
+  ],
+  "37.183.248.215": [
+    "personale",
     "po82TPxrwlsiEW1GRLMpD6BHfpAmpcUVT3Eb2j2P"
   ],
   "149.202.89.29": [
@@ -174,5 +178,9 @@
   "5.181.31.236": [
     "Spino Server",
     "4Rxa7TmKO8xaQXa5fHUqr0xZ6KaQjH8nGWHGGHiU"
+  ],
+  "5.181.31.118": [
+    "lemoncity",
+    "a8zvKvXoj0dE9EAol3nwJ8zWO7t9MvEwPj5scxlw"
   ]
 }
