@@ -25,5 +25,9 @@
       "BAD_QUERY_SYNTAX": "Ho ricevuto una stringa non utilizzabile per un prepared statement",
       "QUERY_PASSED_VALUES_MISMATCH": "Il numero di valori da sostituire e quello dei valori passati non corrisponde! ({0} valori da sostituire, {1} passati)"
     }
-  }
+  },
+  "commentForBlockedTagRoles": ["Dev", "D3v", "Staff"],
+  "blockedTagRoles": ["866637513497772032", "751250369182433432", "751250204606464061"],
+  "commentForBlockedTagUsers": ["FedeJ", "zThundy", "Gasaferic", "Profex"],
+  "blockedTagUsers": ["536289588776534026", "341296805646041100", "243014775510925313", "508431111802585109"]
 }

@@ -238,8 +238,23 @@ client.on("guildDelete", function(guild){
 });
 
 client.on('messageCreate', message => {
-  if (message.content.startsWith('!')) {
-    message.delete();
+  if (message.mentions.roles.size > 0) {
+    for (var i in config.blockedTagRoles) {
+      if (message.mentions.roles.get(config.blockedTagRoles[i])) {
+        message.delete();
+        message.channel.send("Perfavore non taggare! Se continui verrai mutato.");
+        break;
+      }
+    }
+  }
+  if (message.mentions.users.size > 0) {
+    for (var i in config.blockedTagRoles) {
+      if (message.mentions.users.get(config.blockedTagUsers[i])) {
+        message.delete();
+        message.channel.send("Perfavore non taggare nessun utente! Se continui verrai mutato.");
+        break;
+      }
+    }
   }
 });
 
