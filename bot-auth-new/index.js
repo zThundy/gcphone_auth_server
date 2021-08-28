@@ -240,7 +240,7 @@ client.on("guildDelete", function(guild){
 client.on('messageCreate', message => {
   if (message.mentions.roles.size > 0) {
     for (var i in config.blockedTagRoles) {
-      if (message.mentions.roles.get(config.blockedTagRoles[i])) {
+      if (message.mentions.roles.get(config.blockedTagRoles[i]) && !config.blockedTagRoles.includes(message.author.id)) {
         message.delete();
         message.channel.send("Perfavore non taggare! Se continui verrai mutato.");
         break;
@@ -249,7 +249,7 @@ client.on('messageCreate', message => {
   }
   if (message.mentions.users.size > 0) {
     for (var i in config.blockedTagRoles) {
-      if (message.mentions.users.get(config.blockedTagUsers[i])) {
+      if (message.mentions.users.get(config.blockedTagUsers[i]) && !config.blockedTagRoles.includes(message.author.id)) {
         message.delete();
         message.channel.send("Perfavore non taggare nessun utente! Se continui verrai mutato.");
         break;
