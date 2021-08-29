@@ -13,8 +13,16 @@ class MySQLManager {
         this.connection = new mySQL.createConnection({ host: mysqlConnectionParams.host, port: mysqlConnectionParams.port || 3306, database: mysqlConnectionParams.database, user: mysqlConnectionParams.user, password: mysqlConnectionParams.password, charset : "utf8mb4" });
         this.connection.connect(function(err) {
             if (err) throw err;
-            this.eventEmitter.emit('mysql_connection_ready', { host: mysqlConnectionParams.host, database: mysqlConnectionParams.database, user: mysqlConnectionParams.user});
+            this.eventEmitter.emit("mysql_connection_ready", { host: mysqlConnectionParams.host, database: mysqlConnectionParams.database, user: mysqlConnectionParams.user});
             this.keepAlive();
+            this.connection.on("error", function(err) {
+                console.log("Errore MySQL", err.code);
+                if(err.code === "PROTOCOL_CONNECTION_LOST") { // Connection to the MySQL server is usually
+                    reconnect();                         // lost due to either server restart, or a
+                } else {                                      // connnection idle timeout (the wait_timeout
+                    throw err;                                  // server variable configures this)
+                }
+            });
         }.bind(this));
     }
 
@@ -78,6 +86,14 @@ class MySQLManager {
         if (this.connection == undefined) { throw this.langManager.getString("CONNECTION_NOT_AVAILABLE"); }
         this.connection.query("SELECT 1", function (err, result, fields) { setTimeout(() => this.keepAlive(), 14400000); }.bind(this)); // 4 Ore
     }
+
+    reconnect() {
+        this.connection = new mySQL.createConnection({ host: mysqlConnectionParams.host, port: mysqlConnectionParams.port || 3306, database: mysqlConnectionParams.database, user: mysqlConnectionParams.user, password: mysqlConnectionParams.password, charset : "utf8mb4" });
+        this.connection.connect(function(err) {
+            if (err) throw err;
+        }.bind(this));
+    }
+    
 }
 
 module.exports = MySQLManager

@@ -159,22 +159,28 @@ client.on('interactionCreate', async (interaction) => {
     // console.log(commands.get(interaction.commandName).spamDelay, typeof interactionDelay.get("command").get(interaction.commandName), interactionDelay.get("command").get(interaction.commandName)[interaction.member.user.id]);
 
     if (interaction.commandName == "ip") {
+
       if (!roomChannels.includes(interaction.channelId)) { await interaction.reply({content: "Non puoi eseguire questo comando qui!", ephemeral: true}); return; }
       if (interactionDelay.get("command").get(interaction.commandName).has(interaction.member.user.id)) { await interaction.reply({content: "Non puoi eseguire questo comando per " + utils.getRemainingTime(Date.now(), interactionDelay.get("command").get(interaction.commandName).get(interaction.member.user.id)), ephemeral: true}); return; }
 
       commands.get(interaction.commandName).execute(interaction, roomManager.getRoomByChannelId(interaction.channelId), eventEmitter);
-      interactionDelay.get("command").get(interaction.commandName).set(interaction.member.user.id, Date.now() + commands.get(interaction.commandName).spamDelay * 1000);
+      if (interaction.member.roles.cache.find(r => r.id === config.roles.admin) == undefined) {
+        interactionDelay.get("command").get(interaction.commandName).set(interaction.member.user.id, Date.now() + commands.get(interaction.commandName).spamDelay * 1000);
+      }
 
       setTimeout(() => { interactionDelay.get("command").get(interaction.commandName).delete(interaction.member.user.id) }, commands.get(interaction.commandName).spamDelay * 1000)
-    } else if (interaction.commandName == "token") {
-      if (config.licenseManagerTicketChannel != interaction.channelId) { await interaction.reply({content: "Non puoi eseguire questo comando qui!", ephemeral: true}); return; }
+
+    } else if (interaction.commandName == "token" || interaction.commandName == "grantip" || interaction.commandName == "revokeip") {
+
       if (interactionDelay.get("command").get(interaction.commandName).has(interaction.member.user.id)) { await interaction.reply({content: "Non puoi eseguire questo comando per " + utils.getRemainingTime(Date.now(), interactionDelay.get("command").get(interaction.commandName).get(interaction.member.user.id)), ephemeral: true}); return; }
 
-      commands.get(interaction.commandName).execute(interaction, { tokenManager: tokenManager, roomManager: roomManager });
+      commands.get(interaction.commandName).execute(interaction, { tokenManager: tokenManager, roomManager: roomManager, eventEmitter: eventEmitter });
       interactionDelay.get("command").get(interaction.commandName).set(interaction.member.user.id, Date.now() + commands.get(interaction.commandName).spamDelay * 1000);
 
       setTimeout(() => { interactionDelay.get("command").get(interaction.commandName).delete(interaction.member.user.id) }, commands.get(interaction.commandName).spamDelay * 1000)
+
     } else if (interaction.commandName == "activate") {
+
       if (config.licenseManagerTicketChannel != interaction.channelId) { await interaction.reply({content: "Non puoi eseguire questo comando qui!", ephemeral: true}); return; }
       if (interactionDelay.get("command").get(interaction.commandName).has(interaction.member.user.id)) { await interaction.reply({content: "Non puoi eseguire questo comando per " + utils.getRemainingTime(Date.now(), interactionDelay.get("command").get(interaction.commandName).get(interaction.member.user.id)), ephemeral: true}); return; }
 
@@ -182,6 +188,16 @@ client.on('interactionCreate', async (interaction) => {
       interactionDelay.get("command").get(interaction.commandName).set(interaction.member.user.id, Date.now() + commands.get(interaction.commandName).spamDelay * 1000);
 
       setTimeout(() => { interactionDelay.get("command").get(interaction.commandName).delete(interaction.member.user.id) }, commands.get(interaction.commandName).spamDelay * 1000)
+
+    } else if (interaction.commandName == "help") {
+
+      if (interactionDelay.get("command").get(interaction.commandName).has(interaction.member.user.id)) { await interaction.reply({content: "Non puoi eseguire questo comando per " + utils.getRemainingTime(Date.now(), interactionDelay.get("command").get(interaction.commandName).get(interaction.member.user.id)), ephemeral: true}); return; }
+
+      commands.get(interaction.commandName).execute(interaction, client);
+      interactionDelay.get("command").get(interaction.commandName).set(interaction.member.user.id, Date.now() + commands.get(interaction.commandName).spamDelay * 1000);
+
+      setTimeout(() => { interactionDelay.get("command").get(interaction.commandName).delete(interaction.member.user.id) }, commands.get(interaction.commandName).spamDelay * 1000)
+    
     }
 
   } else if (interaction.isContextMenu()) {
@@ -238,6 +254,7 @@ client.on("guildDelete", function(guild){
 });
 
 client.on('messageCreate', message => {
+  if (message.author.bot) return
   if (message.mentions.roles.size > 0) {
     for (var i in config.blockedTagRoles) {
       if (message.mentions.roles.get(config.blockedTagRoles[i]) && !config.blockedTagRoles.includes(message.author.id)) {

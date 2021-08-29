@@ -1,7 +1,6 @@
 const Utils = require('../utils');
 
 class TokenManager {
-
     constructor() {
         this.tokens = new Map();
         this.utils = new Utils();
@@ -57,8 +56,6 @@ class TokenManager {
         }
         return tokenElements.join('-');
     }
-
-
 }
 
 module.exports = TokenManager;

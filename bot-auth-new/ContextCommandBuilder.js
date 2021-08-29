@@ -1,6 +1,4 @@
-
 class ContextCommandBuilder {
-
     constructor(name) {
         if (!name) { throw "Non è possibile inizializzare un ContextCommand senza un nome!" }
         this.name = name;

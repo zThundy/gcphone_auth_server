@@ -134,6 +134,7 @@ class Utils {
     if (embedData.title) { embedMessage.setTitle(embedData.title); }
     if (embedData.description) { embedMessage.setDescription(embedData.description); }
     if (embedData.timestamp) { embedMessage.setTimestamp(); }
+    if (embedData.fields) { embedMessage.addFields(embedData.fields); }
     embedMessage.setThumbnail(embedData.thumbnail || this.defaultEmbedData.thumbnail);
     embedMessage.setFooter(embedData.footer || this.defaultEmbedData.footer);
     return embedMessage;

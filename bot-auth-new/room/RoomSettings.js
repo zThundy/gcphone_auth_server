@@ -2,7 +2,7 @@ class RoomSettings {
     roomSettings = {};
 
     constructor(roomSettingsString) {
-        this.roomSettings = JSON.parse(roomSettingsString || '{"firstIP": {"name": "Senza nome", "ip": "Non impostato"}, "secondIP": {"name": "Senza nome", "ip": "Non impostato"}}'); // , "allowedIds": []
+        this.roomSettings = JSON.parse(roomSettingsString || '{"firstIP": {"name": "Senza nome", "ip": "Non impostato"}, "secondIP": {"name": "Non acquistato", "ip": "Non acquistato"}}'); // , "allowedIds": []
     }
 
     getValue(key) {
