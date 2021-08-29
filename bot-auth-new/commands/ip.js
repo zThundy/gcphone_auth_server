@@ -41,6 +41,8 @@ module.exports = {
     spamDelay: 43200,
 	async execute(interaction, room, eventEmitter) {
         if (utils.validateIPaddress(interaction.options._hoistedOptions[2].value)) {
+            if (room.getSettings().getValue(interaction.options._hoistedOptions[0].value).ip == "REVOCATO") { await interaction.reply({content: "Non puoi utilizzare questo IP!", ephemeral: true}); return; }
+            if (room.getSettings().getValue(interaction.options._hoistedOptions[0].value).ip == "Non acquistato") { await interaction.reply({content: "Per utilizzare questo IP apri un ticket ed acquistalo!", ephemeral: true}); return; }
             room.getSettings().setValue(interaction.options._hoistedOptions[0].value, { name: interaction.options._hoistedOptions[1].value, ip: interaction.options._hoistedOptions[2].value })
             room.saveSettings();
             eventEmitter.emit('onIPUpdate');

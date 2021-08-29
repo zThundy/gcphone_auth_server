@@ -38,7 +38,11 @@ module.exports = {
             if (data.roomManager.getRoomByUserId(option.value) != undefined) {
                 await interaction.reply({content: "Impossibile generare un token, l'utente possiede già una stanza personale!", ephemeral: true});
             } else {
-                await interaction.reply({content: "Generato token " + data.tokenManager.registerToken(option.value) + " per " + (option.member.nickname || option.user.username), ephemeral: true});
+                if (data.tokenManager.getTokenByUserId(option.value) != undefined) {
+                    await interaction.reply({content: "Impossibile generare un token, l'utente ha già un token generato!", ephemeral: true});
+                } else {
+                    await interaction.reply({content: "Generato token " + data.tokenManager.registerToken(option.value) + " per " + (option.member.nickname || option.user.username), ephemeral: true});
+                }
             }
         } else if (interaction.options._subcommand == "revoke") {
             if (data.tokenManager.revokeToken(option.value)) {
