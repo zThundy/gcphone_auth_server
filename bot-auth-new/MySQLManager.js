@@ -2,7 +2,6 @@ const LangManager = require('./LangManager');
 const mySQL = require('mysql');
 
 class MySQLManager {
-
     constructor(data) {
         this.eventEmitter = data.eventEmitter;
         this.langManager = new LangManager("mysql");
@@ -10,7 +9,7 @@ class MySQLManager {
     }
 
     init(mysqlConnectionParams) {
-	this.mysqlConnectionParams = mysqlConnectionParams;
+	    this.mysqlConnectionParams = mysqlConnectionParams;
         this.connection = new mySQL.createConnection({ host: mysqlConnectionParams.host, port: mysqlConnectionParams.port || 3306, database: mysqlConnectionParams.database, user: mysqlConnectionParams.user, password: mysqlConnectionParams.password, charset : "utf8mb4" });
         this.connection.connect(function(err) {
             if (err) throw err;
@@ -18,7 +17,7 @@ class MySQLManager {
             this.keepAlive();
             this.connection.on("error", function(err) {
                 console.log("Errore MySQL", err.code);
-                if(err.code === "PROTOCOL_CONNECTION_LOST") {
+                if (err.code === "PROTOCOL_CONNECTION_LOST" || err.code === "ECONNREFUSED") {
                     this.reconnect();
                 } else {
                     throw err;
@@ -92,9 +91,9 @@ class MySQLManager {
         this.connection = new mySQL.createConnection({ host: this.mysqlConnectionParams.host, port: this.mysqlConnectionParams.port || 3306, database: this.mysqlConnectionParams.database, user: this.mysqlConnectionParams.user, password: this.mysqlConnectionParams.password, charset : "utf8mb4" });
         this.connection.connect(function(err) {
             if (err) throw err;
-	    this.connection.on("error", function(err) {
+	        this.connection.on("error", function(err) {
                 console.log("Errore MySQL", err.code);
-                if(err.code === "PROTOCOL_CONNECTION_LOST") {
+                if (err.code === "PROTOCOL_CONNECTION_LOST" || err.code === "ECONNREFUSED") {
                     this.reconnect();
             	} else {
                     throw err;
@@ -102,7 +101,6 @@ class MySQLManager {
             }.bind(this));
         }.bind(this));
     }
-    
 }
 
 module.exports = MySQLManager
