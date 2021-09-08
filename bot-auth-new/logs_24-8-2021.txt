@@ -1,1 +1,0 @@
-[2:54:0] > APPLICATION_COMMAND: Don Samuele ha utilizzato un comando (ip)

@@ -1,2 +1,0 @@
-[23:59:13] > MESSAGE_COMPONENT: Gasaferic ha utilizzato un bottone (creaStanza)
-[23:59:22] > MESSAGE_COMPONENT: Gasaferic ha utilizzato un bottone (creaStanza)
