@@ -6,16 +6,16 @@ const { SlashCommandBuilder } = require('@discordjs/builders');
 module.exports = {
 	data: new SlashCommandBuilder()
         .setName('revokeip')
-        .setDescription("Serve a disabilitare l'utilizzo di un'IP")
+        .setDescription("Serve a revocare l'utilizzo di un'IP")
         .addStringOption(option =>
             option.setName('id')
-                .setDescription('Quale IP bisogna disabilitare')
+                .setDescription('Quale IP bisogna revocare')
                 .setRequired(true)
                 .addChoice('Primo IP', 'firstIP')
                 .addChoice('Secondo IP', 'secondIP'))
         .addUserOption(option =>
             option.setName('utente')
-            .setDescription('Per quale utente bisogna disabilitare un IP')
+            .setDescription('Per quale utente bisogna revocare un IP')
             .setRequired(true)),
     permissions: [
         {

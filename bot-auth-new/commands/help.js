@@ -29,12 +29,12 @@ module.exports = {
         if (client.users.cache.get(interaction.member.user.id) == null) {
             client.users.fetch(interaction.member.user.id).then(user => {
                 user.createDM().then(dmMessages => {
-                    dmMessages.messages.fetch({ limit: 100 }).then(messages => { messages.forEach(message => { message.delete() }) }
+                    dmMessages.messages.fetch({ limit: 100 }).then(messages => { messages.forEach(message => { if (message.author.id == client.user.id) { message.delete(); } }) }
                 )});
             })
         } else {
             client.users.cache.get(interaction.member.user.id).createDM().then(dmMessages => {
-                dmMessages.messages.fetch({ limit: 100 }).then(messages => { messages.forEach(message => { message.delete() }) }
+                dmMessages.messages.fetch({ limit: 100 }).then(messages => { messages.forEach(message => { if (message.author.id == client.user.id) { message.delete(); } }) }
             )});
         }
         const fields = [];

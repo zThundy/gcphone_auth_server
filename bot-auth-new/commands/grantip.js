@@ -6,16 +6,16 @@ const { SlashCommandBuilder } = require('@discordjs/builders');
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('grantip')
-		.setDescription("Serve a abilitare l'utilizzo di un'IP")
+		.setDescription("Serve a permettere l'utilizzo di un'IP")
         .addStringOption(option =>
             option.setName('id')
-                .setDescription('Quale ip bisogna abilitare')
+                .setDescription('Di quale IP bisogna permettere l\'utilizzo')
                 .setRequired(true)
                 .addChoice('Primo IP', 'firstIP')
                 .addChoice('Secondo IP', 'secondIP'))
         .addUserOption(option =>
             option.setName('utente')
-            .setDescription('Per quale utente bisogna abilitare un IP')
+            .setDescription('Per quale utente bisogna permettere l\'utilizzo di un IP')
             .setRequired(true)),
     permissions: [
         {
@@ -36,11 +36,10 @@ module.exports = {
         if (room == undefined) {
             await interaction.reply({content: "L'utente non possiede una stanza per le licenze!", ephemeral: true});
         } else {
-            if (room.getSettings().getValue(options[0].value).ip != "REVOCATO") { await interaction.reply({content: "Questo IP non è stato disabilitato!", ephemeral: true}); return; }
+            if (room.getSettings().getValue(options[0].value).ip != "REVOCATO" && room.getSettings().getValue(options[0].value).ip != "Non acquistato") { await interaction.reply({content: "Questo IP non è stato disabilitato!", ephemeral: true}); return; }
             room.getSettings().setValue(options[0].value, { name: "Senza nome", ip: "Non impostato" })
             room.saveSettings();
-            data.eventEmitter.emit("onIPUpdate");
-            await interaction.reply({content: "IP abilitato", ephemeral: true});
+            await interaction.reply({content: "Concesso il permesso di utilizzo dell'" + options[0].name, ephemeral: true});
         }
 	},
 };
