@@ -120,19 +120,22 @@ client.once("ready", () => {
   
     console.log("Loaded commands for guild", config.authoritativeDiscord);
 
-    currentServer.commands.fetch().then(() => {
 
-      console.log("Loading permissions for guild", config.authoritativeDiscord + "...");
+    console.log("Loading permissions for guild", config.authoritativeDiscord + "...");
 
-      var currentCommand;
-      for (var command of currentServer.commands.cache.keys()) {
-        currentCommand = currentServer.commands.cache.get(command);
-        currentServer.commands.permissions.set({ command: currentCommand.id, permissions: commands.get(currentCommand.name.toLowerCase().replaceAll(" ", "")).permissions })
-        console.log("Loaded permissions for command", currentCommand.name);
-      }
-
-      console.log("Loaded permissions for guild", config.authoritativeDiscord);
-    });
+    setTimeout(() => {
+      currentServer.commands.fetch().then(() => {
+        console.log("Fetched commands to set permissions on...");
+        var currentCommand;
+        for (var command of currentServer.commands.cache.keys()) {
+          currentCommand = currentServer.commands.cache.get(command);
+          currentServer.commands.permissions.set({ command: currentCommand.id, permissions: commands.get(currentCommand.name.toLowerCase().replaceAll(" ", "")).permissions })
+          console.log("Loaded permissions for command", currentCommand.name);
+        }
+  
+        console.log("Loaded permissions for guild", config.authoritativeDiscord);
+      });
+    }, 60 * 1000)
 
   });
 
@@ -170,7 +173,7 @@ client.on('interactionCreate', async (interaction) => {
 
       setTimeout(() => { interactionDelay.get("command").get(interaction.commandName).delete(interaction.member.user.id) }, commands.get(interaction.commandName).spamDelay * 1000)
 
-    } else if (interaction.commandName == "token" || interaction.commandName == "grantip" || interaction.commandName == "revokeip") {
+    } else if (interaction.commandName == "token" || interaction.commandName == "grantip" || interaction.commandName == "revokeip" || interaction.commandName == "revokelicense" || interaction.commandName == "transferlicense") {
 
       if (interactionDelay.get("command").get(interaction.commandName).has(interaction.member.user.id)) { await interaction.reply({content: "Non puoi eseguire questo comando per " + utils.getRemainingTime(Date.now(), interactionDelay.get("command").get(interaction.commandName).get(interaction.member.user.id)), ephemeral: true}); return; }
 
@@ -254,12 +257,14 @@ client.on("guildDelete", function(guild){
 });
 
 client.on('messageCreate', message => {
-  if (message.author.bot) return
+  if (message.author.bot || config.tagBypass.includes(message.author.id)) { return; }
   if (message.mentions.roles.size > 0) {
     for (var i in config.blockedTagRoles) {
       if (message.mentions.roles.get(config.blockedTagRoles[i]) && !config.blockedTagRoles.includes(message.author.id)) {
         message.delete();
-        message.channel.send("Perfavore non taggare! Se continui verrai mutato.");
+        message.reply("Perfavore non taggare! Se continui verrai mutato.").then(sentMessage => {
+          setTimeout(() => { if (!sentMessage.deleted) { sentMessage.delete(); } }, 120 * 1000)
+        });
         break;
       }
     }
@@ -268,7 +273,9 @@ client.on('messageCreate', message => {
     for (var i in config.blockedTagRoles) {
       if (message.mentions.users.get(config.blockedTagUsers[i]) && !config.blockedTagRoles.includes(message.author.id)) {
         message.delete();
-        message.channel.send("Perfavore non taggare nessun utente! Se continui verrai mutato.");
+        message.reply("Perfavore non taggare! Se continui verrai mutato.").then(sentMessage => {
+          setTimeout(() => { if (!sentMessage.deleted) { sentMessage.delete(); } }, 120 * 1000)
+        });
         break;
       }
     }
