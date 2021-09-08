@@ -172,8 +172,10 @@ class Utils {
     var room;
     for (var roomChannel of roomChannels) {
         if (room) { break; }
-        for (var permissionOverwrite of currentServer.channels.cache.get(roomChannel).permissionOverwrites.cache.keys()) {
-            if (permissionOverwrite == userId) { room = roomChannel; break; }
+        if (currentServer.channels.cache.has(roomChannel)) {
+          for (var permissionOverwrite of currentServer.channels.cache.get(roomChannel).permissionOverwrites.cache.keys()) {
+              if (permissionOverwrite == userId) { room = roomChannel; break; }
+          }
         }
     }
     return room;
