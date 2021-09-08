@@ -39,8 +39,16 @@ class Room {
         this.channel.send({ embeds: [roomManagerEmbed] });
     }
 
+    setUserId(userId) {
+        this.userId = userId;
+    }
+
     getUserId() {
         return this.userId;
+    }
+
+    setLicense(license) {
+        this.license = license;
     }
 
     getLicense() {
