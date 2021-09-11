@@ -9,19 +9,14 @@ class MySQLManager {
     }
 
     init(mysqlConnectionParams) {
-	    this.mysqlConnectionParams = mysqlConnectionParams;
+	this.mysqlConnectionParams = mysqlConnectionParams;
         this.connection = new mySQL.createConnection({ host: mysqlConnectionParams.host, port: mysqlConnectionParams.port || 3306, database: mysqlConnectionParams.database, user: mysqlConnectionParams.user, password: mysqlConnectionParams.password, charset : "utf8mb4" });
         this.connection.connect(function(err) {
-            if (err) throw err;
             this.eventEmitter.emit("mysql_connection_ready", { host: mysqlConnectionParams.host, database: mysqlConnectionParams.database, user: mysqlConnectionParams.user});
             this.keepAlive();
             this.connection.on("error", function(err) {
-                console.log("Errore MySQL", err.code);
-                if (err.code === "PROTOCOL_CONNECTION_LOST" || err.code === "ECONNREFUSED") {
-                    this.reconnect();
-                } else {
-                    throw err;
-                }
+		 console.log("Errore MySQL", err.code);
+		this.reconnect();
             }.bind(this));
         }.bind(this));
     }
@@ -84,21 +79,16 @@ class MySQLManager {
 
     keepAlive() {
         if (this.connection == undefined) { throw this.langManager.getString("CONNECTION_NOT_AVAILABLE"); }
-        this.connection.query("SELECT 1", function (err, result, fields) { setTimeout(() => this.keepAlive(), 14400000); }.bind(this)); // 4 Ore
+        this.connection.query("SELECT 1", function (err, result, fields) { setTimeout(() => this.keepAlive(), 1800000); }.bind(this)); // 4 Ore
     }
 
     reconnect() {
         this.connection = new mySQL.createConnection({ host: this.mysqlConnectionParams.host, port: this.mysqlConnectionParams.port || 3306, database: this.mysqlConnectionParams.database, user: this.mysqlConnectionParams.user, password: this.mysqlConnectionParams.password, charset : "utf8mb4" });
         this.connection.connect(function(err) {
-            if (err) throw err;
-	        this.connection.on("error", function(err) {
-                console.log("Errore MySQL", err.code);
-                if (err.code === "PROTOCOL_CONNECTION_LOST" || err.code === "ECONNREFUSED") {
-                    this.reconnect();
-            	} else {
-                    throw err;
-                }
-            }.bind(this));
+		this.connection.on("error", function(err) {
+			console.log("Errore MySQL", err.code);
+			this.reconnect();
+		}.bind(this));
         }.bind(this));
     }
 }
