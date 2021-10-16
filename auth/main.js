@@ -6,9 +6,12 @@ const io = require("socket.io-client")
 const app = express()
 
 const port = 5000
+const socketPort = 6969
+const socketIp = "http://137.74.155.20:" + socketPort
 var licenses = {}
 
-const socket = io("http://phoneauth.it:6969")
+const socket = io(socketIp)
+log(`Trying connecting to ${socketIp}`)
 const token = "HGx3YmgEkoPMpGh9q6LSSKPTECxoCtCd4moLMme5"
 
 socket.on('updateIPTables', jsonString => {
@@ -49,12 +52,14 @@ app.get('/', (req, res) => {
         res.status(403).send("CUNT")
         log(ip + ' tryed authing without any query params')
         autoBlacklist(ip)
+        res.end();
         return
     }
 
     if (blacklisted.includes(ip) && !licenses[ip]) {
         log(ip + " his blacklisted OMEGALUL")
         res.status(403).send("Bye bye nigger")
+        res.end();
         return
     } else if (blacklisted.includes(ip) && licenses[ip]) {
         log(ip + " was blacklisted, bot now is no more :)")
@@ -70,6 +75,7 @@ app.get('/', (req, res) => {
         res.status(403).send("CUNT")
         log(ip + ' no correct arguments where given')
         autoBlacklist(ip)
+        res.end();
         return
     }
 
@@ -78,10 +84,12 @@ app.get('/', (req, res) => {
             if (licenses[ip][1] == args.split(":")[1]) {
                 res.status(200).send("Correct auth :)")
                 log(ip + ' started successfully | ' + licenses[ip][0])
+                res.end();
             } else {
                 res.status(403).send("CUNT")
                 log(ip + ' has been blocked because of startup failure')
                 autoBlacklist(ip)
+                res.end();
             }
         }
 
@@ -92,15 +100,17 @@ app.get('/', (req, res) => {
                 text: "STATUS_OK",
                 random_id: makeid(50)
             }
-            string = JSON.stringify(string)
-            var encrypted = aes256.encrypt(licenses[ip][1], string)
-            res.status(200).send(encrypted)
-            log(ip + ' authed successfully | ' + licenses[ip][0])
+            string = JSON.stringify(string);
+            var encrypted = aes256.encrypt(licenses[ip][1], string);
+            res.status(200).send(encrypted);
+            res.end();
+            log(ip + ' authed successfully | ' + licenses[ip][0]);
         }
     } else {
-        res.status(403).send("CUNT")
-        log(ip + ' has been blocked because not present in the ip whitelist')
-        autoBlacklist(ip)
+        res.status(403).send("CUNT");
+        res.end();
+        log(ip + ' has been blocked because not present in the ip whitelist');
+        autoBlacklist(ip);
     }
 })
 
@@ -146,5 +156,9 @@ function makeid(length) {
 }
 
 app.listen(port, () => {
-    log(`Listening on port ${port}`)
-})
+    log(`Listening on port ${port}`);
+});
+
+socket.on('connect', () => {
+    log(`Socket connected on port ${socketPort}`);
+});

@@ -16,6 +16,7 @@ var authServerSocket;
 const io = require('socket.io')(6969);
 
 io.on('connection', (IOSocket) => {
+  console.log("Socket connected");
   authServerSocket = IOSocket;
   eventEmitter.emit('onIPUpdate');
 });
