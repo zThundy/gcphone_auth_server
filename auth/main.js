@@ -7,10 +7,10 @@ const app = express()
 
 const port = 5000
 const socketPort = 6969
-const socketIp = "http://137.74.155.20:" + socketPort
+const socketIp = "http://phoneauth.it:" + socketPort
 var licenses = {}
 
-const socket = io(socketIp)
+const socket = io.connect(socketIp)
 log(`Trying connecting to ${socketIp}`)
 const token = "HGx3YmgEkoPMpGh9q6LSSKPTECxoCtCd4moLMme5"
 
@@ -34,8 +34,6 @@ socket.on('updateIPTables', jsonString => {
         licenses = require("./cached_licenses.json")
     }
 })
-
-licenses = require("./cached_licenses.json")
 
 var blacklisted = []
 fs.readFile("./blacklist.txt", 'utf8', (err, data) => {
