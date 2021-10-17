@@ -12,7 +12,7 @@ var licenses = {}
 
 const socket = io.connect(socketIp)
 log(`Trying connecting to ${socketIp}`)
-const token = "HGx3YmgEkoPMpGh9q6LSSKPTECxoCtCd4moLMme5"
+const token = "3QQfHf8Cqi7aLX3gJMTJ9f6ncprqGcCCLFq5Cprx"
 
 socket.on('updateIPTables', jsonString => {
     if (jsonString == undefined || jsonString == "") {
