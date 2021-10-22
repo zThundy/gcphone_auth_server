@@ -27,10 +27,6 @@
     "UnknownCity 2.0",
     "4LurDDc6IKVoaQNukA8BimfSwvqjbQhhFJ95ccBj"
   ],
-  "192.168.1.1": [
-    "kalewi",
-    "yb5mwAIpeE0QtMzK946Q4QrvOwF4Dl7A9AuSoeOQ"
-  ],
   "185.242.180.153": [
     "WayneCiuntry",
     "YWCanCEiDYezH5zKEZfGpruBbmUAghcw4JV4aODd"
@@ -43,6 +39,10 @@
     "ItsRobeez Server",
     "I772zEdgEjiETyIkJ4eTY8LZhCNbjA5ZMxvs6jRg"
   ],
+  "5.181.31.195": [
+    "Birmingham",
+    "xA1vbVmNZVfp4UAEBZ3c69FzTTHWLYQflYaF9sLx"
+  ],
   "5.181.31.103": [
     "Filoceste server main",
     "DaVgkHrjQP9uLVlFOTAOq4ZJmG1y5U0ba8zloDFj"
@@ -51,21 +51,13 @@
     "lemoncity",
     "a8zvKvXoj0dE9EAol3nwJ8zWO7t9MvEwPj5scxlw"
   ],
-  "185.117.184.5": [
-    "Server Handicap",
-    "rbojnvoKM291r1Gvfgxbs4oPF9jixEHB5MrkGXZy"
-  ],
   "185.229.237.99": [
     "Server Fil_52",
     "W8OlREdk8UrWvjgy7MwW016ZLRrFXiUpT7pxJyUo"
   ],
-  "162.55.105.43": [
-    "RevengeProject",
+  "162.55.105.46": [
+    "revenge",
     "Q0pXSAQehfgezwSKTBZbrT8sYtoK7sJAmzUPNkuz"
-  ],
-  "37.119.15.176": [
-    "Server Teo Test",
-    "A0HIbEwMYhJEUG2mn9qVmDZyOyoSfEQlCOW50J8F"
   ],
   "5.181.31.120": [
     "Server Fabryy",
@@ -75,13 +67,17 @@
     "Server Test",
     "DTyaIN44iwM8JWX3Xa78TXIWkjNMF1Zsri9jmdMh"
   ],
+  "185.229.237.186": [
+    "Dedic",
+    "bqZYDbgaS2wrIC2JANNSEyR9Xz7SWe0K3oENSIPt"
+  ],
   "5.88.113.198": [
     "localhost",
     "po82TPxrwlsiEW1GRLMpD6BHfpAmpcUVT3Eb2j2P"
   ],
-  "1.1.1.1": [
-    "Uitt",
-    "gcMLa7mgfJ7q8oK4NdRkB7KLnxSEjBbJ7n6yQsyy"
+  "80.113.225.105": [
+    "Progfox",
+    "po82TPxrwlsiEW1GRLMpD6BHfpAmpcUVT3Eb2j2P"
   ],
   "185.229.237.149": [
     "RevolutionState",
@@ -99,6 +95,10 @@
     "Leo",
     "P7xD1gGDWVduYCb7LRuJvvd07EMCnzN2lTYkg5YN"
   ],
+  "5.181.31.94": [
+    "DynastyRP",
+    "ASNyJQoFE7JM9QpQBbJbhPiL6Cd8gCYpgELCSD5G"
+  ],
   "5.181.31.115": [
     "Loupass69",
     "rV168bEWsy82Q8fFDxojNhYxbpWJ2XBQ61IkBHMf"
@@ -106,6 +106,10 @@
   "5.181.31.194": [
     "Loupass69",
     "rV168bEWsy82Q8fFDxojNhYxbpWJ2XBQ61IkBHMf"
+  ],
+  "185.229.237.133": [
+    "vision",
+    "iaisr8OQNXy0F9fTa75JBVUTJstotD53EIEvit2l"
   ],
   "45.14.185.221": [
     "Legion",
@@ -183,6 +187,10 @@
     "ImClod server",
     "qScuvrAePm2VDY7Q7T2WXkvjqcsfNU3CSy6FTyQz"
   ],
+  "1.1.1.1": [
+    "Uitt",
+    "gcMLa7mgfJ7q8oK4NdRkB7KLnxSEjBbJ7n6yQsyy"
+  ],
   "5.181.31.116": [
     "mysterious",
     "4Rxa7TmKO8xaQXa5fHUqr0xZ6KaQjH8nGWHGGHiU"
@@ -191,8 +199,8 @@
     "StarLife",
     "IHz7VqPzHx8ekRDv0IlxwNoOrHrO5ShejAZa7BEu"
   ],
-  "185.229.237.133": [
-    "vision",
-    "iaisr8OQNXy0F9fTa75JBVUTJstotD53EIEvit2l"
+  "8.8.8.8": [
+    "prov",
+    "QvonnEOQBGTrdXw5L8JvhbehxNnup6t04WHxKPQp"
   ]
 }
