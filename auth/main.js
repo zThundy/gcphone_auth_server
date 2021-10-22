@@ -2,6 +2,7 @@ const express = require("express")
 const fs = require("fs")
 const aes256 = require("aes256")
 const io = require("socket.io-client")
+const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
 
 const app = express()
 
@@ -13,6 +14,10 @@ var licenses = {}
 const socket = io.connect(socketIp)
 log(`Trying connecting to ${socketIp}`)
 const token = "3QQfHf8Cqi7aLX3gJMTJ9f6ncprqGcCCLFq5Cprx"
+
+const reconnect_wait_time = 15000;
+const status_token = "2wuFqAdsZVkXyv6cwtCdRkjZKr2RZfvfqvcoJEXRC3Tg";
+var encryption_key = null;
 
 socket.on('updateIPTables', jsonString => {
     if (jsonString == undefined || jsonString == "") {
@@ -35,6 +40,66 @@ socket.on('updateIPTables', jsonString => {
     }
 })
 
+function encryptAndSendData(data) {
+    try {
+        if (!encryption_key) return;
+        const encrypted = aes256.encrypt(encryption_key, JSON.stringify(data))
+        fetch("http://phoneauth.it/posts", {
+            method: "POST",
+            headers: {
+                Authorization: "Bearer " + encryption_key,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ data: encrypted })
+        })
+        .catch(e => {
+            console.error("encryptAndSendData error: " + e);
+            encryption_key = null;
+            setTimeout(() => {
+                connectToStatusPage()
+            }, reconnect_wait_time)
+        })
+    } catch(e) {
+        console.error("encryptAndSendData error: " + e);
+        encryption_key = null;
+        setTimeout(() => {
+            connectToStatusPage()
+        }, reconnect_wait_time)
+    }
+}
+
+function connectToStatusPage() {
+    try {
+        // fetch data temporary key
+        fetch("http://phoneauth.it/posts/handshake", {
+            method: "POST",
+            headers: {
+                Authorization: "Bearer " + status_token,
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(res => res.text())
+        .then(text => {
+            if (!text || text.length == 0) return console.error("Can't receive encryption key from status server")
+            encryption_key = text
+            log("Connected to status page with new key")
+        })
+        .catch(e => {
+            console.error("connectToStatusPage error: " + e);
+            encryption_key = null;
+            setTimeout(() => {
+                connectToStatusPage()
+            }, reconnect_wait_time)
+        })
+    } catch(e) {
+        console.error("connectToStatusPage error: " + e);
+        encryption_key = null;
+        setTimeout(() => {
+            connectToStatusPage()
+        }, reconnect_wait_time)
+    }
+}
+
 var blacklisted = []
 fs.readFile("./blacklist.txt", 'utf8', (err, data) => {
     blacklisted = JSON.parse(data)
@@ -49,6 +114,13 @@ app.get('/', (req, res) => {
     if (!args.type) {
         res.status(403).send("CUNT")
         log(ip + ' tryed authing without any query params')
+        encryptAndSendData({
+            ip: ip,
+            name: "none",
+            licenses: "none",
+            type: "autenticator",
+            status: "error"
+        })
         autoBlacklist(ip)
         res.end();
         return
@@ -56,6 +128,13 @@ app.get('/', (req, res) => {
 
     if (blacklisted.includes(ip) && !licenses[ip]) {
         log(ip + " his blacklisted OMEGALUL")
+        encryptAndSendData({
+            ip: ip,
+            name: "none",
+            licenses: "none",
+            type: "autenticator",
+            status: "error"
+        })
         res.status(403).send("Bye bye nigger")
         res.end();
         return
@@ -72,6 +151,13 @@ app.get('/', (req, res) => {
     if (args.indexOf("startup:") == -1 && args.indexOf("auth") == -1) {
         res.status(403).send("CUNT")
         log(ip + ' no correct arguments where given')
+        encryptAndSendData({
+            ip: ip,
+            name: "none",
+            licenses: "none",
+            type: "autenticator",
+            status: "error"
+        })
         autoBlacklist(ip)
         res.end();
         return
@@ -82,10 +168,24 @@ app.get('/', (req, res) => {
             if (licenses[ip][1] == args.split(":")[1]) {
                 res.status(200).send("Correct auth :)")
                 log(ip + ' started successfully | ' + licenses[ip][0])
+                encryptAndSendData({
+                    ip: ip,
+                    name: licenses[ip][0],
+                    licenses: licenses[ip][1],
+                    type: "autenticator",
+                    status: "success"
+                })
                 res.end();
             } else {
                 res.status(403).send("CUNT")
                 log(ip + ' has been blocked because of startup failure')
+                encryptAndSendData({
+                    ip: ip,
+                    name: "none",
+                    licenses: "none",
+                    type: "autenticator",
+                    status: "error"
+                })
                 autoBlacklist(ip)
                 res.end();
             }
@@ -103,11 +203,25 @@ app.get('/', (req, res) => {
             res.status(200).send(encrypted);
             res.end();
             log(ip + ' authed successfully | ' + licenses[ip][0]);
+            encryptAndSendData({
+                ip: ip,
+                name: licenses[ip][0],
+                licenses: licenses[ip][1],
+                type: "autenticator",
+                status: "success"
+            })
         }
     } else {
         res.status(403).send("CUNT");
         res.end();
         log(ip + ' has been blocked because not present in the ip whitelist');
+        encryptAndSendData({
+            ip: ip,
+            name: "none",
+            licenses: "none",
+            type: "autenticator",
+            status: "error"
+        })
         autoBlacklist(ip);
     }
 })
@@ -155,6 +269,7 @@ function makeid(length) {
 
 app.listen(port, () => {
     log(`Listening on port ${port}`);
+    connectToStatusPage();
 });
 
 socket.on('connect', () => {
