@@ -12,7 +12,7 @@
   "replyDeleteTime": 5,
   "warnDeleteTime": 1,
   "authoritativeDiscord": "561323825476796568",
-  "licenseManagerTicketCategory": "878450570313220117",
+  "licenseManagerTicketCategory": ["878450570313220117", "901021530174128129"],
   "licenseManagerTicketChannel": "878450571294679050",
   "roles": {
     "admin": "866637513497772032",
@@ -26,11 +26,32 @@
       "QUERY_PASSED_VALUES_MISMATCH": "Il numero di valori da sostituire e quello dei valori passati non corrisponde! ({0} valori da sostituire, {1} passati)"
     }
   },
+
+
+
+
+
+
+
+
   "commentForBlockedTagRoles": [
     "Dev",
     "D3v",
     "Staff",
     "Bot"
+  ],
+  "blockedTagRoles": [
+    "866637513497772032",
+    "751250369182433432",
+    "751250204606464061",
+    "816479627064508416"
+  ],
+  "commentTagBypass": [
+    "Gasaferic",
+    "zThundy",
+    "Profex",
+    "Fedej",
+    "zThundy (2)"
   ],
   "tagBypass": [
     "243014775510925313",
@@ -39,19 +60,14 @@
     "536289588776534026",
     "389525098463232001"
   ],
-  "blockedTagRoles": [
-    "866637513497772032",
-    "751250369182433432",
-    "751250204606464061",
-    "816479627064508416"
-  ],
   "commentForBlockedTagUsers": [
     "FedeJ",
     "zThundy",
     "Gasaferic",
     "Profex",
     "License Manager",
-    "Ticket Tool"
+    "Ticket Tool",
+    "zThundy (2)"
   ],
   "blockedTagUsers": [
     "536289588776534026",
@@ -59,6 +75,7 @@
     "243014775510925313",
     "508431111802585109",
     "867025159553417277",
-    "557628352828014614"
+    "557628352828014614",
+    "389525098463232001"
   ]
 }

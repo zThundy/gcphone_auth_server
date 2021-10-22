@@ -1,37 +1,45 @@
 // Utils Classes
-
 const fs = require('fs');
-
 const aes256 = require("aes256");
-
-const Utils = require('./utils');
-const utils = new Utils();
-
+  // connection socket
+var authServerSocket;
+const io = require('socket.io')(6969);
+  // event emitter
 const EventEmitter = require("events");
 const eventEmitter = new EventEmitter();
 
+// random jsons
 var config = require('./config.json');
 
-var authServerSocket;
-const io = require('socket.io')(6969);
+// custom classess
+  // colored console class
+const Colors = require("./colors");
+const colors = new Colors();
+  // utility class
+const Utils = require('./utils');
+const utils = new Utils();
+  // mysql connection manager
+const MySQLManager = require('./MySQLManager');
+var mysqlConnectionParams = config.mysql;
+  // discord tokens manager
+const TokenManager = require('./token/TokenManager');
+  // Room Classes
+const Room = require('./room/Room');
+const RoomManager = require('./room/RoomManager');
+const RoomButtonHandler = require('./room/RoomButtonHandler');
+const RoomSettings = require('./room/RoomSettings');
 
 io.on('connection', (IOSocket) => {
-  console.log("Socket connected");
+  console.log(colors.changeBackground("green", "Socket connected"));
   authServerSocket = IOSocket;
   eventEmitter.emit('onIPUpdate');
 });
-
-const MySQLManager = require('./MySQLManager');
-var mysqlConnectionParams = config.mysql;
-
-const TokenManager = require('./token/TokenManager');
 
 // Anti-Spam
 
 const interactionDelay = new Map();
 interactionDelay.set("button", []);
 interactionDelay.set("contextMenu", []);
-
 interactionDelay.set("command", new Map());
 
 // Commands Classes
@@ -46,13 +54,6 @@ for (const file of commandFiles) {
     // console.log(command.data.name.toLowerCase().replaceAll(" ", ""),  interactionDelay.get("command").get(command.data.name.toLowerCase().replaceAll(" ", "")))
   }
 }
-
-// Room Classes
-
-const Room = require('./room/Room');
-const RoomManager = require('./room/RoomManager');
-const RoomButtonHandler = require('./room/RoomButtonHandler');
-const RoomSettings = require('./room/RoomSettings');
 
 // Discord
 
@@ -83,8 +84,7 @@ process.on('unhandledRejection', error => {
 });
 
 client.once("ready", () => {
-  console.log("so pronto");
-
+  console.log(colors.changeBackground("green", "Starting up the discordjs client"));
   currentServer = client.guilds.cache.get(config.authoritativeDiscord);
 
   config.roles.admin = "" + currentServer.roles.cache.find(r => r.name === 'Dev');
@@ -93,65 +93,70 @@ client.once("ready", () => {
 
   saveConfig();
 
-  /*client.application.commands.fetch().then(() => {
+  /*
+  client.application.commands.fetch().then(() => {
     for (var command of client.application.commands.cache) {
       client.application.commands.delete(command[0]);
       console.log("Deleted command", command[1].name);
     }
-  });*/
+  });
+  */
 
-  console.log("Cleaning commands for guild", config.authoritativeDiscord + "...");
+  console.log(colors.changeBackground("yellow", "Cleaning commands for guild " + config.authoritativeDiscord + "..."));
 
   currentServer.commands.fetch().then(() => {
     for (var command of currentServer.commands.cache) {
       currentServer.commands.delete(command[0]);
-      console.log("Deleted command", command[1].name);
+      console.log(colors.changeColor("red", "Deleted command " + command[1].name));
     }
-
-    console.log("Cleaned commands for guild", config.authoritativeDiscord);
-
-    console.log("Loading commands for guild", config.authoritativeDiscord + "...");
-
+    console.log(colors.changeColor("blue", "Cleaned commands for guild " + config.authoritativeDiscord));
+    console.log(colors.changeColor("yellow", "Loading commands for guild " + config.authoritativeDiscord + "..."));
     for (var command of commands.keys()) {
       var currentJSON = commands.get(command).data.toJSON();
-  
       currentServer.commands.create(currentJSON);
-      console.log("Loaded command", command);
+      console.log(colors.changeColor("blue", "Loaded command " + command));
     }
-  
-    console.log("Loaded commands for guild", config.authoritativeDiscord);
-
-
-    console.log("Loading permissions for guild", config.authoritativeDiscord + "...");
-
+    console.log(colors.changeColor("green", "Loaded commands for guild " + config.authoritativeDiscord));
+    console.log(colors.changeColor("yellow", "Loading permissions for guild " + config.authoritativeDiscord + "..."));
     setTimeout(() => {
       currentServer.commands.fetch().then(() => {
-        console.log("Fetched commands to set permissions on...");
+        console.log(colors.changeColor("yellow", "Fetched commands to set permissions on..."));
         var currentCommand;
         for (var command of currentServer.commands.cache.keys()) {
           currentCommand = currentServer.commands.cache.get(command);
           currentServer.commands.permissions.set({ command: currentCommand.id, permissions: commands.get(currentCommand.name.toLowerCase().replaceAll(" ", "")).permissions })
-          console.log("Loaded permissions for command", currentCommand.name);
+          console.log(colors.changeColor("blue", "Loaded permissions for command " + currentCommand.name));
         }
-  
-        console.log("Loaded permissions for guild", config.authoritativeDiscord);
+        console.log(colors.changeColor("green", "Loaded permissions for guild " + config.authoritativeDiscord));
       });
     }, 60 * 1000)
-
   });
 
+  console.log(colors.changeColor("yellow", "Initializing room manager"))
   roomChannels = getRoomChannels();
-
   mySQLManager.getRooms(function(rooms) {
     roomManager = new RoomManager(client, rooms, mySQLManager, currentServer, roomChannels, config);
     tokenManager = new TokenManager();
     roomButtonHandler = new RoomButtonHandler(client, currentServer, roomManager, tokenManager, config);
   });
-  
+  console.log(colors.changeColor("green", "Room manager initialized"))
+  console.log(colors.changeColor("yellow", "Createing event emitter 'onIPUpdate' for socket IO"))
+  eventEmitter.on('onIPUpdate', function() {
+    const JSONData = { authServerIPs: {} };
+    var currentSettings;
+    for (var room of roomManager.getRooms()) {
+      currentSettings = room[1].getSettings();
+      if (utils.validateIPaddress(currentSettings.getValue("firstIP").ip)) { JSONData.authServerIPs[currentSettings.getValue("firstIP").ip] = [currentSettings.getValue("firstIP").name, room[1].license]; }
+      if (utils.validateIPaddress(currentSettings.getValue("secondIP").ip)) { JSONData.authServerIPs[currentSettings.getValue("secondIP").ip] = [currentSettings.getValue("secondIP").name, room[1].license]; }
+    }
+    // console.log(JSONData.authServerIPs);
+    // authServerSocket.emit('updateIPTables', aes256.encrypt(config.authToken, "test")); PER TESTING
+    authServerSocket.emit('updateIPTables', aes256.encrypt(config.authToken, JSON.stringify(JSONData.authServerIPs)));
+  });
+  console.log(colors.changeColor("green", "Event emitter 'onIPUpdate' for socket IO initialized successfully"))
 })
 
 client.on('interactionCreate', async (interaction) => {
-  // console.log(interaction);
   if (interaction.isButton()) {
     log({ action: interaction.type, content: interaction.member.user.username + " ha utilizzato un bottone (" + interaction.customId + ")"});
     if (interactionDelay.get("button").includes(interaction.member.user.id)) { return; }
@@ -161,57 +166,37 @@ client.on('interactionCreate', async (interaction) => {
   } else if (interaction.isCommand()) {
     log({ action: interaction.type, content: interaction.member.user.username + " ha utilizzato un comando (" + interaction.commandName + ")"});
     // console.log(commands.get(interaction.commandName).spamDelay, typeof interactionDelay.get("command").get(interaction.commandName), interactionDelay.get("command").get(interaction.commandName)[interaction.member.user.id]);
-
     if (interaction.commandName == "ip") {
-
       if (!roomChannels.includes(interaction.channelId)) { await interaction.reply({content: "Non puoi eseguire questo comando qui!", ephemeral: true}); return; }
       if (interactionDelay.get("command").get(interaction.commandName).has(interaction.member.user.id)) { await interaction.reply({content: "Non puoi eseguire questo comando per " + utils.getRemainingTime(Date.now(), interactionDelay.get("command").get(interaction.commandName).get(interaction.member.user.id)), ephemeral: true}); return; }
-
       commands.get(interaction.commandName).execute(interaction, roomManager.getRoomByChannelId(interaction.channelId), eventEmitter);
       if (interaction.member.roles.cache.find(r => r.id === config.roles.admin) == undefined) {
         interactionDelay.get("command").get(interaction.commandName).set(interaction.member.user.id, Date.now() + commands.get(interaction.commandName).spamDelay * 1000);
       }
-
       setTimeout(() => { interactionDelay.get("command").get(interaction.commandName).delete(interaction.member.user.id) }, commands.get(interaction.commandName).spamDelay * 1000)
-
     } else if (interaction.commandName == "token" || interaction.commandName == "grantip" || interaction.commandName == "revokeip" || interaction.commandName == "revokelicense" || interaction.commandName == "transferlicense") {
-
       if (interactionDelay.get("command").get(interaction.commandName).has(interaction.member.user.id)) { await interaction.reply({content: "Non puoi eseguire questo comando per " + utils.getRemainingTime(Date.now(), interactionDelay.get("command").get(interaction.commandName).get(interaction.member.user.id)), ephemeral: true}); return; }
-
       commands.get(interaction.commandName).execute(interaction, { tokenManager: tokenManager, roomManager: roomManager, eventEmitter: eventEmitter });
       interactionDelay.get("command").get(interaction.commandName).set(interaction.member.user.id, Date.now() + commands.get(interaction.commandName).spamDelay * 1000);
-
       setTimeout(() => { interactionDelay.get("command").get(interaction.commandName).delete(interaction.member.user.id) }, commands.get(interaction.commandName).spamDelay * 1000)
-
     } else if (interaction.commandName == "activate") {
-
       if (config.licenseManagerTicketChannel != interaction.channelId) { await interaction.reply({content: "Non puoi eseguire questo comando qui!", ephemeral: true}); return; }
       if (interactionDelay.get("command").get(interaction.commandName).has(interaction.member.user.id)) { await interaction.reply({content: "Non puoi eseguire questo comando per " + utils.getRemainingTime(Date.now(), interactionDelay.get("command").get(interaction.commandName).get(interaction.member.user.id)), ephemeral: true}); return; }
-
       commands.get(interaction.commandName).execute(interaction, tokenManager);
       interactionDelay.get("command").get(interaction.commandName).set(interaction.member.user.id, Date.now() + commands.get(interaction.commandName).spamDelay * 1000);
-
       setTimeout(() => { interactionDelay.get("command").get(interaction.commandName).delete(interaction.member.user.id) }, commands.get(interaction.commandName).spamDelay * 1000)
-
     } else if (interaction.commandName == "help") {
-
       if (interactionDelay.get("command").get(interaction.commandName).has(interaction.member.user.id)) { await interaction.reply({content: "Non puoi eseguire questo comando per " + utils.getRemainingTime(Date.now(), interactionDelay.get("command").get(interaction.commandName).get(interaction.member.user.id)), ephemeral: true}); return; }
-
       commands.get(interaction.commandName).execute(interaction, client);
       interactionDelay.get("command").get(interaction.commandName).set(interaction.member.user.id, Date.now() + commands.get(interaction.commandName).spamDelay * 1000);
-
       setTimeout(() => { interactionDelay.get("command").get(interaction.commandName).delete(interaction.member.user.id) }, commands.get(interaction.commandName).spamDelay * 1000)
-    
     }
-
   } else if (interaction.isContextMenu()) {
     log({ action: interaction.type, content: interaction.member.user.username + " ha utilizzato un comando da un context menu (" + interaction.commandName + ")"});
     if (interactionDelay.get("contextMenu").includes(interaction.member.user.id)) { return; }
-
     if (interaction.commandName == "Attiva Token") {
       commands.get(interaction.commandName.toLowerCase().replaceAll(" ", "")).execute(interaction, tokenManager);
     }
-
     interactionDelay.get("contextMenu").push(interaction.member.user.id);
     setTimeout(() => { interactionDelay.get("contextMenu").splice(interactionDelay.get("contextMenu").indexOf(interaction.member.user.id), 1) }, 2000)
   }
@@ -223,30 +208,28 @@ client.on("guildMemberUpdate", (oldMember, newMember) => {
 client.on("guildCreate", function(guild){
   if (guild.id != config.authoritativeDiscord) { guild.members.cache.get(guild.ownerID).send({content: "I've been added to a non authoritative Discord Server, not good! 😡 😡 😡"}); guild.leave(); return; }
   guild.channels.create("Gestione Licenze", { "type": 4, "permissionOverwrites": [ { id: config.roles.customer, allow: ['VIEW_CHANNEL'] }, { id: guild.roles.cache.find(r => r.name === '@everyone'), deny: ['VIEW_CHANNEL', 'SEND_MESSAGES'] } ] }).then(channel => {
-    config.licenseManagerTicketCategory = channel.id;
+    config.licenseManagerTicketCategory[0] = channel.id;
     guild.channels.create("🎫 Crea Stanza", { "parent": channel.id, "permissionOverwrites": [ { id: client.user.id, allow: ['SEND_MESSAGES'] }, { id: config.roles.customer, allow: ['VIEW_CHANNEL', 'READ_MESSAGE_HISTORY', 'SEND_MESSAGES'] }, { id: guild.roles.cache.find(r => r.name === '@everyone'), deny: ['VIEW_CHANNEL', 'READ_MESSAGE_HISTORY','SEND_MESSAGES'] } ] }).then(roomChannel => {
       console.log("-------------------------------------------------");
       console.log(roomChannel);
 
       const roomManagerEmbed = new Discord.MessageEmbed()
-      .setColor('#1900ff')
-      .setTitle('Gestione Stanza Licenze')
-      .setDescription('Clicca il bottone qui sotto per creare una stanza personale per la gestione della licenza e dell\'ip. Se esiste una tua stanza personale verrai taggato in quella stanza.')
-      .setThumbnail('https://cdn.discordapp.com/attachments/858349668197859378/876171558157160478/smurf-funny.gif')
-      .setTimestamp()
-      .setFooter('Bot fatto da Gasaferic cor core');
+        .setColor('#1900ff')
+        .setTitle('Gestione Stanza Licenze')
+        .setDescription('Clicca il bottone qui sotto per creare una stanza personale per la gestione della licenza e dell\'ip. Se esiste una tua stanza personale verrai taggato in quella stanza.')
+        .setThumbnail('https://cdn.discordapp.com/attachments/858349668197859378/876171558157160478/smurf-funny.gif')
+        .setTimestamp()
+        .setFooter('Bot fatto da Gasaferic cor core');
       
       let createRoomButton = new Discord.MessageButton()
-      .setCustomId("creaStanza")
-      .setLabel("Crea una stanza")
-      .setStyle("PRIMARY")
-      .setEmoji("😱");
+        .setCustomId("creaStanza")
+        .setLabel("Crea una stanza")
+        .setStyle("PRIMARY")
+        .setEmoji("😱");
 
       let messageActionRow = new Discord.MessageActionRow();
       messageActionRow.addComponents(createRoomButton)
-
       roomChannel.send({ embeds: [roomManagerEmbed], components: [messageActionRow] });
-
       config.licenseManagerTicketChannel = roomChannel.id;
 
       saveConfig();
@@ -273,10 +256,10 @@ client.on('messageCreate', message => {
   if (message.mentions.users.size > 0) {
     for (var i in config.blockedTagRoles) {
       if (message.mentions.users.get(config.blockedTagUsers[i]) && !config.blockedTagRoles.includes(message.author.id)) {
-        message.delete();
+        // message.delete();
         message.reply("Perfavore non taggare! Se continui verrai mutato.").then(sentMessage => {
           setTimeout(() => { if (!sentMessage.deleted) { sentMessage.delete(); } }, 120 * 1000)
-        });
+        }).then(() => { message.delete(); });
         break;
       }
     }
@@ -296,25 +279,14 @@ function getRoomChannels() {
   var currentElem;
   for (var key of currentServer.channels.cache.keys()) {
     currentElem = currentServer.channels.cache.get(key);
-    if (currentElem.parentId == config.licenseManagerTicketCategory && currentElem.id != config.licenseManagerTicketChannel) {
-      roomChannels.push(key);
+    for (var id in config.licenseManagerTicketCategory) {
+      if (currentElem.parentId == config.licenseManagerTicketCategory[id] && currentElem.id != config.licenseManagerTicketChannel) {
+        roomChannels.push(key);
+      }
     }
   }
   return roomChannels;
 }
-
-eventEmitter.on('onIPUpdate', function() {
-  const JSONData = { authServerIPs: {} };
-  var currentSettings;
-  for (var room of roomManager.getRooms()) {
-    currentSettings = room[1].getSettings();
-    if (utils.validateIPaddress(currentSettings.getValue("firstIP").ip)) { JSONData.authServerIPs[currentSettings.getValue("firstIP").ip] = [currentSettings.getValue("firstIP").name, room[1].license]; }
-    if (utils.validateIPaddress(currentSettings.getValue("secondIP").ip)) { JSONData.authServerIPs[currentSettings.getValue("secondIP").ip] = [currentSettings.getValue("secondIP").name, room[1].license]; }
-  }
-  // console.log(JSONData.authServerIPs);
-  // authServerSocket.emit('updateIPTables', aes256.encrypt(config.authToken, "test")); PER TESTING
-  authServerSocket.emit('updateIPTables', aes256.encrypt(config.authToken, JSON.stringify(JSONData.authServerIPs)));
-});
 
 /*
 

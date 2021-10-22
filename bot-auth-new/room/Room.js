@@ -1,7 +1,6 @@
 const Discord = require('discord.js');
 
 class Room {
-
     constructor(data, mySQLManager) {
         this.userId = data.userId;
         this.license = data.license;
@@ -26,15 +25,15 @@ class Room {
         // console.log(this.license, this.settings);
         this.channel.messages.fetch({ limit: 100 }).then(messages => { messages.forEach(message => { message.delete() }) })
         const roomManagerEmbed = new Discord.MessageEmbed()
-        .setColor('#1900ff')
-        .setTitle('Gestione Stanza Licenze')
-        .setDescription('Clicca il bottone qui sotto per creare una stanza personale per la gestione della licenza e dell\'ip. Se esiste una tua stanza personale verrai taggato in quella stanza.')
-        .setThumbnail('https://cdn.discordapp.com/attachments/858349668197859378/876171558157160478/smurf-funny.gif')
-        .setTimestamp()
-        .setFooter('Bot per la gestione delle licenze e degli ip per l\'autenticazione.')
-        .addFields({ name: "Licenza", value: this.license })
-        .addFields({ name: "Primo IP", value: "Nome: " + this.settings.getValue("firstIP").name + " , IP: " + this.settings.getValue("firstIP").ip })
-        .addFields({ name: "Secondo IP", value: "Nome: " + this.settings.getValue("secondIP").name + " , IP: " + this.settings.getValue("secondIP").ip });
+            .setColor('#1900ff')
+            .setTitle('Gestione Stanza Licenze')
+            .setDescription('Clicca il bottone qui sotto per creare una stanza personale per la gestione della licenza e dell\'ip. Se esiste una tua stanza personale verrai taggato in quella stanza.')
+            .setThumbnail('https://cdn.discordapp.com/attachments/858349668197859378/876171558157160478/smurf-funny.gif')
+            .setTimestamp()
+            .setFooter('Bot per la gestione delle licenze e degli ip per l\'autenticazione.')
+            .addFields({ name: "Licenza", value: this.license })
+            .addFields({ name: "Primo IP", value: "Nome: " + this.settings.getValue("firstIP").name + " , IP: " + this.settings.getValue("firstIP").ip })
+            .addFields({ name: "Secondo IP", value: "Nome: " + this.settings.getValue("secondIP").name + " , IP: " + this.settings.getValue("secondIP").ip });
 
         this.channel.send({ embeds: [roomManagerEmbed] });
     }

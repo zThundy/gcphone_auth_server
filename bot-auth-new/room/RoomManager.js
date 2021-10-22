@@ -1,6 +1,8 @@
 const Utils = require('../utils');
 const Room = require('./Room');
 const RoomSettings = require('./RoomSettings');
+const Colors = require("../colors");
+const colors = new Colors();
 
 class RoomManager {
     constructor(client, rooms, mySQLManager, currentServer, roomChannels, config) {
@@ -13,15 +15,18 @@ class RoomManager {
 
         this.utils = new Utils();
 
-        console.log("Loading users rooms...");
+        console.log(colors.changeColor("yellow", "Loading users rooms..."));
         var currentRoomChannel;
         rooms.forEach(roomData => {
             currentRoomChannel = this.utils.getRoomByUserID(this.roomChannels, this.currentServer, roomData.user_id);
-            if (currentRoomChannel == undefined) { console.log("Unable to load a room for the user", roomData.user_id + ", since there isn't a room for this user!"); return; } /*this.createRoomForID(roomData.user_id); IN CASO DI NECESSITA' */
+            if (currentRoomChannel == undefined) {
+                console.log(colors.changeColor("red", "Unable to load a room for the user " + roomData.user_id + ", since there isn't a room for this user!"));
+                return;
+            } /*this.createRoomForID(roomData.user_id); IN CASO DI NECESSITA' */
             this.rooms.set(roomData.user_id, new Room({ userId: roomData.user_id, license: roomData.license, roomSettings: new RoomSettings(roomData.settings), channel: this.currentServer.channels.cache.get(currentRoomChannel) }, this.mySQLManager));
-            console.log("Loaded room for user", roomData.user_id);
+            console.log(colors.changeColor("blue", "Loaded room for user " + roomData.user_id));
         })
-        console.log("Done loading users rooms.");
+        console.log(colors.changeColor("green", "Done loading users rooms."));
     }
 
     getRooms() {
@@ -29,8 +34,43 @@ class RoomManager {
     }
 
     createRoomForID(data) {
-        this.currentServer.members.fetch(data.userId).then(() => {
-            this.currentServer.channels.create("licenza-" + this.currentServer.members.cache.get(data.userId).user.username, { "parent": this.config.licenseManagerTicketCategory, "permissionOverwrites": [ { id: this.client.user.id, allow: ['SEND_MESSAGES'] }, { id: this.config.roles.admin, allow: ['VIEW_CHANNEL', 'READ_MESSAGE_HISTORY', 'SEND_MESSAGES'] }, { id: data.userId, allow: ['VIEW_CHANNEL', 'READ_MESSAGE_HISTORY', 'SEND_MESSAGES'] }, { id: this.currentServer.roles.cache.find(r => r.name === '@everyone'), deny: ['VIEW_CHANNEL', 'READ_MESSAGE_HISTORY','SEND_MESSAGES'] } ] }).then(roomChannel => {
+        var useCategoryId = null;
+        this.currentServer.members.fetch(data.userId).then(async () => {
+            console.log(colors.changeColor("yellow", "Searching for free of space category"))
+            for (var i in this.config.licenseManagerTicketCategory) {
+                if (useCategoryId) break;
+                const categoryId = this.config.licenseManagerTicketCategory[i];
+                useCategoryId = await this.currentServer.channels.fetch(categoryId).then(channel => {
+                    if (Number(channel.children.size) <= 50) {
+                        return channel;
+                    }
+                })
+            }
+            console.log(colors.changeColor("green", "Found category with space: " + useCategoryId))
+            const username = this.currentServer.members.cache.get(data.userId).user.username
+            console.log(colors.changeColor("yellow", "Creating channel for " + username))
+            this.currentServer.channels.create("licenza-" + username, {
+                "parent": useCategoryId,
+                "permissionOverwrites": [
+                    {
+                        id: this.client.user.id,
+                        allow: ['SEND_MESSAGES']
+                    },
+                    {
+                        id: this.config.roles.admin,
+                        allow: ['VIEW_CHANNEL', 'READ_MESSAGE_HISTORY', 'SEND_MESSAGES']
+                    },
+                    {
+                        id: data.userId,
+                        allow: ['VIEW_CHANNEL', 'READ_MESSAGE_HISTORY', 'SEND_MESSAGES']
+                    },
+                    {
+                        id: this.currentServer.roles.cache.find(r => r.name === '@everyone'),
+                        deny: ['VIEW_CHANNEL', 'READ_MESSAGE_HISTORY','SEND_MESSAGES']
+                    }
+                ]
+            }).then(roomChannel => {
+                console.log(colors.changeColor("green", "Channel for user " + username + " created"))
                 var license = data.license || this.utils.getRandomString(40);
                 var roomSettings = data.settings || new RoomSettings();
                 this.mySQLManager.getRoomByUserId(data.userId, function(roomData) {
@@ -44,7 +84,7 @@ class RoomManager {
                     this.roomChannels.push(roomChannel.id);
                 }.bind(this));
             });
-        })
+        });
     }
 
     transferLicense(userId, newUserId) {
