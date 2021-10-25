@@ -23,7 +23,7 @@ class RoomManager {
                 console.log(colors.changeColor("red", "Unable to load a room for the user " + roomData.user_id + ", since there isn't a room for this user!"));
                 return;
             } /*this.createRoomForID(roomData.user_id); IN CASO DI NECESSITA' */
-            this.rooms.set(roomData.user_id, new Room({ userId: roomData.user_id, license: roomData.license, roomSettings: new RoomSettings(roomData.settings), channel: this.currentServer.channels.cache.get(currentRoomChannel) }, this.mySQLManager));
+            this.rooms.set(roomData.user_id, new Room({ language: this.config.language.personalRooms, userId: roomData.user_id, license: roomData.license, roomSettings: new RoomSettings(roomData.settings), channel: this.currentServer.channels.cache.get(currentRoomChannel) }, this.mySQLManager));
             console.log(colors.changeColor("blue", "Loaded room for user " + roomData.user_id));
         })
         console.log(colors.changeColor("green", "Done loading users rooms."));

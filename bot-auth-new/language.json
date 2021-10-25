@@ -1,0 +1,25 @@
+{
+    "mysql": {
+        "CONNECTION_NOT_AVAILABLE": "Connection to database not established!",
+        "BAD_QUERY_SYNTAX": "Ho ricevuto una stringa non utilizzabile per un prepared statement",
+        "QUERY_PASSED_VALUES_MISMATCH": "Il numero di valori da sostituire e quello dei valori passati non corrisponde! ({0} valori da sostituire, {1} passati)"
+    },
+    "personalRooms": {
+        "ROOM_EMBED_TITLE": "License Manager Room",
+        "ROOM_EMBED_DESCRIPTION": "Press the button down here to create a personal room to manage your license. If the room already exists, you will be tagged in the room.",
+        "ROOM_EMBED_THUMBNAIL": "https://cdn.discordapp.com/attachments/858349668197859378/876171558157160478/smurf-funny.gif",
+        "ROOM_EMBED_FOOTER": "Bot for managing your zth_gcphone license",
+        "ROOM_EMBED_FIELD_1": "License",
+        "ROOM_EMBED_FIELD_2": "First IP",
+        "ROOM_EMBED_FIELD_3": "Second IP"
+    },
+    "buttonRooms": {
+        "BUTTON_TITLE": "Create Room",
+        "BUTTON_PRESS_ERROR_1": "You already have a room for managing your IPs",
+        "BUTTON_PRESS_ERROR_THUMBNAIL_1": "https://cdn.discordapp.com/attachments/858349668197859378/876547319024218172/dwayne-rock.gif",
+        "BUTTON_PRESS_ERROR_2": "You can't create a room. Please open a ticket if you think this is an error",
+        "BUTTON_PRESS_ERROR_THUMBNAIL_2": "https://cdn.discordapp.com/attachments/858349668197859378/877206678066593852/no-no-no-jotaro-kujo.gif",
+        "BUTTON_PRESS_SUCCESS": "Creation room process in progress...",
+        "BUTOON_PRESS_SUCCESS_THUMBNAIL": "https://cdn.discordapp.com/attachments/858349668197859378/876267222782337044/ezgif.com-gif-maker.gif"
+    }
+}

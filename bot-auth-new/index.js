@@ -302,6 +302,8 @@ function log(data) {
 }
 
 function saveConfig() {
+  const language = require("./language.json");
+  config.language = language;
   var configContentString = JSON.stringify(config, null, 2); // "\t" per i tabs
   const configContent = configContentString.split(",");
   if (fs.existsSync("./config.json")) { fs.unlinkSync("./config.json") }
