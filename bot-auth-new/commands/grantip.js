@@ -1,24 +1,27 @@
 const config = require('../config.json');
 const Utils = require('../utils.js');
 const utils = new Utils();
-const { SlashCommandBuilder } = require('@discordjs/builders');
+const {
+    SlashCommandBuilder
+} = require('@discordjs/builders');
+const LangManager = require('../LangManager');
+const language = new LangManager("commands");
 
 module.exports = {
-	data: new SlashCommandBuilder()
-		.setName('grantip')
-		.setDescription("Serve a permettere l'utilizzo di un'IP")
+    data: new SlashCommandBuilder()
+        .setName(language.getString("GRANTIP_NAME"))
+        .setDescription(language.getString("GRANTIP_DESCRIPTION"))
         .addStringOption(option =>
             option.setName('id')
-                .setDescription('Di quale IP bisogna permettere l\'utilizzo')
+                .setDescription(language.getString("GRANTIP_DESCRIPTION_ARG_1"))
                 .setRequired(true)
                 .addChoice('Primo IP', 'firstIP')
                 .addChoice('Secondo IP', 'secondIP'))
         .addUserOption(option =>
             option.setName('utente')
-            .setDescription('Per quale utente bisogna permettere l\'utilizzo di un IP')
-            .setRequired(true)),
-    permissions: [
-        {
+                .setDescription(language.getString("GRANTIP_DESCRIPTION_ARG_2"))
+                .setRequired(true)),
+    permissions: [{
             id: config.roles.everyone,
             type: 'ROLE',
             permission: false
@@ -30,16 +33,31 @@ module.exports = {
         }
     ],
     spamDelay: 5,
-	async execute(interaction, data) {
+    async execute(interaction, data) {
         var options = interaction.options._hoistedOptions;
         var room = data.roomManager.getRoomByUserId(options[1].value);
         if (room == undefined) {
-            await interaction.reply({content: "L'utente non possiede una stanza per le licenze!", ephemeral: true});
+            await interaction.reply({
+                content: language.getString("GRANTIP_ERROR_1"),
+                ephemeral: true
+            });
         } else {
-            if (room.getSettings().getValue(options[0].value).ip != "REVOCATO" && room.getSettings().getValue(options[0].value).ip != "Non acquistato") { await interaction.reply({content: "Questo IP non è stato disabilitato!", ephemeral: true}); return; }
-            room.getSettings().setValue(options[0].value, { name: "Senza nome", ip: "Non impostato" })
+            if (room.getSettings().getValue(options[0].value).ip != "REVOCATO" && room.getSettings().getValue(options[0].value).ip != "Non acquistato") {
+                await interaction.reply({
+                    content: language.getString("GRANTIP_ERROR_2"),
+                    ephemeral: true
+                });
+                return;
+            }
+            room.getSettings().setValue(options[0].value, {
+                name: "Senza nome",
+                ip: "Non impostato"
+            })
             room.saveSettings();
-            await interaction.reply({content: "Concesso il permesso di utilizzo dell'" + options[0].name, ephemeral: true});
+            await interaction.reply({
+                content: language.getString("GRANTIP_SUCCESS_1", options[0].name),
+                ephemeral: true
+            });
         }
-	},
+    },
 };

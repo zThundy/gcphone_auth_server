@@ -1,14 +1,13 @@
 const config = require('../config.json');
 const { SlashCommandBuilder, SlashCommandSubcommandBuilder } = require('@discordjs/builders');
+const LangManager = require('../LangManager');
+const language = new LangManager("commands");
 
 module.exports = {
 	data: new SlashCommandBuilder()
-		.setName('activate')
-		.setDescription("Comando per l'attivazione dei token")
-        .addStringOption(option =>
-            option.setName('token')
-            .setDescription('Inserisci il token da attivare')
-            .setRequired(true)),
+		.setName(language.getString("ACTIVATE_NAME"))
+		.setDescription(language.getString("ACTIVATE_DESCRIPTION"))
+        .addStringOption(option => option.setName('token').setDescription(language.getString("ACTIVATE_DESCRIPTION_ARG_1")).setRequired(true)),
     permissions: [
         {
             id: config.roles.everyone,
@@ -36,5 +35,3 @@ module.exports = {
         }
 	},
 };
-
-

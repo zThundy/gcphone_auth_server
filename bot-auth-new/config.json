@@ -12,25 +12,36 @@
   "replyDeleteTime": 5,
   "warnDeleteTime": 1,
   "authoritativeDiscord": "561323825476796568",
-  "licenseManagerTicketCategory": "878450570313220117",
+  "licenseManagerTicketCategory": [
+    "878450570313220117",
+    "901021530174128129",
+    "901050919356088390"
+  ],
   "licenseManagerTicketChannel": "878450571294679050",
   "roles": {
     "admin": "866637513497772032",
     "customer": "847188219023720499",
     "everyone": "561323825476796568"
   },
-  "lang": {
-    "mysql": {
-      "CONNECTION_NOT_AVAILABLE": "Non è stata stabilita una connessione con un database!",
-      "BAD_QUERY_SYNTAX": "Ho ricevuto una stringa non utilizzabile per un prepared statement",
-      "QUERY_PASSED_VALUES_MISMATCH": "Il numero di valori da sostituire e quello dei valori passati non corrisponde! ({0} valori da sostituire, {1} passati)"
-    }
-  },
+  "lang": {},
   "commentForBlockedTagRoles": [
     "Dev",
     "D3v",
     "Staff",
     "Bot"
+  ],
+  "blockedTagRoles": [
+    "866637513497772032",
+    "751250369182433432",
+    "751250204606464061",
+    "816479627064508416"
+  ],
+  "commentTagBypass": [
+    "Gasaferic",
+    "zThundy",
+    "Profex",
+    "Fedej",
+    "zThundy (2)"
   ],
   "tagBypass": [
     "243014775510925313",
@@ -39,19 +50,14 @@
     "536289588776534026",
     "389525098463232001"
   ],
-  "blockedTagRoles": [
-    "866637513497772032",
-    "751250369182433432",
-    "751250204606464061",
-    "816479627064508416"
-  ],
   "commentForBlockedTagUsers": [
     "FedeJ",
     "zThundy",
     "Gasaferic",
     "Profex",
     "License Manager",
-    "Ticket Tool"
+    "Ticket Tool",
+    "zThundy (2)"
   ],
   "blockedTagUsers": [
     "536289588776534026",
@@ -59,6 +65,23 @@
     "243014775510925313",
     "508431111802585109",
     "867025159553417277",
-    "557628352828014614"
-  ]
+    "557628352828014614",
+    "389525098463232001"
+  ],
+  "language": {
+    "mysql": {
+      "CONNECTION_NOT_AVAILABLE": "Connection to database not established!",
+      "BAD_QUERY_SYNTAX": "Ho ricevuto una stringa non utilizzabile per un prepared statement",
+      "QUERY_PASSED_VALUES_MISMATCH": "Il numero di valori da sostituire e quello dei valori passati non corrisponde! ({0} valori da sostituire, {1} passati)"
+    },
+    "personalRooms": {
+      "ROOM_EMBED_TITLE": "License Manager Room",
+      "ROOM_EMBED_DESCRIPTION": "Press the button down here to create a personal room to manage your license. If the room already exists, you will be tagged in the room.",
+      "ROOM_EMBED_THUMBNAIL": "https://cdn.discordapp.com/attachments/858349668197859378/876171558157160478/smurf-funny.gif",
+      "ROOM_EMBED_FOOTER": "Bot for managing your zth_gcphone license",
+      "ROOM_EMBED_FIELD_1": "License",
+      "ROOM_EMBED_FIELD_2": "First IP",
+      "ROOM_EMBED_FIELD_3": "Second IP"
+    }
+  }
 }

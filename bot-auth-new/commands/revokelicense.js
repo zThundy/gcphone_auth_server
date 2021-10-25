@@ -1,18 +1,21 @@
 const config = require('../config.json');
 const Utils = require('../utils.js');
 const utils = new Utils();
-const { SlashCommandBuilder } = require('@discordjs/builders');
+const {
+    SlashCommandBuilder
+} = require('@discordjs/builders');
+const LangManager = require('../LangManager');
+const language = new LangManager("commands");
 
 module.exports = {
-	data: new SlashCommandBuilder()
-        .setName('revokelicense')
-        .setDescription("Serve a revocare una licenza")
+    data: new SlashCommandBuilder()
+        .setName(language.getString("REVOKELICENSE_TITLE"))
+        .setDescription(language.getString("REVOKELICENSE_DESCRIPTION"))
         .addUserOption(option =>
             option.setName('utente')
-            .setDescription('A quale utente bisogna revocare la licenza')
+            .setDescription(language.getString("REVOKELICENSE_DESCRIPTION_ARG_1"))
             .setRequired(true)),
-    permissions: [
-        {
+    permissions: [{
             id: config.roles.everyone,
             type: 'ROLE',
             permission: false
@@ -24,15 +27,21 @@ module.exports = {
         }
     ],
     spamDelay: 5,
-	async execute(interaction, data) {
+    async execute(interaction, data) {
         var options = interaction.options._hoistedOptions;
         var room = data.roomManager.getRoomByUserId(options[0].value);
         if (room == undefined) {
-            await interaction.reply({content: "L'utente non possiede una stanza per le licenze!", ephemeral: true});
+            await interaction.reply({
+                content: language.getString("REVOKELICENSE_ERROR_1"),
+                ephemeral: true
+            });
         } else {
             data.roomManager.revokeLicense(options[0].value);
             data.eventEmitter.emit("onIPUpdate");
-            await interaction.reply({content: "Licenza revocata", ephemeral: true});
+            await interaction.reply({
+                content: language.getString("REVOKELICENSE_SUCCESS_1"),
+                ephemeral: true
+            });
         }
-	},
+    },
 };

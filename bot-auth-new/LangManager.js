@@ -1,11 +1,9 @@
-var config = require('./config.json');
-const lang = config.lang;
+const language = require("./language.json");
 
 class LangManager {
-    langConfigScope;
-
     constructor(configScope) {
-        this.langConfigScope = lang[configScope];
+        this.lang = language;
+        this.langConfigScope = this.lang[configScope];
     }
 
     getString(key, ...values) {
