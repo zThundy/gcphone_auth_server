@@ -7,6 +7,7 @@ class Room {
         this.license = data.license;
         this.settings = data.roomSettings;
         this.channel = data.channel;
+        this.language = data.language;
         this.mySQLManager = mySQLManager;
         this.language = new LangManager("personalRooms");
 
