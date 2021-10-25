@@ -41,7 +41,7 @@ class RoomManager {
                 if (useCategoryId) break;
                 const categoryId = this.config.licenseManagerTicketCategory[i];
                 useCategoryId = await this.currentServer.channels.fetch(categoryId).then(channel => {
-                    if (Number(channel.children.size) <= 50) {
+                    if ((Number(channel.children.size) + 1) <= 50) {
                         return channel;
                     }
                 })
@@ -94,11 +94,14 @@ class RoomManager {
     }
 
     revokeLicense(userId) {
+        const username = this.currentServer.members.cache.get(userId).user.username
+        console.log(colors.changeColor("yellow", "Deleting " + username + "'s room"))
         if (!this.rooms.has(userId)) { return; }
         this.roomChannels.splice(this.roomChannels.indexOf(this.rooms.get(userId).channel.id), 1);
         this.rooms.get(userId).getChannel().delete();
         this.rooms.delete(userId);
         this.mySQLManager.removeRoomByUserId(userId);
+        console.log(colors.changeColor("green", "Deleted " + username + "'s room"))
     }
 
     removeRoom(room) {
