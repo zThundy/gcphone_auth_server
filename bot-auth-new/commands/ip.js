@@ -13,18 +13,18 @@ module.exports = {
         .setDescription(language.getString("IP_DESCRIPTION"))
         .addStringOption(option =>
             option.setName('id')
-            .setDescription(language.getString("IP_DESCRIPTION_ARG_1"))
-            .setRequired(true)
-            .addChoice('Primo IP', 'firstIP')
-            .addChoice('Secondo IP', 'secondIP'))
+                .setDescription(language.getString("IP_DESCRIPTION_ARG_1"))
+                .setRequired(true)
+                .addChoice('Primo IP', 'firstIP')
+                .addChoice('Secondo IP', 'secondIP'))
         .addStringOption(option =>
             option.setName('nome')
-            .setDescription(language.getString("IP_DESCRIPTION_ARG_2"))
-            .setRequired(true))
+                .setDescription(language.getString("IP_DESCRIPTION_ARG_2"))
+                .setRequired(true))
         .addStringOption(option =>
             option.setName('ip')
-            .setDescription(language.getString("IP_DESCRIPTION_ARG_3"))
-            .setRequired(true)),
+                .setDescription(language.getString("IP_DESCRIPTION_ARG_3"))
+                .setRequired(true)),
     permissions: [{
             id: config.roles.everyone,
             type: 'ROLE',

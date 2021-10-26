@@ -4,12 +4,14 @@ const LangManager = require('../LangManager');
 const language = new LangManager("commands");
 
 module.exports = {
-	data: new SlashCommandBuilder()
-		.setName(language.getString("ACTIVATE_NAME"))
-		.setDescription(language.getString("ACTIVATE_DESCRIPTION"))
-        .addStringOption(option => option.setName('token').setDescription(language.getString("ACTIVATE_DESCRIPTION_ARG_1")).setRequired(true)),
-    permissions: [
-        {
+    data: new SlashCommandBuilder()
+        .setName(language.getString("ACTIVATE_NAME"))
+        .setDescription(language.getString("ACTIVATE_DESCRIPTION"))
+        .addStringOption(option =>
+            option.setName('token')
+                .setDescription(language.getString("ACTIVATE_DESCRIPTION_ARG_1"))
+                .setRequired(true)),
+    permissions: [{
             id: config.roles.everyone,
             type: 'ROLE',
             permission: false
@@ -26,12 +28,18 @@ module.exports = {
         }
     ],
     spamDelay: 120,
-	async execute(interaction, tokenManager) {
+    async execute(interaction, tokenManager) {
         var option = interaction.options._hoistedOptions[0];
         if (tokenManager.activateToken(interaction.member.user.id, option.value)) {
-            await interaction.reply({content: "Attivato il token " + option.value, ephemeral: true});
+            await interaction.reply({
+                content: "Attivato il token " + option.value,
+                ephemeral: true
+            });
         } else {
-            interaction.reply({content: "Impossibile attivare il token " + option.value, ephemeral: true});
+            interaction.reply({
+                content: "Impossibile attivare il token " + option.value,
+                ephemeral: true
+            });
         }
-	},
+    },
 };

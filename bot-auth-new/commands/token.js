@@ -1,57 +1,75 @@
 const config = require('../config.json');
 const { SlashCommandBuilder, SlashCommandSubcommandBuilder, SlashCommandSubcommandGroupBuilder } = require('@discordjs/builders');
+const LangManager = require('../LangManager');
+const language = new LangManager("commands");
 
 module.exports = {
-	data: new SlashCommandBuilder()
-		.setName('token')
-		.setDescription("Per i comandi da admin")
+    data: new SlashCommandBuilder()
+        .setName(language.getString("TOKEN_TITLE"))
+        .setDescription(language.getString("TOKEN_DESCRIPTION"))
         .addSubcommand(new SlashCommandSubcommandBuilder()
             .setName('generate')
-            .setDescription('Serve a generare un token per la creazione di una stanza, scadrà dopo 30 minuti!')
+            .setDescription(language.getString("TOKEN_DESCRIPTION_ARG_1"))
             .addUserOption(option =>
                 option.setName('utente')
-                .setDescription('Per quale utente bisogna creare il token')
-                .setRequired(true)))
+                    .setDescription(language.getString("TOKEN_DESCRIPTION_ARG_2"))
+                    .setRequired(true)))
         .addSubcommand(new SlashCommandSubcommandBuilder()
             .setName('revoke')
-            .setDescription('Serve a disattivare un token per prevenire la creazione di una stanza')
+            .setDescription(language.getString("TOKEN_DESCRIPTION_ARG_3"))
             .addStringOption(option =>
                 option.setName('token')
-                    .setDescription('Il token da disattivare')
+                    .setDescription(language.getString("TOKEN_DESCRIPTION_ARG_4"))
                     .setRequired(true))),
-    permissions: [
-        {
-          id: config.roles.everyone,
-          type: 'ROLE',
-          permission: false
+    permissions: [{
+            id: config.roles.everyone,
+            type: 'ROLE',
+            permission: false
         },
         {
-          id: config.roles.admin,
-          type: 'ROLE',
-          permission: true
+            id: config.roles.admin,
+            type: 'ROLE',
+            permission: true
         }
     ],
     spamDelay: 5,
-	async execute(interaction, data) {
+    async execute(interaction, data) {
         var option = interaction.options._hoistedOptions[0];
-        if (interaction.options._subcommand == "generate") {
-            if (data.roomManager.getRoomByUserId(option.value) != undefined) {
-                await interaction.reply({content: "Impossibile generare un token, l'utente possiede già una stanza personale!", ephemeral: true});
-            } else {
-                if (data.tokenManager.getTokenByUserId(option.value) != undefined) {
-                    await interaction.reply({content: "Impossibile generare un token, l'utente ha già un token generato!", ephemeral: true});
+        switch (interaction.options._subcommand) {
+            case "generate":
+                if (data.roomManager.getRoomByUserId(option.value) != undefined) {
+                    await interaction.reply({
+                        content: language.getString("TOKEN_ERROR_1"),
+                        ephemeral: true
+                    });
                 } else {
-                    await interaction.reply({content: "Generato token " + data.tokenManager.registerToken(option.value) + " per " + (option.member.nickname || option.user.username), ephemeral: true});
+                    if (data.tokenManager.getTokenByUserId(option.value) != undefined) {
+                        await interaction.reply({
+                            content: language.getString("TOKEN_ERROR_2"),
+                            ephemeral: true
+                        });
+                    } else {
+                        await interaction.reply({
+                            content: language.getString("TOKEN_SUCCESS_1", (option.member.nickname || option.user.username), data.tokenManager.registerToken(option.value)),
+                            ephemeral: true
+                        });
+                    }
                 }
-            }
-        } else if (interaction.options._subcommand == "revoke") {
-            if (data.tokenManager.revokeToken(option.value)) {
-                await interaction.reply({content: "Revocato il token " + option.value, ephemeral: true});
-            } else {
-                await interaction.reply({content: "Impossibile revocare il token " + option.value, ephemeral: true});
-            }
+                break;
+            
+            case "revoke":
+                if (data.tokenManager.revokeToken(option.value)) {
+                    await interaction.reply({
+                        content: language.getString("TOKEN_SUCCESS_2", option.value),
+                        ephemeral: true
+                    });
+                } else {
+                    await interaction.reply({
+                        content: language.getString("TOKEN_ERROR_3", option.value),
+                        ephemeral: true
+                    });
+                }
+                break;
         }
-	},
+    },
 };
-
-

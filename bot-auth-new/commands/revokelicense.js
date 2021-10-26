@@ -1,9 +1,7 @@
 const config = require('../config.json');
 const Utils = require('../utils.js');
 const utils = new Utils();
-const {
-    SlashCommandBuilder
-} = require('@discordjs/builders');
+const { SlashCommandBuilder } = require('@discordjs/builders');
 const LangManager = require('../LangManager');
 const language = new LangManager("commands");
 
@@ -13,8 +11,8 @@ module.exports = {
         .setDescription(language.getString("REVOKELICENSE_DESCRIPTION"))
         .addUserOption(option =>
             option.setName('utente')
-            .setDescription(language.getString("REVOKELICENSE_DESCRIPTION_ARG_1"))
-            .setRequired(true)),
+                .setDescription(language.getString("REVOKELICENSE_DESCRIPTION_ARG_1"))
+                .setRequired(true)),
     permissions: [{
             id: config.roles.everyone,
             type: 'ROLE',

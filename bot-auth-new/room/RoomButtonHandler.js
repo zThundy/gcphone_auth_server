@@ -73,8 +73,6 @@ class RoomButtonHandler {
         }
         return hasPermission;
     }
-
-
 }
 
 module.exports = RoomButtonHandler

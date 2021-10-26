@@ -1,5 +1,4 @@
 const Discord = require('discord.js');
-const LangManager = require('../LangManager');
 
 class Room {
     constructor(data, mySQLManager) {
@@ -9,10 +8,8 @@ class Room {
         this.channel = data.channel;
         this.language = data.language;
         this.mySQLManager = mySQLManager;
-        this.language = new LangManager("personalRooms");
 
-        /*
-        for (var allowedId of this.settings.getValue("allowedIds")) {
+        /*for (var allowedId of this.settings.getValue("allowedIds")) {
             if (!this.channel.permissionOverwrites.cache.has(allowedId)) {
                 if (!this.channel.guild.members.cache.has(allowedId)) {
                     this.channel.guild.members.fetch(allowedId).then(() => {
@@ -20,8 +17,7 @@ class Room {
                     });
                 }
             }
-        }
-        */
+        }*/
 
         this.sendInfoEmbed();
     }
@@ -31,14 +27,14 @@ class Room {
         this.channel.messages.fetch({ limit: 100 }).then(messages => { messages.forEach(message => { message.delete() }) })
         const roomManagerEmbed = new Discord.MessageEmbed()
             .setColor('#1900ff')
-            .setTitle(this.language.getString("ROOM_EMBED_TITLE"))
-            .setDescription(this.language.getString("ROOM_EMBED_DESCRIPTION"))
-            .setThumbnail(this.language.getString("ROOM_EMBED_THUMBNAIL"))
+            .setTitle(this.language["ROOM_EMBED_TITLE"])
+            .setDescription(this.language["ROOM_EMBED_DESCRIPTION"])
+            .setThumbnail(this.language["ROOM_EMBED_THUMBNAIL"])
             .setTimestamp()
-            .setFooter(this.language.getString("ROOM_EMBED_FOOTER"))
-            .addFields({ name: this.language.getString("ROOM_EMBED_FIELD_1"), value: this.license })
-            .addFields({ name: this.language.getString("ROOM_EMBED_FIELD_2"), value: "Name: " + this.settings.getValue("firstIP").name + " , IP: " + this.settings.getValue("firstIP").ip })
-            .addFields({ name: this.language.getString("ROOM_EMBED_FIELD_3"), value: "Name: " + this.settings.getValue("secondIP").name + " , IP: " + this.settings.getValue("secondIP").ip });
+            .setFooter(this.language["ROOM_EMBED_FOOTER"])
+            .addFields({ name: this.language["ROOM_EMBED_FIELD_1"], value: this.license })
+            .addFields({ name: this.language["ROOM_EMBED_FIELD_2"], value: "Name: " + this.settings.getValue("firstIP").name + " , IP: " + this.settings.getValue("firstIP").ip })
+            .addFields({ name: this.language["ROOM_EMBED_FIELD_3"], value: "Name: " + this.settings.getValue("secondIP").name + " , IP: " + this.settings.getValue("secondIP").ip });
 
         this.channel.send({ embeds: [roomManagerEmbed] });
     }

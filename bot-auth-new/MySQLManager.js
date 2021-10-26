@@ -1,5 +1,7 @@
 const LangManager = require('./LangManager');
 const mySQL = require('mysql');
+const Colors = require('./colors');
+const colors = new Colors();
 
 class MySQLManager {
     constructor(data) {
@@ -9,14 +11,14 @@ class MySQLManager {
     }
 
     init(mysqlConnectionParams) {
-	this.mysqlConnectionParams = mysqlConnectionParams;
+	    this.mysqlConnectionParams = mysqlConnectionParams;
         this.connection = new mySQL.createConnection({ host: mysqlConnectionParams.host, port: mysqlConnectionParams.port || 3306, database: mysqlConnectionParams.database, user: mysqlConnectionParams.user, password: mysqlConnectionParams.password, charset : "utf8mb4" });
         this.connection.connect(function(err) {
             this.eventEmitter.emit("mysql_connection_ready", { host: mysqlConnectionParams.host, database: mysqlConnectionParams.database, user: mysqlConnectionParams.user});
             this.keepAlive();
             this.connection.on("error", function(err) {
-		 console.log("Errore MySQL", err.code);
-		this.reconnect();
+                console.log(colors.changeColor("red", "MySQL Error " + err.code));
+                this.reconnect();
             }.bind(this));
         }.bind(this));
     }
@@ -85,10 +87,10 @@ class MySQLManager {
     reconnect() {
         this.connection = new mySQL.createConnection({ host: this.mysqlConnectionParams.host, port: this.mysqlConnectionParams.port || 3306, database: this.mysqlConnectionParams.database, user: this.mysqlConnectionParams.user, password: this.mysqlConnectionParams.password, charset : "utf8mb4" });
         this.connection.connect(function(err) {
-		this.connection.on("error", function(err) {
-			console.log("Errore MySQL", err.code);
-			this.reconnect();
-		}.bind(this));
+            this.connection.on("error", function(err) {
+                console.log(colors.changeColor("red", "MySQL Error " + err.code));
+                this.reconnect();
+            }.bind(this));
         }.bind(this));
     }
 }

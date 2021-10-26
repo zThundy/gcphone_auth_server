@@ -1,4 +1,18 @@
 {
+    "general": {
+        "CANT_USE_COMMAND_HERE": "You can't use this command here",
+        "CANT_USE_COMMAND_COOLDOWN": "To use this command again you will need to wait **{0}**",
+        "DO_NOT_USE_TAGS": "Please do not use tags; you could be muted!",
+        "GUILD_CREATE_ERROR_1": "I've been added to a non authoritative Discord Server, not good 😡",
+        "LICENSE_CATEGORY_PREFIX": "License Manager - {0}",
+        "LICENSE_MAIN_ROOM_TITLE": "🎫 Create Room",
+        "LICENSE_ROOM_EMBED_TITLE": "License Manager Rooms",
+        "LICENSE_ROOM_EMBED_DESCRIPTION": "Press the button down here to create a personal room to manage your license. If the room already exists, you will be tagged in the room.",
+        "LICENSE_ROOM_EMBED_THUMBNAIL": "https://cdn.discordapp.com/attachments/858349668197859378/876171558157160478/smurf-funny.gif",
+        "LICENSE_ROOM_EMBED_FOOTER": "License Manager Bot",
+        "LICENSE_ROOM_BUTTON_TITLE": "Create a room",
+        "LICENSE_ROOM_BUTTON_EMOJI": "➕"
+    },
     "mysql": {
         "CONNECTION_NOT_AVAILABLE": "Connection to database not established!",
         "BAD_QUERY_SYNTAX": "Ho ricevuto una stringa non utilizzabile per un prepared statement",
@@ -6,7 +20,7 @@
     },
     "personalRooms": {
         "ROOM_EMBED_TITLE": "License Manager Room",
-        "ROOM_EMBED_DESCRIPTION": "Press the button down here to create a personal room to manage your license. If the room already exists, you will be tagged in the room.",
+        "ROOM_EMBED_DESCRIPTION": "Welcome to your License Room. Type **/ip** and follow the instruction to change the IP address connected to your license",
         "ROOM_EMBED_THUMBNAIL": "https://cdn.discordapp.com/attachments/858349668197859378/876171558157160478/smurf-funny.gif",
         "ROOM_EMBED_FOOTER": "Bot for managing your zth_gcphone license",
         "ROOM_EMBED_FIELD_1": "License",
@@ -71,6 +85,24 @@
         "REVOKELICENSE_DESCRIPTION": "Used by administrators to revoke a License and delete the License Room",
         "REVOKELICENSE_DESCRIPTION_ARG_1": "Please tag the user you want to revoke the license",
         "REVOKELICENSE_ERROR_1": "The tagged user does not own a license",
-        "REVOKELICENSE_SUCCESS_1": "License revoked"
+        "REVOKELICENSE_SUCCESS_1": "License revoked",
+        "TOKEN_TITLE": "token",
+        "TOKEN_DESCRIPTION": "Used by administrators to create or revoke an activation token",
+        "TOKEN_DESCRIPTION_ARG_1": "Choose this subcommand to generate an activation token for the tagged user",
+        "TOKEN_DESCRIPTION_ARG_2": "Please tag the user wich the token will be generated for",
+        "TOKEN_DESCRIPTION_ARG_3": "Choose this subcommand to revoke a previously generated token",
+        "TOKEN_DESCRIPTION_ARG_4": "Please type the token you want to revoke",
+        "TOKEN_ERROR_1": "Can't create a new token for this user: he already owns a License Room",
+        "TOKEN_ERROR_2": "Can't create a new token for this user: he already has a generated token",
+        "TOKEN_ERROR_3": "Can't revoke token {0}",
+        "TOKEN_SUCCESS_1": "Token for the user {0} generated successfully! **{1}**",
+        "TOKEN_SUCCESS_2": "Token {0} revoked successfully",
+        "TRANSFERLICENSE_TITLE": "transferlicense",
+        "TRANSFERLICENSE_DESCRIPTION": "Used by administrators to transfer the ownership of a license to another user",
+        "TRANSFERLICENSE_DESCRIPTION_ARG_1": "Please tag the current owner of the license",
+        "TRANSFERLICENSE_DESCRIPTION_ARG_2": "Please tag the new owner of the license",
+        "TRANSFERLICENSE_ERROR_1": "The tagged owner does not own a license",
+        "TRANSFERLICENSE_ERROR_2": "The tagged new owner already owns a license",
+        "TRANSFERLICENSE_SUCCESS_1": "License transfered successfully"
     }
 }

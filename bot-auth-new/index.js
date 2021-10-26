@@ -24,10 +24,14 @@ var mysqlConnectionParams = config.mysql;
 // discord tokens manager
 const TokenManager = require('./token/TokenManager');
 // Room Classes
-const Room = require('./room/Room');
+// const Room = require('./room/Room');
+// const RoomSettings = require('./room/RoomSettings');
 const RoomManager = require('./room/RoomManager');
 const RoomButtonHandler = require('./room/RoomButtonHandler');
-const RoomSettings = require('./room/RoomSettings');
+// Language manager
+const LangManager = require('./LangManager');
+const language = new LangManager("general");
+const language_button = new LangManager("commands");
 
 io.on('connection', (IOSocket) => {
     console.log(colors.changeBackground("green", "Socket connected"));
@@ -197,14 +201,14 @@ client.on('interactionCreate', async (interaction) => {
         if (interaction.commandName == "ip") {
             if (!roomChannels.includes(interaction.channelId)) {
                 await interaction.reply({
-                    content: "Non puoi eseguire questo comando qui!",
+                    content: language.getString("CANT_USE_COMMAND_HERE"),
                     ephemeral: true
                 });
                 return;
             }
             if (interactionDelay.get("command").get(interaction.commandName).has(interaction.member.user.id)) {
                 await interaction.reply({
-                    content: "Non puoi eseguire questo comando per " + utils.getRemainingTime(Date.now(), interactionDelay.get("command").get(interaction.commandName).get(interaction.member.user.id)),
+                    content: language.getString("CANT_USE_COMMAND_COOLDOWN", utils.getRemainingTime(Date.now(), interactionDelay.get("command").get(interaction.commandName).get(interaction.member.user.id))),
                     ephemeral: true
                 });
                 return;
@@ -219,7 +223,7 @@ client.on('interactionCreate', async (interaction) => {
         } else if (interaction.commandName == "token" || interaction.commandName == "grantip" || interaction.commandName == "revokeip" || interaction.commandName == "revokelicense" || interaction.commandName == "transferlicense") {
             if (interactionDelay.get("command").get(interaction.commandName).has(interaction.member.user.id)) {
                 await interaction.reply({
-                    content: "Non puoi eseguire questo comando per " + utils.getRemainingTime(Date.now(), interactionDelay.get("command").get(interaction.commandName).get(interaction.member.user.id)),
+                    content: language.getString("CANT_USE_COMMAND_COOLDOWN", utils.getRemainingTime(Date.now(), interactionDelay.get("command").get(interaction.commandName).get(interaction.member.user.id))),
                     ephemeral: true
                 });
                 return;
@@ -236,14 +240,14 @@ client.on('interactionCreate', async (interaction) => {
         } else if (interaction.commandName == "activate") {
             if (config.licenseManagerTicketChannel != interaction.channelId) {
                 await interaction.reply({
-                    content: "Non puoi eseguire questo comando qui!",
+                    content: language.getString("CANT_USE_COMMAND_HERE"),
                     ephemeral: true
                 });
                 return;
             }
             if (interactionDelay.get("command").get(interaction.commandName).has(interaction.member.user.id)) {
                 await interaction.reply({
-                    content: "Non puoi eseguire questo comando per " + utils.getRemainingTime(Date.now(), interactionDelay.get("command").get(interaction.commandName).get(interaction.member.user.id)),
+                    content: language.getString("CANT_USE_COMMAND_COOLDOWN", utils.getRemainingTime(Date.now(), interactionDelay.get("command").get(interaction.commandName).get(interaction.member.user.id))),
                     ephemeral: true
                 });
                 return;
@@ -256,7 +260,7 @@ client.on('interactionCreate', async (interaction) => {
         } else if (interaction.commandName == "help") {
             if (interactionDelay.get("command").get(interaction.commandName).has(interaction.member.user.id)) {
                 await interaction.reply({
-                    content: "Non puoi eseguire questo comando per " + utils.getRemainingTime(Date.now(), interactionDelay.get("command").get(interaction.commandName).get(interaction.member.user.id)),
+                    content: language.getString("CANT_USE_COMMAND_COOLDOWN", utils.getRemainingTime(Date.now(), interactionDelay.get("command").get(interaction.commandName).get(interaction.member.user.id))),
                     ephemeral: true
                 });
                 return;
@@ -275,7 +279,7 @@ client.on('interactionCreate', async (interaction) => {
         if (interactionDelay.get("contextMenu").includes(interaction.member.user.id)) {
             return;
         }
-        if (interaction.commandName == "Attiva Token") {
+        if (interaction.commandName == language_button.getString("ATTIVATOKEN_NAME")) {
             commands.get(interaction.commandName.toLowerCase().replaceAll(" ", "")).execute(interaction, tokenManager);
         }
         interactionDelay.get("contextMenu").push(interaction.member.user.id);
@@ -290,63 +294,66 @@ client.on("guildMemberUpdate", (oldMember, newMember) => {});
 client.on("guildCreate", function (guild) {
     if (guild.id != config.authoritativeDiscord) {
         guild.members.cache.get(guild.ownerID).send({
-            content: "I've been added to a non authoritative Discord Server, not good! 😡 😡 😡"
+            content: language.getString("GUILD_CREATE_ERROR_1")
         });
         guild.leave();
         return;
     }
-    guild.channels.create("Gestione Licenze", {
-        "type": 4,
-        "permissionOverwrites": [{
-            id: config.roles.customer,
-            allow: ['VIEW_CHANNEL']
-        }, {
-            id: guild.roles.cache.find(r => r.name === '@everyone'),
-            deny: ['VIEW_CHANNEL', 'SEND_MESSAGES']
-        }]
-    }).then(channel => {
-        config.licenseManagerTicketCategory[0] = channel.id;
-        guild.channels.create("🎫 Crea Stanza", {
-            "parent": channel.id,
+    var id = 0;
+    config.licenseManagerTicketCategory.forEach(() => {
+        id += 1;
+        guild.channels.create(language.getString("LICENSE_CATEGORY_PREFIX", id), {
+            "type": 4,
             "permissionOverwrites": [{
-                id: client.user.id,
-                allow: ['SEND_MESSAGES']
-            }, {
                 id: config.roles.customer,
-                allow: ['VIEW_CHANNEL', 'READ_MESSAGE_HISTORY', 'SEND_MESSAGES']
+                allow: ['VIEW_CHANNEL']
             }, {
                 id: guild.roles.cache.find(r => r.name === '@everyone'),
-                deny: ['VIEW_CHANNEL', 'READ_MESSAGE_HISTORY', 'SEND_MESSAGES']
+                deny: ['VIEW_CHANNEL', 'SEND_MESSAGES']
             }]
-        }).then(roomChannel => {
-            console.log("-------------------------------------------------");
-            console.log(roomChannel);
-
-            const roomManagerEmbed = new Discord.MessageEmbed()
-                .setColor('#1900ff')
-                .setTitle('Gestione Stanza Licenze')
-                .setDescription('Clicca il bottone qui sotto per creare una stanza personale per la gestione della licenza e dell\'ip. Se esiste una tua stanza personale verrai taggato in quella stanza.')
-                .setThumbnail('https://cdn.discordapp.com/attachments/858349668197859378/876171558157160478/smurf-funny.gif')
-                .setTimestamp()
-                .setFooter('Bot fatto da Gasaferic cor core');
-
-            let createRoomButton = new Discord.MessageButton()
-                .setCustomId("creaStanza")
-                .setLabel("Crea una stanza")
-                .setStyle("PRIMARY")
-                .setEmoji("😱");
-
-            let messageActionRow = new Discord.MessageActionRow();
-            messageActionRow.addComponents(createRoomButton)
-            roomChannel.send({
-                embeds: [roomManagerEmbed],
-                components: [messageActionRow]
-            });
-            config.licenseManagerTicketChannel = roomChannel.id;
-
-            saveConfig();
-        });
-    });
+        }).then(channel => {
+            if (id == 1) {
+                config.licenseManagerTicketCategory[0] = channel.id;
+                guild.channels.create(language.getString("LICENSE_MAIN_ROOM_TITLE"), {
+                    "parent": channel.id,
+                    "permissionOverwrites": [{
+                        id: client.user.id,
+                        allow: ['SEND_MESSAGES']
+                    }, {
+                        id: config.roles.customer,
+                        allow: ['VIEW_CHANNEL', 'READ_MESSAGE_HISTORY', 'SEND_MESSAGES']
+                    }, {
+                        id: guild.roles.cache.find(r => r.name === '@everyone'),
+                        deny: ['VIEW_CHANNEL', 'READ_MESSAGE_HISTORY', 'SEND_MESSAGES']
+                    }]
+                }).then(roomChannel => {
+                    const roomManagerEmbed = new Discord.MessageEmbed()
+                        .setColor('#1900ff')
+                        .setTitle(language.getString("LICENSE_ROOM_EMBED_TITLE"))
+                        .setDescription(language.getString("LICENSE_ROOM_EMBED_DESCRIPTION"))
+                        .setThumbnail(language.getString("LICENSE_ROOM_EMBED_THUMBNAIL"))
+                        .setTimestamp()
+                        .setFooter(language.getString("LICENSE_ROOM_EMBED_FOOTER"));
+        
+                    let createRoomButton = new Discord.MessageButton()
+                        .setCustomId("creaStanza")
+                        .setLabel(language.getString("LICENSE_ROOM_BUTTON_TITLE"))
+                        .setStyle("PRIMARY")
+                        .setEmoji(language.getString("LICENSE_ROOM_BUTTON_EMOJI"));
+        
+                    let messageActionRow = new Discord.MessageActionRow();
+                    messageActionRow.addComponents(createRoomButton)
+                    roomChannel.send({
+                        embeds: [roomManagerEmbed],
+                        components: [messageActionRow]
+                    });
+                    config.licenseManagerTicketChannel = roomChannel.id;
+        
+                    saveConfig();
+                });
+            }
+        })
+    })
 });
 
 client.on("guildDelete", function (guild) {});
@@ -359,7 +366,7 @@ client.on('messageCreate', message => {
         for (var i in config.blockedTagRoles) {
             if (message.mentions.roles.get(config.blockedTagRoles[i]) && !config.blockedTagRoles.includes(message.author.id)) {
                 message.delete();
-                message.reply("Perfavore non taggare! Se continui verrai mutato.").then(sentMessage => {
+                message.reply(language.getString("DO_NOT_USE_TAGS")).then(sentMessage => {
                     setTimeout(() => {
                         if (!sentMessage.deleted) {
                             sentMessage.delete();
@@ -374,7 +381,7 @@ client.on('messageCreate', message => {
         for (var i in config.blockedTagRoles) {
             if (message.mentions.users.get(config.blockedTagUsers[i]) && !config.blockedTagRoles.includes(message.author.id)) {
                 // message.delete();
-                message.reply("Perfavore non taggare! Se continui verrai mutato.").then(sentMessage => {
+                message.reply(language.getString("DO_NOT_USE_TAGS")).then(sentMessage => {
                     setTimeout(() => {
                         if (!sentMessage.deleted) {
                             sentMessage.delete();

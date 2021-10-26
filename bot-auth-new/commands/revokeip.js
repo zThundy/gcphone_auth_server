@@ -13,14 +13,14 @@ module.exports = {
         .setDescription(language.getString("REVOKEIP_DESCRIPTION"))
         .addStringOption(option =>
             option.setName('id')
-            .setDescription(language.getString("REVOKEIP_DESCRIPTION_ARG_1"))
-            .setRequired(true)
-            .addChoice('Primo IP', 'firstIP')
-            .addChoice('Secondo IP', 'secondIP'))
+                .setDescription(language.getString("REVOKEIP_DESCRIPTION_ARG_1"))
+                .setRequired(true)
+                .addChoice('Primo IP', 'firstIP')
+                .addChoice('Secondo IP', 'secondIP'))
         .addUserOption(option =>
             option.setName('utente')
-            .setDescription(language.getString("REVOKEIP_DESCRIPTION_ARG_2"))
-            .setRequired(true)),
+                .setDescription(language.getString("REVOKEIP_DESCRIPTION_ARG_2"))
+                .setRequired(true)),
     permissions: [{
             id: config.roles.everyone,
             type: 'ROLE',
