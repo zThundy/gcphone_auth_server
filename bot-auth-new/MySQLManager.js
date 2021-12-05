@@ -26,7 +26,7 @@ class MySQLManager {
     getRooms(cb) {
         if (this.connection == undefined) { throw this.langManager.getString("CONNECTION_NOT_AVAILABLE"); }
         this.connection.query("SELECT * FROM licenses", function (err, result, fields) {
-            if (err) throw err;
+            if (err) console.error(err);
             if (result.length > 0) { cb(result); } else { cb([]); }
         });
     }
@@ -34,7 +34,7 @@ class MySQLManager {
     getRoomByUserId(user_id, cb) {
         if (this.connection == undefined) { throw this.langManager.getString("CONNECTION_NOT_AVAILABLE"); }
         this.connection.query(this.getPreparedStatement("SELECT * FROM licenses WHERE user_id = ?", [user_id]), function (err, result, fields) {
-            if (err) throw err;
+            if (err) console.error(err);
             if (result.length > 0) { cb(result[0]); } else { cb([]); }
         });
     }
@@ -42,21 +42,21 @@ class MySQLManager {
     addRoom(data) {
         if (this.connection == undefined) { throw this.langManager.getString("CONNECTION_NOT_AVAILABLE"); }
         this.connection.query(this.getPreparedStatement("INSERT IGNORE INTO licenses (user_id, license, settings) values (?,?,?)", [data.user_id, data.license, data.settings]), function (err, result, fields) {
-            if (err) throw err;
+            if (err) console.error(err);
         });
     }
 
     removeRoomByUserId(user_id) {
         if (this.connection == undefined) { throw this.langManager.getString("CONNECTION_NOT_AVAILABLE"); }
         this.connection.query(this.getPreparedStatement("DELETE FROM licenses WHERE user_id = ?", [user_id]), function (err, result, fields) {
-            if (err) throw err;
+            if (err) console.error(err);
         });
     }
 
     getSettingsByUserId(user_id, cb) {
         if (this.connection == undefined) { throw this.langManager.getString("CONNECTION_NOT_AVAILABLE"); }
         this.connection.query(this.getPreparedStatement("SELECT * FROM licenses WHERE user_id = ?", [user_id]), function (err, result, fields) {
-            if (err) throw err;
+            if (err) console.error(err);
             if (result.length > 0) { cb(result[0]); } else { cb([]); }
         });
     }
@@ -64,7 +64,7 @@ class MySQLManager {
     updateSettingsByUserId(user_id, settings) {
         if (this.connection == undefined) { throw this.langManager.getString("CONNECTION_NOT_AVAILABLE"); }
         this.connection.query(this.getPreparedStatement("UPDATE licenses SET settings = ? WHERE user_id = ?", [settings, user_id]), function (err, result, fields) {
-            if (err) throw err;
+            if (err) console.error(err);
         });
     }
 
