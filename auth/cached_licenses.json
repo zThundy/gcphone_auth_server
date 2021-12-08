@@ -35,17 +35,13 @@
     "ScorpionRP",
     "ZJBhIexKd457FCyu6JhQ8NRPlmzjEKWXo18cKrd5"
   ],
-  "2.39.112.167": [
-    "Server",
+  "185.229.236.209": [
+    "serverx",
     "I772zEdgEjiETyIkJ4eTY8LZhCNbjA5ZMxvs6jRg"
   ],
   "5.181.31.195": [
     "Birmingham",
     "xA1vbVmNZVfp4UAEBZ3c69FzTTHWLYQflYaF9sLx"
-  ],
-  "85.215.242.124": [
-    "Dev",
-    "3tBb5RLO93zsLpBjUxzxym6igChVVm6R7eybVH8f"
   ],
   "145.239.130.120": [
     "DawnValley",
@@ -55,8 +51,12 @@
     "DawnvalleyV2",
     "1urkuKEOFdn6n1q7cxts1hTmMrRZYnga9Af5iYU7"
   ],
-  "185.229.237.124": [
-    "Server Main",
+  "5.181.31.118": [
+    "ServerPrincipale",
+    "ipXLWXUTrYLH704oADjeUYcVUulOYkRR4Sh5Ny0A"
+  ],
+  "185.229.237.129": [
+    "Server Test",
     "DaVgkHrjQP9uLVlFOTAOq4ZJmG1y5U0ba8zloDFj"
   ],
   "5.181.31.125": [
@@ -83,25 +83,29 @@
     "Extr",
     "bqZYDbgaS2wrIC2JANNSEyR9Xz7SWe0K3oENSIPt"
   ],
-  "2.32.62.237": [
-    "localhost",
-    "po82TPxrwlsiEW1GRLMpD6BHfpAmpcUVT3Eb2j2P"
-  ],
-  "80.113.225.105": [
-    "BOH",
-    "po82TPxrwlsiEW1GRLMpD6BHfpAmpcUVT3Eb2j2P"
+  "5.181.31.121": [
+    "Heroes",
+    "KqWgEaCExyYJvpVzzBlFDZBXSh9W50n84Tu324h7"
   ],
   "88.214.56.10": [
     "RevolutionState",
     "ilvuvvR1Sidp4kBAn30pAa1mpun7gcqam2xj0FVG"
   ],
+  "31.156.76.80": [
+    "Agon",
+    "TNxIxV9bYSzEEMDhUfeKU9lXIdDJAFZDZEqYLpRl"
+  ],
   "45.14.185.235": [
     "royal",
     "P6yopAjIKzOMpER5QBxXl8gAZbj7fSSPaSS2czMg"
   ],
-  "185.229.237.23": [
-    "Server Mariex",
-    "xq2sO6BMkC6D52fEG2S5wL1PyfnSun1IYIc7luTf"
+  "5.181.31.113": [
+    "Megalos",
+    "LK64ECN6lrrZggKpZiNNyi4WTBfPDpURQzhSzkwM"
+  ],
+  "185.229.237.181": [
+    "NerdCity",
+    "2dhuKCWJgfG2oci4wTyhMJJgWA47kMJAZofqkENn"
   ],
   "5.181.31.117": [
     "Virtual",
@@ -110,6 +114,10 @@
   "51.178.68.203": [
     "Leo",
     "P7xD1gGDWVduYCb7LRuJvvd07EMCnzN2lTYkg5YN"
+  ],
+  "5.181.31.227": [
+    "OnlyRp",
+    "4ksxQpCl3wnPs0QyGNFwjJBO4njwANV9zW7Ii4U4"
   ],
   "5.181.31.170": [
     "borderline",
@@ -123,7 +131,7 @@
     "Loupass69",
     "rV168bEWsy82Q8fFDxojNhYxbpWJ2XBQ61IkBHMf"
   ],
-  "185.229.237.133": [
+  "185.229.236.181": [
     "vision",
     "iaisr8OQNXy0F9fTa75JBVUTJstotD53EIEvit2l"
   ],
@@ -135,29 +143,61 @@
     "InsideMain",
     "WZkh8Q94RDcb5ZHZBlsx7ZvSiu8CTXn4rd6yLDWb"
   ],
-  "5.181.31.81": [
-    "Infinity Rp",
+  "192.168.1.1": [
+    "local",
+    "po82TPxrwlsiEW1GRLMpD6BHfpAmpcUVT3Eb2j2P"
+  ],
+  "80.113.225.105": [
+    "asdasd",
+    "po82TPxrwlsiEW1GRLMpD6BHfpAmpcUVT3Eb2j2P"
+  ],
+  "0.0.0.0": [
+    "non attivo",
     "i4wnQKr596H8QvyJ4Yv7Gmn1mjyFQsGW0VZ7Fcxe"
   ],
-  "164.132.202.75": [
-    "Falcon",
+  "5.181.31.126": [
+    "Evolve",
     "Q4PtuvvVZPQZFUGQFgzNYqTHXW58LfsT9G4QbaRK"
   ],
   "5.181.31.122": [
     "Mailk Main Server",
     "stca8mKtP22dfmeB9SRT59DTX4Sp6Nyqm4w3zk3a"
   ],
+  "147.189.173.72": [
+    "Anomaly",
+    "7QXcr7r6DfEbfGmHgZA8mDyKOsOheXKnsaNzhF7a"
+  ],
+  "5.181.31.114": [
+    "Horus City",
+    "bJH82U3T5997TgFqhnDZhnlo3SGZjqhK5aI5Uhod"
+  ],
+  "185.229.237.31": [
+    "Tamma",
+    "AIlzT1HXov4RdMOHDG7qQJXQBXJccq4IPt5pTzEp"
+  ],
   "164.132.207.215": [
     "Scheggia Main Server",
     "Y1LRopaEycRrGVXVuGewU9TyBblZ4U7ZTs4KHxdP"
+  ],
+  "185.229.237.86": [
+    "LuxuryLifeRP",
+    "aYdS7DYqqpQYrnaO89WiPi4g962iyc3P91HgmeaH"
   ],
   "5.181.31.142": [
     "Vanquest Main Server",
     "oIW37tjgJ9fTeiXxQW4ME3blaXBs9T4j1ZDn6Ipk"
   ],
-  "193.70.1.58": [
-    "Samu Evos Server",
+  "5.181.31.154": [
+    "HavanaRP",
+    "rIOVWC1UaHuhVX8AGKMPKlaABKbKU4N40hjkeXQ0"
+  ],
+  "5.181.31.169": [
+    "Lvirp",
     "7PXfdR4XeHY3ExXcyi6YBQFraTrJFLdeAMxemFBE"
+  ],
+  "185.229.237.23": [
+    "Server Mariex",
+    "xq2sO6BMkC6D52fEG2S5wL1PyfnSun1IYIc7luTf"
   ],
   "37.187.155.167": [
     "SaToX Main",
@@ -171,9 +211,17 @@
     "New York State RP",
     "iJEMPIWjyD5qC2guHaxt4F1HB2qUAJ7jpW7OU8YA"
   ],
+  "37.179.140.67": [
+    "hm",
+    "ZW3uLfWJd6NNTRbxP6NjXCB27tyLKiPJe8erK55n"
+  ],
   "5.181.31.128": [
     "Deadwood",
     "3rhxTbA3GUbEuHWlAnnaNaquxO4JslZzO3XEMYkQ"
+  ],
+  "185.229.237.230": [
+    "AvatarCity",
+    "qNjb3rIQ2nlO9fFZOhScvOxx01yCXutQeI8xYrdB"
   ],
   "164.132.203.150": [
     "Marco-Ombra Server",
@@ -183,15 +231,19 @@
     "Server Packy Anderson",
     "JfJpQC5YVTrfVbLE429N29FVjQkHK1I9JxcsL3mO"
   ],
-  "5.181.31.169": [
-    "Server Edo",
+  "5.181.31.211": [
+    "Galaxy RP",
+    "31XrNZW2cMwCeenbUVPv7w1966KxQbnm2GPQ0Vvr"
+  ],
+  "5.181.31.253": [
+    "lvirp",
     "p6QD38fe1tDOPnmv4qccGjh2N4E0tFtPjVnwvElF"
   ],
   "185.229.237.255": [
     "Server di Il_bomber98",
     "wciLUG2p35HlylU18IZ0vK5Q6aK9jXmR62NAvzuJ"
   ],
-  "185.229.237.88": [
+  "138.201.30.105": [
     "Administrator",
     "B3jOzsOEfVPepq5RFE5zqt2QbI7PaEoe0d29WP0c"
   ],
@@ -203,6 +255,10 @@
     "ImClod server",
     "qScuvrAePm2VDY7Q7T2WXkvjqcsfNU3CSy6FTyQz"
   ],
+  "5.181.31.65": [
+    "ISRP",
+    "1DZGdSiHSriNaLOEtGFyg7L0LcZAKmDnNBalXl7G"
+  ],
   "1.1.1.1": [
     "Uitt",
     "gcMLa7mgfJ7q8oK4NdRkB7KLnxSEjBbJ7n6yQsyy"
@@ -211,60 +267,8 @@
     "mysterious",
     "4Rxa7TmKO8xaQXa5fHUqr0xZ6KaQjH8nGWHGGHiU"
   ],
-  "202.61.202.81": [
+  "95.179.254.222": [
     "StarLife",
     "IHz7VqPzHx8ekRDv0IlxwNoOrHrO5ShejAZa7BEu"
-  ],
-  "31.156.115.209": [
-    "Agon",
-    "TNxIxV9bYSzEEMDhUfeKU9lXIdDJAFZDZEqYLpRl"
-  ],
-  "185.229.237.86": [
-    "LuxuryLifeRP",
-    "aYdS7DYqqpQYrnaO89WiPi4g962iyc3P91HgmeaH"
-  ],
-  "5.181.31.118": [
-    "ServerPrincipale",
-    "ipXLWXUTrYLH704oADjeUYcVUulOYkRR4Sh5Ny0A"
-  ],
-  "5.181.31.154": [
-    "HavanaRP",
-    "rIOVWC1UaHuhVX8AGKMPKlaABKbKU4N40hjkeXQ0"
-  ],
-  "5.181.31.113": [
-    "Megalos",
-    "LK64ECN6lrrZggKpZiNNyi4WTBfPDpURQzhSzkwM"
-  ],
-  "5.181.31.121": [
-    "Heroes",
-    "KqWgEaCExyYJvpVzzBlFDZBXSh9W50n84Tu324h7"
-  ],
-  "185.229.237.230": [
-    "AvatarCity",
-    "qNjb3rIQ2nlO9fFZOhScvOxx01yCXutQeI8xYrdB"
-  ],
-  "5.181.31.211": [
-    "Galaxy RP",
-    "31XrNZW2cMwCeenbUVPv7w1966KxQbnm2GPQ0Vvr"
-  ],
-  "147.189.173.72": [
-    "Anomaly",
-    "7QXcr7r6DfEbfGmHgZA8mDyKOsOheXKnsaNzhF7a"
-  ],
-  "5.181.31.114": [
-    "HorusCity",
-    "bJH82U3T5997TgFqhnDZhnlo3SGZjqhK5aI5Uhod"
-  ],
-  "185.229.237.31": [
-    "Tamma",
-    "AIlzT1HXov4RdMOHDG7qQJXQBXJccq4IPt5pTzEp"
-  ],
-  "37.179.140.67": [
-    "hm",
-    "ZW3uLfWJd6NNTRbxP6NjXCB27tyLKiPJe8erK55n"
-  ],
-  "185.229.237.181": [
-    "NerdCity",
-    "2dhuKCWJgfG2oci4wTyhMJJgWA47kMJAZofqkENn"
   ]
 }
