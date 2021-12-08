@@ -27,7 +27,7 @@ class MySQLManager {
         if (this.connection == undefined) { throw this.langManager.getString("CONNECTION_NOT_AVAILABLE"); }
         this.connection.query("SELECT * FROM licenses", function (err, result, fields) {
             if (err) console.error(err);
-            if (result.length > 0) { cb(result); } else { cb([]); }
+            if (result && result.length > 0) { cb(result); } else { cb([]); }
         });
     }
 
@@ -35,7 +35,7 @@ class MySQLManager {
         if (this.connection == undefined) { throw this.langManager.getString("CONNECTION_NOT_AVAILABLE"); }
         this.connection.query(this.getPreparedStatement("SELECT * FROM licenses WHERE user_id = ?", [user_id]), function (err, result, fields) {
             if (err) console.error(err);
-            if (result.length > 0) { cb(result[0]); } else { cb([]); }
+            if (result && result.length > 0) { cb(result[0]); } else { cb([]); }
         });
     }
 
@@ -57,7 +57,7 @@ class MySQLManager {
         if (this.connection == undefined) { throw this.langManager.getString("CONNECTION_NOT_AVAILABLE"); }
         this.connection.query(this.getPreparedStatement("SELECT * FROM licenses WHERE user_id = ?", [user_id]), function (err, result, fields) {
             if (err) console.error(err);
-            if (result.length > 0) { cb(result[0]); } else { cb([]); }
+            if (result && result.length > 0) { cb(result[0]); } else { cb([]); }
         });
     }
 
