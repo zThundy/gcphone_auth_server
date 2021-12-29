@@ -42,7 +42,17 @@ module.exports = {
         }
     ],
     spamDelay: 43200,
-    async execute(interaction, room, eventEmitter) {
+    async execute(interaction, data) {
+        var room = data.room;
+        var eventEmitter = data.eventEmitter;
+        var roomChannels = data.roomChannels;
+        if (!roomChannels.includes(interaction.channelId)) {
+            await interaction.reply({
+                content: data.mLanguage.getString("CANT_USE_COMMAND_HERE"),
+                ephemeral: true
+            });
+            return;
+        }
         if (utils.validateIPaddress(interaction.options._hoistedOptions[2].value)) {
             if (room.getSettings().getValue(interaction.options._hoistedOptions[0].value).ip == "REVOCATO") {
                 await interaction.reply({

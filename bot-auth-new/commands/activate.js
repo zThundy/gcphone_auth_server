@@ -28,7 +28,8 @@ module.exports = {
         }
     ],
     spamDelay: 120,
-    async execute(interaction, tokenManager) {
+    async execute(interaction, data) {
+        var tokenManager = data.tokenManager;
         var option = interaction.options._hoistedOptions[0];
         if (tokenManager.activateToken(interaction.member.user.id, option.value)) {
             await interaction.reply({

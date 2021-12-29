@@ -26,7 +26,8 @@ module.exports = {
         }
     ],
     spamDelay: 86400,
-    async execute(interaction, client) {
+    async execute(interaction, data) {
+        var client = data.client;
         if (client.users.cache.get(interaction.member.user.id) == null) {
             client.users.fetch(interaction.member.user.id).then(user => {
                 user.createDM().then(dmMessages => {
