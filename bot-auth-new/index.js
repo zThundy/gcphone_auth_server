@@ -398,7 +398,7 @@ function saveConfig() {
         fs.unlinkSync("./config.json")
     }
     for (var configElement of configContent) {
-        if (configElement !== "langiage")
+        if (configElement !== "language")
             fs.appendFileSync('./config.json', configElement + (configContent.indexOf(configElement) == configContent.length - 1 ? "" : ","), 'utf8');
     }
 }
