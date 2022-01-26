@@ -50,8 +50,9 @@ module.exports = {
                         });
                     } else {
                         await interaction.reply({
-                            content: language.getString("TOKEN_SUCCESS_1", (option.member.nickname || option.user.username), data.tokenManager.registerToken(option.value)),
-                            ephemeral: false
+                            // content: language.getString("TOKEN_SUCCESS_1", (option.member.nickname || option.user.username), data.tokenManager.registerToken(option.value)),
+                            content: language.getString("TOKEN_SUCCESS_1", data.tokenManager.registerToken(option.value)),
+                            ephemeral: true
                         });
                     }
                 }

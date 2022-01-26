@@ -95,7 +95,7 @@
         "TOKEN_ERROR_1": "Can't create a new token for this user: he already owns a License Room",
         "TOKEN_ERROR_2": "Can't create a new token for this user: he already has a generated token",
         "TOKEN_ERROR_3": "Can't revoke token {0}",
-        "TOKEN_SUCCESS_1": "Token for the user {0} generated successfully! **{1}**",
+        "TOKEN_SUCCESS_1": "Token generated successfully! **{0}**",
         "TOKEN_SUCCESS_2": "Token {0} revoked successfully",
         "TRANSFERLICENSE_TITLE": "transferlicense",
         "TRANSFERLICENSE_DESCRIPTION": "Used by administrators to transfer the ownership of a license to another user",
