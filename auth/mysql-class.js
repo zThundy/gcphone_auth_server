@@ -37,12 +37,6 @@ class MySQLConnection {
         // console.log(args)
         this.connection.query(query, args, cb) 
     }
-
-    sleep(ms) {
-        return new Promise((resolve) => {
-            setTimeout(resolve, ms)
-        })
-    }
 }
 
 /* eslint-disable */
