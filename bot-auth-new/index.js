@@ -322,7 +322,7 @@ client.on('messageCreate', message => {
     /**
      * AUTO RESPONDER SYSTEM
      */
-    if (responder.run(message.content)) {
+    if (responder.run(message.content) && message.channel.title.includes("ticket-")) {
         const embed = new Discord.MessageEmbed()
             .setColor('#00FF00')
             .setTitle(language.getString("AUTORESPONSE_MESSAGE_TITLE"))
