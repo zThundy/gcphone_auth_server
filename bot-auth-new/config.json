@@ -69,6 +69,33 @@
     "557628352828014614",
     "389525098463232001"
   ],
+  "responder": {
+    "values": {
+      "phone": 1,
+      "telefono": 1,
+      "disponibile": 1,
+      "disposizione": 1,
+      "a disposizione": 1,
+      "gcphone": 2,
+      "thundy": 2,
+      "prezzo": 2,
+      "price": 2,
+      "risorsa": 1,
+      "resource": 1,
+      "zth_gcphone": 3,
+      "informazioni": 1,
+      "licenza": 1,
+      "costo": 2,
+      "aiuto": 0,
+      "salve": 0,
+      "hello": 0,
+      "hi": 0,
+      "BiE0Lg6nUeM": 5,
+      "Wb-Dx-DWVFM": 5,
+      "hdYka-ldEzM": 5
+    },
+    "min_score": 3
+  },
   "language": {
     "general": {
       "CANT_USE_COMMAND_HERE": "You can't use this command here",
@@ -82,7 +109,9 @@
       "LICENSE_ROOM_EMBED_THUMBNAIL": "https://cdn.discordapp.com/attachments/858349668197859378/876171558157160478/smurf-funny.gif",
       "LICENSE_ROOM_EMBED_FOOTER": "License Manager Bot",
       "LICENSE_ROOM_BUTTON_TITLE": "Create a room",
-      "LICENSE_ROOM_BUTTON_EMOJI": "➕"
+      "LICENSE_ROOM_BUTTON_EMOJI": "➕",
+      "AUTORESPONSE_MESSAGE_DESCRIPTION": "\n:flag_it:\nIl prezzo del telefono è €120\nIl prezzo del secondo IP è di €40\n-------------------------------------------------------\n:flag_us:\nPhone price €120\nSecondary IP price €40\n(currency: Euro)\n\n<#878725091830153226>\n\nLink: https://paypal.me/Thundy",
+      "AUTORESPONSE_MESSAGE_TITLE": "zth_gcPhone"
     },
     "mysql": {
       "CONNECTION_NOT_AVAILABLE": "Connection to database not established!",
@@ -166,7 +195,7 @@
       "TOKEN_ERROR_1": "Can't create a new token for this user: he already owns a License Room",
       "TOKEN_ERROR_2": "Can't create a new token for this user: he already has a generated token",
       "TOKEN_ERROR_3": "Can't revoke token {0}",
-      "TOKEN_SUCCESS_1": "Token for the user {0} generated successfully! **{1}**",
+      "TOKEN_SUCCESS_1": "Token generated successfully! **{0}**",
       "TOKEN_SUCCESS_2": "Token {0} revoked successfully",
       "TRANSFERLICENSE_TITLE": "transferlicense",
       "TRANSFERLICENSE_DESCRIPTION": "Used by administrators to transfer the ownership of a license to another user",

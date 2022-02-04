@@ -11,7 +11,9 @@
         "LICENSE_ROOM_EMBED_THUMBNAIL": "https://cdn.discordapp.com/attachments/858349668197859378/876171558157160478/smurf-funny.gif",
         "LICENSE_ROOM_EMBED_FOOTER": "License Manager Bot",
         "LICENSE_ROOM_BUTTON_TITLE": "Create a room",
-        "LICENSE_ROOM_BUTTON_EMOJI": "➕"
+        "LICENSE_ROOM_BUTTON_EMOJI": "➕",
+        "AUTORESPONSE_MESSAGE_DESCRIPTION": "\n:flag_it:\nIl prezzo del telefono è €120\nIl prezzo del secondo IP è di €40\n-------------------------------------------------------\n:flag_us:\nPhone price €120\nSecondary IP price €40\n(currency: Euro)\n\n<#878725091830153226>\n\nLink: https://paypal.me/Thundy",
+        "AUTORESPONSE_MESSAGE_TITLE": "zth_gcPhone"
     },
     "mysql": {
         "CONNECTION_NOT_AVAILABLE": "Connection to database not established!",

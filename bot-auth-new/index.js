@@ -32,6 +32,9 @@ const RoomButtonHandler = require('./room/RoomButtonHandler');
 const LangManager = require('./LangManager');
 const language = new LangManager("general");
 const language_button = new LangManager("commands");
+// Autoresponder
+const AutoResponder = require('./classes/AutoRespond');
+const responder = new AutoResponder(config.responder);
 
 io.on('connection', (IOSocket) => {
     console.log(colors.changeBackground("green", "Socket connected"));
@@ -314,9 +317,24 @@ client.on("guildCreate", function (guild) {
 client.on("guildDelete", function (guild) {});
 
 client.on('messageCreate', message => {
-    if (message.author.bot || config.tagBypass.includes(message.author.id)) {
-        return;
+    if (message.author.bot) return;
+
+    /**
+     * AUTO RESPONDER SYSTEM
+     */
+    if (responder.run(message.content)) {
+        const embed = new Discord.MessageEmbed()
+            .setColor('#00FF00')
+            .setTitle(language.getString("AUTORESPONSE_MESSAGE_TITLE"))
+            .setDescription(language.getString("AUTORESPONSE_MESSAGE_DESCRIPTION"))
+            .setTimestamp();
+        message.channel.send({ embeds: [embed] });
     }
+
+    /**
+     * TAGS SYSTEM
+     */
+    if (config.tagBypass.includes(message.author.id)) return;
     if (message.mentions.roles.size > 0) {
         for (var i in config.blockedTagRoles) {
             if (message.mentions.roles.get(config.blockedTagRoles[i]) && !config.blockedTagRoles.includes(message.author.id)) {
@@ -392,7 +410,7 @@ function log(data) {
 function saveConfig() {
     const language = require("./language.json");
     config.language = language;
-    var configContentString = JSON.stringify(config, null, 2); // "\t" per i tabs
+    var configContentString = JSON.stringify(config, null, 4); // "\t" per i tabs
     const configContent = configContentString.split(",");
     if (fs.existsSync("./config.json")) {
         fs.unlinkSync("./config.json")
