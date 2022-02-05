@@ -1,8 +1,5 @@
 const Discord = require('discord.js');
 const { start } = require('repl');
-var config = require('./config.json');
-
-const fusoOrario = config.fusoOrario
 
 class Utils {
   constructor() { }

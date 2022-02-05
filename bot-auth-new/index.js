@@ -113,12 +113,12 @@ client.once("ready", () => {
     saveConfig();
 
     /*
-    client.application.commands.fetch().then(() => {
-        for (var command of client.application.commands.cache) {
-            client.application.commands.delete(command[0]);
-            console.log("Deleted command", command[1].name);
-        }
-    });
+        client.application.commands.fetch().then(() => {
+            for (var command of client.application.commands.cache) {
+                client.application.commands.delete(command[0]);
+                console.log("Deleted command", command[1].name);
+            }
+        });
     */
 
     console.log(colors.changeBackground("yellow", "Cleaning commands for guild " + config.authoritativeDiscord + "..."));
@@ -322,13 +322,15 @@ client.on('messageCreate', message => {
     /**
      * AUTO RESPONDER SYSTEM
      */
-    if (responder.run(message.content) && message.channel.title.includes("ticket-")) {
-        const embed = new Discord.MessageEmbed()
-            .setColor('#00FF00')
-            .setTitle(language.getString("AUTORESPONSE_MESSAGE_TITLE"))
-            .setDescription(language.getString("AUTORESPONSE_MESSAGE_DESCRIPTION"))
-            .setTimestamp();
-        message.channel.send({ embeds: [embed] });
+    if (message.channel.name.includes("ticket-")) {
+        if (responder.run(message.content)) {
+            const embed = new Discord.MessageEmbed()
+                .setColor('#00FF00')
+                .setTitle(language.getString("AUTORESPONSE_MESSAGE_TITLE"))
+                .setDescription(language.getString("AUTORESPONSE_MESSAGE_DESCRIPTION"))
+                .setTimestamp();
+            message.channel.send({ embeds: [embed] });
+        }
     }
 
     /**
@@ -400,23 +402,20 @@ client.on("roleUpdate", function(oldRole, newRole) {
 
 */
 
-const fusoOrario = 2;
+const fusoOrario = config.fusoOrario
 
 function log(data) {
     var currentDate = new Date(Date.now() + (fusoOrario * (60 * 60 * 1000)));
-    fs.appendFileSync("./logs_" + (currentDate.getDate() + "-" + (currentDate.getMonth() + 1) + "-" + currentDate.getFullYear()) + ".txt", ("[" + currentDate.getHours() + ":" + currentDate.getMinutes() + ":" + currentDate.getSeconds() + "]") + " > " + data.action + ": " + data.content + "\n", 'utf8');
+    fs.appendFileSync("./logs/logs_" + (currentDate.getDate() + "-" + (currentDate.getMonth() + 1) + "-" + currentDate.getFullYear()) + ".txt", ("[" + currentDate.getHours() + ":" + currentDate.getMinutes() + ":" + currentDate.getSeconds() + "]") + " > " + data.action + ": " + data.content + "\n", 'utf8');
 }
 
 function saveConfig() {
-    const language = require("./language.json");
-    config.language = language;
     var configContentString = JSON.stringify(config, null, 4); // "\t" per i tabs
     const configContent = configContentString.split(",");
-    if (fs.existsSync("./config.json")) {
-        fs.unlinkSync("./config.json")
-    }
-    for (var configElement of configContent) {
-        if (configElement !== "language")
-            fs.appendFileSync('./config.json', configElement + (configContent.indexOf(configElement) == configContent.length - 1 ? "" : ","), 'utf8');
-    }
+    if (fs.existsSync("./config.json"))
+        fs.unlinkSync("./config.json");
+    for (var configElement of configContent)
+        fs.appendFileSync('./config.json', configElement + (configContent.indexOf(configElement) == configContent.length - 1 ? "" : ","), 'utf8');
+    const language = require("./language.json");
+    config.language = language;
 }
