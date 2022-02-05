@@ -68,47 +68,5 @@
         "867025159553417277",
         "557628352828014614",
         "389525098463232001"
-    ],
-    "responder": {
-        "values": {
-            "phone": 1,
-            "telefono": 1,
-            "disponibile": 1,
-            "disposizione": 1,
-            "interessato": 1,
-            "acquisto": 2,
-            "tundy": 3,
-            "buy": 2,
-            "buying": 2,
-            "sim": 5,
-            "saltychat": 5,
-            "second ip": 2,
-            "dev": 2,
-            "a disposizione": 1,
-            "comprare": 2,
-            "zth": 1,
-            "paypal": 3,
-            "prezzi": 2,
-            "script": 1,
-            "much": 2,
-            "gcphone": 2,
-            "thundy": 2,
-            "prezzo": 2,
-            "price": 2,
-            "risorsa": 1,
-            "resource": 1,
-            "zth_gcphone": 3,
-            "zThundy": 2,
-            "informazioni": 1,
-            "licenza": 1,
-            "costo": 2,
-            "salve": 0.5,
-            "hello": 0.5,
-            "hi": 0.5,
-            "BiE0Lg6nUeM": 5,
-            "Wb-Dx-DWVFM": 5,
-            "hdYka-ldEzM": 5
-        },
-        "min_score": 4
-    }
+    ]
 }

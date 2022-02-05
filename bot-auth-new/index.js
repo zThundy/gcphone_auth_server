@@ -34,7 +34,7 @@ const language = new LangManager("general");
 const language_button = new LangManager("commands");
 // Autoresponder
 const AutoResponder = require('./classes/AutoRespond');
-const responder = new AutoResponder(config.responder);
+const responder = new AutoResponder();
 
 io.on('connection', (IOSocket) => {
     console.log(colors.changeBackground("green", "Socket connected"));
