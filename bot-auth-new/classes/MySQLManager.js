@@ -1,6 +1,6 @@
 const LangManager = require('./LangManager');
 const mySQL = require('mysql');
-const Colors = require('./colors');
+const Colors = require('../colors');
 const colors = new Colors();
 
 class MySQLManager {

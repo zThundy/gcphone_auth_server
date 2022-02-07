@@ -1,6 +1,6 @@
 const LangManager = require('./LangManager');
 const sqlite3 = require('sqlite3');
-const Colors = require('./colors');
+const Colors = require('../colors');
 const colors = new Colors();
 
 class SQLiteManager {

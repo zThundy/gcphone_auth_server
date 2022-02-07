@@ -1,5 +1,5 @@
-const Colors = require("./colors");
-const language = require("./language.json");
+const Colors = require("../colors");
+const language = require("../language.json");
 const colors = new Colors();
 
 class LangManager {
