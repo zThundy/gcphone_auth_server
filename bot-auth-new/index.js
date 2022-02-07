@@ -112,6 +112,11 @@ client.once("ready", () => {
 
     saveConfig();
 
+    /* 
+        When developing for the bot, uncomment this
+    */
+    // return;
+
     /*
         client.application.commands.fetch().then(() => {
             for (var command of client.application.commands.cache) {
@@ -322,16 +327,20 @@ client.on('messageCreate', message => {
     /**
      * AUTO RESPONDER SYSTEM
      */
-    if (message.channel.name.includes("ticket-")) {
-        if (responder.run(message.content)) {
-            const embed = new Discord.MessageEmbed()
-                .setColor('#00FF00')
-                .setTitle(language.getString("AUTORESPONSE_MESSAGE_TITLE"))
-                .setDescription(language.getString("AUTORESPONSE_MESSAGE_DESCRIPTION"))
-                .setTimestamp();
-            message.channel.send({ embeds: [embed] });
+    try {
+        if (message.channel.name.includes("ticket-")) {
+            if (!message.member.roles.cache.some(role => role.id === config.roles.customer)) {
+                if (responder.run(message)) {
+                    const embed = new Discord.MessageEmbed()
+                        .setColor('#00FF00')
+                        .setTitle(language.getString("AUTORESPONSE_MESSAGE_TITLE"))
+                        .setDescription(language.getString("AUTORESPONSE_MESSAGE_DESCRIPTION"))
+                        .setTimestamp();
+                    message.channel.send({ embeds: [embed] });
+                }
+            }
         }
-    }
+    } catch(e) { console.error(e); }
 
     /**
      * TAGS SYSTEM

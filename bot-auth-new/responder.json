@@ -11,10 +11,9 @@
         "buy": 2,
         "buying": 2,
         "sim": 5,
-        "saltychat": 5,
+        "saltychat": 1,
         "second ip": 2,
         "dev": 2,
-        "a disposizione": 1,
         "comprare": 2,
         "zth": 1,
         "paypal": 3,
@@ -37,7 +36,10 @@
         "hi": 0.5,
         "BiE0Lg6nUeM": 5,
         "Wb-Dx-DWVFM": 5,
-        "hdYka-ldEzM": 5
+        "hdYka-ldEzM": 5,
+        "elysium": -5,
+        "hydra": -5,
+        "gamemode": -5
     },
     "min_score": 4
 }

@@ -4,10 +4,11 @@ class AutoResponder {
     constructor() {
         this.values = {};
         this.min = 0;
+        this.channels = new Map();
     }
 
     _update() {
-        var responder = fs.readFileSync('../responder.json', 'utf8');
+        var responder = fs.readFileSync('./responder.json', 'utf8');
         if (typeof responder === "string") responder = JSON.parse(responder);
         this.values = responder.values;
         this.min = responder.min_score;
@@ -23,11 +24,16 @@ class AutoResponder {
     }
 
     run(message) {
-        this._update();
-        let score = this._calculateScore(message);
-        if (score >= this.min)
-            return true;
-        return false;
+        var channelId = message.channel.id;
+        if (!this.channels.has(channelId)) {
+            var content = message.content;
+            this.channels.set(channelId, true);
+            this._update();
+            let score = this._calculateScore(content);
+            if (score >= this.min)
+                return true;
+            return false;
+        }
     }
 }
 
