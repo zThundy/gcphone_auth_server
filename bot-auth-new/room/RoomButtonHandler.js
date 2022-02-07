@@ -1,4 +1,4 @@
-const LangManager = require('../LangManager');
+const LangManager = require('../classes/LangManager');
 const Utils = require('../utils');
 // maybe added by vscode auto
 // const RoomSettings = require('./RoomSettings');

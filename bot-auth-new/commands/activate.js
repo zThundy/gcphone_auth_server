@@ -1,6 +1,6 @@
 const config = require('../config.json');
 const { SlashCommandBuilder, SlashCommandSubcommandBuilder } = require('@discordjs/builders');
-const LangManager = require('../LangManager');
+const LangManager = require('../classes/LangManager');
 const language = new LangManager("commands");
 
 module.exports = {

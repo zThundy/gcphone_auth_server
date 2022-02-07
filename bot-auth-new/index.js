@@ -19,8 +19,7 @@ const colors = new Colors();
 const Utils = require('./utils');
 const utils = new Utils();
 // mysql connection manager
-const SQLiteManager = require('./SQLiteManager');
-var mysqlConnectionParams = config.mysql;
+const SQLiteManager = require('./classes/SQLiteManager');
 // discord tokens manager
 const TokenManager = require('./token/TokenManager');
 // Room Classes
@@ -29,12 +28,15 @@ const TokenManager = require('./token/TokenManager');
 const RoomManager = require('./room/RoomManager');
 const RoomButtonHandler = require('./room/RoomButtonHandler');
 // Language manager
-const LangManager = require('./LangManager');
+const LangManager = require('./classes/LangManager');
 const language = new LangManager("general");
 const language_button = new LangManager("commands");
 // Autoresponder
 const AutoResponder = require('./classes/AutoRespond');
 const responder = new AutoResponder();
+// Logger
+const Logger = require("./classes/Logger");
+const logger = new Logger(config);
 
 io.on('connection', (IOSocket) => {
     console.log(colors.changeBackground("green", "Socket connected"));
@@ -83,7 +85,6 @@ var roomManager;
 var tokenManager;
 var currentServer;
 var roomButtonHandler;
-var roomChannels;
 
 eventEmitter.once("mysql_connection_ready", function (a) {
     console.log(colors.changeBackground("yellow", "SQL module ready, enstablishing connection with discord..."))
@@ -160,18 +161,15 @@ client.once("ready", () => {
     });
 
     console.log(colors.changeColor("yellow", "Initializing room manager"))
-    roomChannels = getRoomChannels();
     sqliteManager.getRooms(function (rooms) {
-        roomManager = new RoomManager(client, rooms, sqliteManager, currentServer, roomChannels, config);
+        roomManager = new RoomManager(client, rooms, sqliteManager, currentServer, config);
         tokenManager = new TokenManager();
         roomButtonHandler = new RoomButtonHandler(client, currentServer, roomManager, tokenManager, config);
     });
     console.log(colors.changeColor("green", "Room manager initialized"))
     console.log(colors.changeColor("yellow", "Createing event emitter 'onIPUpdate' for socket IO"))
-    eventEmitter.on('onIPUpdate', function () {
-        const JSONData = {
-            authServerIPs: {}
-        };
+    eventEmitter.on('onIPUpdate', () => {
+        const JSONData = { authServerIPs: {} };
         var currentSettings;
         for (var room of roomManager.getRooms()) {
             currentSettings = room[1].getSettings();
@@ -189,66 +187,72 @@ client.once("ready", () => {
 })
 
 client.on('interactionCreate', async (interaction) => {
-    if (interaction.isButton()) {
-        log({
-            action: interaction.type,
-            content: interaction.member.user.username + " ha utilizzato un bottone (" + interaction.customId + ")"
-        });
-        if (interactionDelay.get("button").includes(interaction.member.user.id)) {
-            return;
-        }
-        if (interaction.customId == "creaStanza") {
-            roomButtonHandler.handleButton(interaction);
-        }
-        interactionDelay.get("button").push(interaction.member.user.id);
-        setTimeout(() => {
-            interactionDelay.get("button").splice(interactionDelay.get("button").indexOf(interaction.member.user.id), 1)
-        }, 2000)
-    } else if (interaction.isCommand()) {
-        log({
-            action: interaction.type,
-            content: interaction.member.user.username + " ha utilizzato un comando (" + interaction.commandName + ")"
-        });
-        // console.log(commands.get(interaction.commandName).spamDelay, typeof interactionDelay.get("command").get(interaction.commandName), interactionDelay.get("command").get(interaction.commandName)[interaction.member.user.id]);
-
-        if (interactionDelay.get("command").get(interaction.commandName).has(interaction.member.user.id)) {
-            await interaction.reply({
-                content: language.getString("CANT_USE_COMMAND_COOLDOWN", utils.getRemainingTime(Date.now(), interactionDelay.get("command").get(interaction.commandName).get(interaction.member.user.id))),
-                ephemeral: true
+    try {
+        if (interaction.isButton()) {
+            logger.log({
+                action: interaction.type,
+                content: interaction.member.user.username + " ha utilizzato un bottone (" + interaction.customId + ")"
             });
-            return;
-        }
-        commands.get(interaction.commandName).execute(interaction, {
-            room: roomManager.getRoomByChannelId(interaction.channelId),
-            mLanguage: language,
-            eventEmitter,
-            roomChannels,
-            tokenManager,
-            roomManager,
-            client
-        });
-        if (interaction.member.roles.cache.find(r => r.id === config.roles.admin) === undefined) {
-            interactionDelay.get("command").get(interaction.commandName).set(interaction.member.user.id, Date.now() + commands.get(interaction.commandName).spamDelay * 1000);
-        }
-        setTimeout(() => {
-            interactionDelay.get("command").get(interaction.commandName).delete(interaction.member.user.id)
-        }, commands.get(interaction.commandName).spamDelay * 1000)
+            if (interactionDelay.get("button").includes(interaction.member.user.id)) {
+                return;
+            }
+            if (interaction.customId == "creaStanza") {
+                roomButtonHandler.handleButton(interaction);
+            }
+            interactionDelay.get("button").push(interaction.member.user.id);
+            setTimeout(() => {
+                interactionDelay.get("button").splice(interactionDelay.get("button").indexOf(interaction.member.user.id), 1)
+            }, 2000)
+        } else if (interaction.isCommand()) {
+            logger.log({
+                action: interaction.type,
+                content: interaction.member.user.username + " ha utilizzato un comando (" + interaction.commandName + ")"
+            });
+            
+            if (interactionDelay.get("command").get(interaction.commandName).has(interaction.member.user.id)) {
+                await interaction.reply({
+                    content: language.getString("CANT_USE_COMMAND_COOLDOWN", utils.getRemainingTime(Date.now(), interactionDelay.get("command").get(interaction.commandName).get(interaction.member.user.id))),
+                    ephemeral: true
+                });
+                return;
+            }
+            commands.get(interaction.commandName).execute(interaction, {
+                room: roomManager.getRoomByChannelId(interaction.channelId),
+                mLanguage: language,
+                eventEmitter,
+                roomChannels: roomManager.getRoomChannels(),
+                tokenManager,
+                roomManager,
+                client
+            });
+            if (interaction.member.roles.cache.find(r => r.id === config.roles.admin) === undefined) {
+                interactionDelay.get("command").get(interaction.commandName).set(interaction.member.user.id, Date.now() + commands.get(interaction.commandName).spamDelay * 1000);
+            }
+            setTimeout(() => {
+                interactionDelay.get("command").get(interaction.commandName).delete(interaction.member.user.id)
+            }, commands.get(interaction.commandName).spamDelay * 1000)
 
-    } else if (interaction.isContextMenu()) {
-        log({
-            action: interaction.type,
-            content: interaction.member.user.username + " ha utilizzato un comando da un context menu (" + interaction.commandName + ")"
+        } else if (interaction.isContextMenu()) {
+            logger.log({
+                action: interaction.type,
+                content: interaction.member.user.username + " ha utilizzato un comando da un context menu (" + interaction.commandName + ")"
+            });
+            if (interactionDelay.get("contextMenu").includes(interaction.member.user.id)) {
+                return;
+            }
+            if (interaction.commandName == language_button.getString("ATTIVATOKEN_NAME")) {
+                commands.get(interaction.commandName.toLowerCase().replaceAll(" ", "")).execute(interaction, tokenManager);
+            }
+            interactionDelay.get("contextMenu").push(interaction.member.user.id);
+            setTimeout(() => {
+                interactionDelay.get("contextMenu").splice(interactionDelay.get("contextMenu").indexOf(interaction.member.user.id), 1)
+            }, 2000)
+        }
+    } catch(e) {
+        logger.log("error", {
+            action: `ERROR: Event 'interactionCreate', Type: ${interaction.type || 'UNDEFINED'}`,
+            content: e
         });
-        if (interactionDelay.get("contextMenu").includes(interaction.member.user.id)) {
-            return;
-        }
-        if (interaction.commandName == language_button.getString("ATTIVATOKEN_NAME")) {
-            commands.get(interaction.commandName.toLowerCase().replaceAll(" ", "")).execute(interaction, tokenManager);
-        }
-        interactionDelay.get("contextMenu").push(interaction.member.user.id);
-        setTimeout(() => {
-            interactionDelay.get("contextMenu").splice(interactionDelay.get("contextMenu").indexOf(interaction.member.user.id), 1)
-        }, 2000)
     }
 });
 
@@ -322,12 +326,12 @@ client.on("guildCreate", function (guild) {
 client.on("guildDelete", function (guild) {});
 
 client.on('messageCreate', message => {
-    if (message.author.bot) return;
-
     /**
      * AUTO RESPONDER SYSTEM
      */
     try {
+        if (message.author.bot) return;
+
         if (message.channel.name.includes("ticket-")) {
             if (!message.member.roles.cache.some(role => role.id === config.roles.customer)) {
                 if (responder.run(message)) {
@@ -340,69 +344,63 @@ client.on('messageCreate', message => {
                 }
             }
         }
-    } catch(e) { console.error(e); }
 
-    /**
-     * TAGS SYSTEM
-     */
-    if (config.tagBypass.includes(message.author.id)) return;
-    if (message.mentions.roles.size > 0) {
-        for (var i in config.blockedTagRoles) {
-            if (message.mentions.roles.get(config.blockedTagRoles[i]) && !config.blockedTagRoles.includes(message.author.id)) {
-                message.delete();
-                message.reply(language.getString("DO_NOT_USE_TAGS")).then(sentMessage => {
-                    setTimeout(() => {
-                        if (!sentMessage.deleted) {
-                            sentMessage.delete();
-                        }
-                    }, 120 * 1000)
-                });
-                break;
-            }
-        }
-    }
-    if (message.mentions.users.size > 0) {
-        for (var i in config.blockedTagRoles) {
-            if (message.mentions.users.get(config.blockedTagUsers[i]) && !config.blockedTagRoles.includes(message.author.id)) {
-                // message.delete();
-                message.reply(language.getString("DO_NOT_USE_TAGS")).then(sentMessage => {
-                    setTimeout(() => {
-                        if (!sentMessage.deleted) {
-                            sentMessage.delete();
-                        }
-                    }, 120 * 1000)
-                }).then(() => {
+        /**
+         * TAGS SYSTEM
+         */
+        if (config.tagBypass.includes(message.author.id)) return;
+        if (message.mentions.roles.size > 0) {
+            for (var i in config.blockedTagRoles) {
+                if (message.mentions.roles.get(config.blockedTagRoles[i]) && !config.blockedTagRoles.includes(message.author.id)) {
                     message.delete();
-                });
-                break;
+                    message.reply(language.getString("DO_NOT_USE_TAGS")).then(sentMessage => {
+                        setTimeout(() => {
+                            if (!sentMessage.deleted) {
+                                sentMessage.delete();
+                            }
+                        }, 120 * 1000)
+                    });
+                    break;
+                }
             }
         }
+        if (message.mentions.users.size > 0) {
+            for (var i in config.blockedTagRoles) {
+                if (message.mentions.users.get(config.blockedTagUsers[i]) && !config.blockedTagRoles.includes(message.author.id)) {
+                    // message.delete();
+                    message.reply(language.getString("DO_NOT_USE_TAGS")).then(sentMessage => {
+                        setTimeout(() => {
+                            if (!sentMessage.deleted) {
+                                sentMessage.delete();
+                            }
+                        }, 120 * 1000)
+                    }).then(() => {
+                        message.delete();
+                    });
+                    break;
+                }
+            }
+        }
+    } catch(e) {
+        logger.log("error", {
+            action: "ERROR: Event 'messageCreate'",
+            content: e
+        });
     }
 });
 
 client.on("channelDelete", function (channel) {
-    if (roomManager == undefined) {
-        return;
-    }
-    var room;
-    if ((room = roomManager.getRoomByChannelId(channel.id)) != undefined) {
-        roomManager.removeRoom(room);
+    try {
+        if (roomManager == undefined) return;
+        var room;
+        if ((room = roomManager.getRoomByChannelId(channel.id)) != undefined) roomManager.removeRoom(room);
+    } catch(e) {
+        logger.log("error", {
+            action: "ERROR: Event 'channelDelete'",
+            content: e
+        });
     }
 });
-
-function getRoomChannels() {
-    const roomChannels = [];
-    var currentElem;
-    for (var key of currentServer.channels.cache.keys()) {
-        currentElem = currentServer.channels.cache.get(key);
-        for (var id in config.licenseManagerTicketCategory) {
-            if (currentElem.parentId == config.licenseManagerTicketCategory[id] && currentElem.id != config.licenseManagerTicketChannel) {
-                roomChannels.push(key);
-            }
-        }
-    }
-    return roomChannels;
-}
 
 /*
 
@@ -411,20 +409,20 @@ client.on("roleUpdate", function(oldRole, newRole) {
 
 */
 
-const fusoOrario = config.fusoOrario
-
-function log(data) {
-    var currentDate = new Date(Date.now() + (fusoOrario * (60 * 60 * 1000)));
-    fs.appendFileSync("./logs/logs_" + (currentDate.getDate() + "-" + (currentDate.getMonth() + 1) + "-" + currentDate.getFullYear()) + ".txt", ("[" + currentDate.getHours() + ":" + currentDate.getMinutes() + ":" + currentDate.getSeconds() + "]") + " > " + data.action + ": " + data.content + "\n", 'utf8');
-}
-
 function saveConfig() {
-    var configContentString = JSON.stringify(config, null, 4); // "\t" per i tabs
-    const configContent = configContentString.split(",");
-    if (fs.existsSync("./config.json"))
-        fs.unlinkSync("./config.json");
-    for (var configElement of configContent)
-        fs.appendFileSync('./config.json', configElement + (configContent.indexOf(configElement) == configContent.length - 1 ? "" : ","), 'utf8');
-    const language = require("./language.json");
-    config.language = language;
+    try {
+        var configContentString = JSON.stringify(config, null, 4); // "\t" per i tabs
+        const configContent = configContentString.split(",");
+        if (fs.existsSync("./config.json"))
+            fs.unlinkSync("./config.json");
+        for (var configElement of configContent)
+            fs.appendFileSync('./config.json', configElement + (configContent.indexOf(configElement) == configContent.length - 1 ? "" : ","), 'utf8');
+        const language = require("./language.json");
+        config.language = language;
+    } catch(e) {
+        logger.log("error", {
+            action: "ERROR: Function 'saveConfig'",
+            content: e
+        });
+    }
 }

@@ -1,5 +1,5 @@
 const Discord = require('discord.js');
-const LangManager = require('../LangManager');
+const LangManager = require('../classes/LangManager');
 
 class Room {
     constructor(data, mySQLManager) {

@@ -1,6 +1,6 @@
 const config = require('../config.json');
-const ContextCommandBuilder = require('../ContextCommandBuilder.js');
-const LangManager = require('../LangManager');
+const ContextCommandBuilder = require('../classes/ContextCommandBuilder.js');
+const LangManager = require('../classes/LangManager');
 const language = new LangManager("commands");
 
 module.exports = {
@@ -11,19 +11,19 @@ module.exports = {
         if (!token) {
             await interaction.reply({
                 content: language.getString("ATTIVATOKEN_ERROR_1"),
-                ephemeral: true
+                ephemeral: false
             });
             return;
         }
         if (tokenManager.activateToken(interaction.member.user.id, token)) {
             await interaction.reply({
                 content: language.getString("ATTIVATOKEN_SUCCESS_1", token),
-                ephemeral: true
+                ephemeral: false
             });
         } else {
             interaction.reply({
                 content: language.getString("ATTIVATOKEN_ERROR_2", token),
-                ephemeral: true
+                ephemeral: false
             });
         }
     },
