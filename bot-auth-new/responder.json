@@ -1,8 +1,8 @@
 
 {
     "values": {
-        "phone": 1,
-        "telefono": 1,
+        "phone": 2,
+        "telefono": 2,
         "disponibile": 1,
         "disposizione": 1,
         "interessato": 1,
@@ -10,7 +10,7 @@
         "tundy": 3,
         "buy": 2,
         "buying": 2,
-        "sim": 5,
+        "sim": 1,
         "saltychat": 1,
         "second ip": 2,
         "dev": 2,
@@ -29,7 +29,7 @@
         "zth_gcphone": 3,
         "zThundy": 2,
         "informazioni": 1,
-        "licenza": 1,
+        "licenza": 3,
         "costo": 2,
         "salve": 0.5,
         "hello": 0.5,
