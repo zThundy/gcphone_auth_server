@@ -63,14 +63,26 @@ class RoomButtonHandler {
                 ephemeral: true
             }).catch(console.error);
             this.roomManager.createRoomForID({ userId: userId });
+        } else {
+            button.reply({
+                embeds: [
+                    this.utils.getEmbedMessage({
+                        colorHex: "#c91212",
+                        title: this.language.getString("BUTTON_TITLE"),
+                        description: this.language.getString("BUTTON_PRESS_ERROR_2"),
+                        timestamp: true,
+                        thumbnail: this.language.getString("BUTTON_PRESS_ERROR_THUMBNAIL_2")
+                    })
+                ],
+                ephemeral: true
+            });
         }
     }
 
     hasPermission(roles) {
         var hasPermission = false;
-        for (var role of roles) {
+        for (var role of roles)
             if (role == this.config.roles.customer) { hasPermission = true; break; }
-        }
         return hasPermission;
     }
 }
