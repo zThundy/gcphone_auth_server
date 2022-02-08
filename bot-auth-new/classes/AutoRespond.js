@@ -27,11 +27,12 @@ class AutoResponder {
         var channelId = message.channel.id;
         if (!this.channels.has(channelId)) {
             var content = message.content;
-            this.channels.set(channelId, true);
             this._update();
             let score = this._calculateScore(content);
-            if (score >= this.min)
+            if (score >= this.min) {
+                this.channels.set(channelId, true);
                 return true;
+            }
             return false;
         }
     }
