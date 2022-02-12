@@ -21,9 +21,25 @@ class RoomManager {
             currentRoomChannel = this.utils.getRoomByUserID(this.roomChannels, this.currentServer, roomData.user_id);
             if (currentRoomChannel == undefined) {
                 console.log(colors.changeColor("red", "Unable to load a room for the user " + roomData.user_id + ", since there isn't a room for this user!"));
+                client.logger.log("error", {
+                    action: "Error",
+                    content: "Unable to load a room for the user " + roomData.user_id + ", since there isn't a room for this user!"
+                });
                 if (this.config.shouldCreateNonExistingRooms) this.createRoomForID({ userId: roomData.user_id, license: roomData.license, settings: roomData.settings });
                 return;
-            } /* IN CASO DI NECESSITA' */
+            }
+
+            this.currentServer.members.fetch(roomData.user_id)
+                .then(member => {
+                    if (!member) {
+                        console.log(colors.changeColor("red", "The user with the id " + roomData.user_id + ", have a room, but is not in the discord!"))
+                        client.logger.log("error", {
+                            action: "Error",
+                            content: "The user with the id " + roomData.user_id + ", have a room, but is not in the discord!"
+                        });
+                    }
+                });
+
             this.rooms.set(roomData.user_id, new Room({ language: this.config.language.personalRooms, userId: roomData.user_id, license: roomData.license, roomSettings: new RoomSettings(roomData.settings), channel: this.currentServer.channels.cache.get(currentRoomChannel) }, this.mySQLManager));
             console.log(colors.changeColor("blue", "Loaded room for user " + roomData.user_id));
         })
@@ -142,6 +158,7 @@ class RoomManager {
                 if (currentElem.parentId === this.config.licenseManagerTicketCategory[id] && currentElem.id !== this.config.licenseManagerTicketChannel)
                     roomChannels.push(key);
         }
+        this.roomChannels = roomChannels;
         return roomChannels;
     }
 }

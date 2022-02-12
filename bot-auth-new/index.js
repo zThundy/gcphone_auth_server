@@ -104,6 +104,8 @@ client.on('shardError', error => {
 });
 
 client.once("ready", () => {
+    client.logger = logger;
+
     console.log(colors.changeBackground("green", "Starting up the discordjs client"));
     currentServer = client.guilds.cache.get(config.authoritativeDiscord);
 
