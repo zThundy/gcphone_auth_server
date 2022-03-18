@@ -109,9 +109,9 @@ client.once("ready", () => {
     console.log(colors.changeBackground("green", "Starting up the discordjs client"));
     currentServer = client.guilds.cache.get(config.authoritativeDiscord);
 
-    config.roles.admin = "" + currentServer.roles.cache.find(r => r.name === 'Dev');
-    config.roles.customer = "" + currentServer.roles.cache.find(r => r.name === '💰 zthPhone Customer');
-    config.roles.everyone = "" + currentServer.roles.cache.find(r => r.name === '@everyone');
+    // config.roles.admin = "" + currentServer.roles.cache.find(r => r.name === 'Dev');
+    // config.roles.customer = "" + currentServer.roles.cache.find(r => r.name === '💰 zthPhone Customer');
+    // config.roles.everyone = "" + currentServer.roles.cache.find(r => r.name === '@everyone');
 
     saveConfig();
 

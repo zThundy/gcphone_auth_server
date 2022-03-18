@@ -6,6 +6,10 @@ const colors = new Colors();
 
 class RoomManager {
     constructor(client, rooms, mySQLManager, currentServer, config) {
+        // rooms is the database data
+        // mysqlmanager is the connection manager
+        // config is the config json
+
         this.rooms = new Map();
         this.client = client;
         this.mySQLManager = mySQLManager;
@@ -18,27 +22,29 @@ class RoomManager {
         console.log(colors.changeColor("yellow", "Loading users rooms..."));
         var currentRoomChannel;
         rooms.forEach(roomData => {
+            // check if room exists
             currentRoomChannel = this.utils.getRoomByUserID(this.roomChannels, this.currentServer, roomData.user_id);
             if (currentRoomChannel == undefined) {
-                console.log(colors.changeColor("red", "Unable to load a room for the user " + roomData.user_id + ", since there isn't a room for this user!"));
-                client.logger.log("error", {
-                    action: "Error",
-                    content: "Unable to load a room for the user " + roomData.user_id + ", since there isn't a room for this user!"
-                });
-                if (this.config.shouldCreateNonExistingRooms) this.createRoomForID({ userId: roomData.user_id, license: roomData.license, settings: roomData.settings });
-                return;
-            }
-
-            this.currentServer.members.fetch(roomData.user_id)
-                .then(member => {
-                    if (!member) {
+                // check if user exists
+                this.currentServer.members.fetch(roomData.user_id)
+                    .then(member => {
+                        console.log(colors.changeColor("red", "Unable to load a room for the user " + roomData.user_id + ", since there isn't a room for this user!"));
+                        client.logger.log("error", {
+                            action: "Error",
+                            content: "Unable to load a room for the user " + roomData.user_id + ", since there isn't a room for this user!"
+                        });
+                        if (this.config.shouldCreateNonExistingRooms) this.createRoomForID({ userId: roomData.user_id, license: roomData.license, settings: roomData.settings });
+                    })
+                    .catch(() => {
                         console.log(colors.changeColor("red", "The user with the id " + roomData.user_id + ", have a room, but is not in the discord!"))
                         client.logger.log("error", {
                             action: "Error",
                             content: "The user with the id " + roomData.user_id + ", have a room, but is not in the discord!"
                         });
-                    }
-                });
+                    });
+
+                return;
+            }
 
             this.rooms.set(roomData.user_id, new Room({ language: this.config.language.personalRooms, userId: roomData.user_id, license: roomData.license, roomSettings: new RoomSettings(roomData.settings), channel: this.currentServer.channels.cache.get(currentRoomChannel) }, this.mySQLManager));
             console.log(colors.changeColor("blue", "Loaded room for user " + roomData.user_id));
@@ -68,7 +74,7 @@ class RoomManager {
             console.log(colors.changeColor("yellow", "Creating channel for " + username))
             this.currentServer.channels.create("licenza-" + username, {
                 "parent": useCategoryId,
-                "permissionOverwrites": [
+                "permissionOverwrites": [ 
                     {
                         id: this.client.user.id,
                         allow: ['SEND_MESSAGES']
