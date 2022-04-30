@@ -60,6 +60,19 @@ class Utils {
     validateIPaddress(ip) {
         return this.regExpIP.test(ip);
     }
+
+    // this function returns the current date formatted as
+    // "DD-MM-YYYY HH:MM:SS"
+    getCurrentDateTime() {
+        var currentDate = new Date();
+        var day = currentDate.getDate();
+        var month = currentDate.getMonth() + 1;
+        var year = currentDate.getFullYear();
+        var hour = currentDate.getHours();
+        var minute = currentDate.getMinutes();
+        var second = currentDate.getSeconds();
+        return day + "-" + month + "-" + year + " " + hour + ":" + minute + ":" + second;
+    }
 }
 
 module.exports = Utils

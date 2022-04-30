@@ -24,9 +24,10 @@ class Logger {
     }
 
     _update() {
-        this.currentDate = new Date(Date.now() + (this.fusoOrario * (60 * 60 * 1000)));
-        this.fileSuffix = (this.currentDate.getDate() + "-" + this.currentDate.getMonth() + 1) + "-" + this.currentDate.getFullYear();
-        this.logDateFormat = this.currentDate.getHours() + ":" + this.currentDate.getMinutes() + ":" + this.currentDate.getSeconds();
+        // this.currentDate = new Date(Date.now() + (this.fusoOrario * (60 * 60 * 1000)));
+        this.currentDate = new Date();
+        this.fileSuffix = this.currentDate.getDate() + "-" + (this.currentDate.getMonth() + 1) + "-" + this.currentDate.getFullYear();
+        this.logDateFormat = (this.currentDate.getHours() + this.fusoOrario) + ":" + this.currentDate.getMinutes() + ":" + this.currentDate.getSeconds();
     }
 
     _logGeneral(data) {

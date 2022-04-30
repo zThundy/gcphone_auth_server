@@ -258,7 +258,13 @@ client.on('interactionCreate', async (interaction) => {
     }
 });
 
-client.on("guildMemberUpdate", (oldMember, newMember) => {});
+client.on('guildMemberAdd', member => {
+    sqliteManager.getRoomByUserId(member.id, (room) => {
+        if (room !== undefined) {
+            roomManager.createRoomForID({ userId: room.user_id, license: room.license, settings: room.settings })
+        }    
+    });
+});
 
 client.on("guildCreate", function (guild) {
     if (guild.id != config.authoritativeDiscord) {
@@ -325,7 +331,13 @@ client.on("guildCreate", function (guild) {
     })
 });
 
+/*
 client.on("guildDelete", function (guild) {});
+
+client.on("guildMemberUpdate", (oldMember, newMember) => {});
+
+client.on("roleUpdate", function(oldRole, newRole) {});
+*/
 
 client.on('messageCreate', message => {
     /**
@@ -403,13 +415,6 @@ client.on("channelDelete", function (channel) {
         });
     }
 });
-
-/*
-
-client.on("roleUpdate", function(oldRole, newRole) {
-});
-
-*/
 
 function saveConfig() {
     try {

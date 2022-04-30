@@ -24,7 +24,7 @@ class RoomManager {
         rooms.forEach(roomData => {
             // check if room exists
             currentRoomChannel = this.utils.getRoomByUserID(this.roomChannels, this.currentServer, roomData.user_id);
-            if (currentRoomChannel == undefined) {
+            if (currentRoomChannel === undefined) {
                 // check if user exists
                 this.currentServer.members.fetch(roomData.user_id)
                     .then(member => {
@@ -43,13 +43,21 @@ class RoomManager {
                         });
                     });
 
+                // get the room channel and delete it
+                // this.currentServer.channels.cache.fetch(roomData.channel_id).then(channel => {
+                //     channel.delete();
+                // });
+
                 return;
             }
+
+            // update room id, and license anyways
+            this.mySQLManager.updateRoom({ user_id: roomData.user_id, room_id: currentRoomChannel, license: roomData.license });
 
             this.rooms.set(roomData.user_id, new Room({ language: this.config.language.personalRooms, userId: roomData.user_id, license: roomData.license, roomSettings: new RoomSettings(roomData.settings), channel: this.currentServer.channels.cache.get(currentRoomChannel) }, this.mySQLManager));
             console.log(colors.changeColor("blue", "Loaded room for user " + roomData.user_id));
         })
-        console.log(colors.changeColor("green", "Done loading users rooms."));
+        console.log(colors.changeColor("green", "Done loading users rooms. Loaded " + this.rooms.size + " rooms."));
     }
 
     getRooms() {
@@ -98,7 +106,7 @@ class RoomManager {
                 var roomSettings = data.settings || new RoomSettings();
                 this.mySQLManager.getRoomByUserId(data.userId, function(roomData) {
                     if (roomData.length == 0) {
-                        this.mySQLManager.addRoom({user_id: data.userId, license: license, settings: roomSettings.getJSONString()});
+                        this.mySQLManager.addRoom({ user_id: data.userId, room_id: roomChannel.id, license: license, settings: roomSettings.getJSONString() });
                     } else {
                         license = roomData.license;
                         roomSettings = new RoomSettings(roomData.settings);
