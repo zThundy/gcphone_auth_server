@@ -150,11 +150,15 @@ client.once("ready", () => {
                 console.log(colors.changeColor("yellow", "Fetched commands to set permissions on..."));
                 var currentCommand;
                 for (var command of currentServer.commands.cache.keys()) {
-                    currentCommand = currentServer.commands.cache.get(command);
-                    currentServer.commands.permissions.set({
-                        command: currentCommand.id,
-                        permissions: commands.get(currentCommand.name.toLowerCase().replaceAll(" ", "")).permissions
-                    })
+                    try {
+                        currentCommand = currentServer.commands.cache.get(command);
+                        currentServer.commands.permissions.set({
+                            command: currentCommand.id,
+                            permissions: commands.get(currentCommand.name.toLowerCase().replaceAll(" ", "")).permissions
+                        })
+                    } catch(e) {
+                        console.log(e);
+                    }
                     console.log(colors.changeColor("blue", "Loaded permissions for command " + currentCommand.name));
                 }
                 console.log(colors.changeColor("green", "Loaded permissions for guild " + config.authoritativeDiscord));

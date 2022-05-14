@@ -44,9 +44,23 @@ class RoomManager {
                     });
 
                 // get the room channel and delete it
-                // this.currentServer.channels.cache.fetch(roomData.channel_id).then(channel => {
-                //     channel.delete();
-                // });
+                if (roomData.room_id) {
+                    this.currentServer.channels.fetch(roomData.room_id).then(channel => {
+                        console.log(colors.changeColor("red", "Room of user " + roomData.user_id + ", has been deleted successfully!"))
+                        client.logger.log("error", {
+                            action: "Error",
+                            content: "Room of user " + roomData.user_id + ", has been deleted successfully!"
+                        });
+                        channel.delete();
+                    })
+                    .catch(e => {
+                        console.log(colors.changeColor("red", "Can't delete room of user " + roomData.user_id + ", since the channel doesn't exist!"))
+                        client.logger.log("error", {
+                            action: "Error",
+                            content: "Can't delete room of user " + roomData.user_id + ", since the channel doesn't exist!"
+                        });
+                    });
+                }
 
                 return;
             }
