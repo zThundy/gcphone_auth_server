@@ -266,13 +266,15 @@ client.on('guildMemberAdd', member => {
     sqliteManager.getRoomByUserId(member.id, (room) => {
         if (room !== undefined) {
             currentServer.channels.fetch(room.room_id).then(channel => {
-                console.log(colors.changeColor("red", "Room of user " + roomData.user_id + ", has been deleted successfully!"))
-                client.logger.log("error", {
-                    action: "Error",
-                    content: "Room of user " + roomData.user_id + ", has been deleted successfully!"
-                });
-                // delete the old channel
-                channel.delete();
+                if (channel) {
+                    console.log(colors.changeColor("red", "Room of user " + roomData.user_id + ", has been deleted successfully!"))
+                    client.logger.log("error", {
+                        action: "Error",
+                        content: "Room of user " + roomData.user_id + ", has been deleted successfully!"
+                    });
+                    // delete the old channel
+                    channel.delete();
+                }
             });
 
             // create a new room for the user
@@ -281,6 +283,8 @@ client.on('guildMemberAdd', member => {
             let role = currentServer.roles.cache.find(r => r.id === config.roles.customer);
             // assign the customer role to the user
             if (role) member.roles.add(role);
+            // update the ip on the server
+            eventEmitter.emit('onIPUpdate');
         }
     });
 });
