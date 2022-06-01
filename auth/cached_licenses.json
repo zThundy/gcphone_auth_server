@@ -1,8 +1,4 @@
 {
-  "5.181.31.250": [
-    "Yaspire",
-    "Z4Kx627kkLcavCilaBXUwQmdIMZ71dXDsITrxsVq"
-  ],
   "5.181.31.233": [
     "main",
     "kc6rjUL815yf1uwDH2j8N1qwYzhEqxMq0VCWhDbN"
@@ -11,53 +7,21 @@
     "test",
     "kc6rjUL815yf1uwDH2j8N1qwYzhEqxMq0VCWhDbN"
   ],
-  "5.181.31.119": [
-    "Vinewood",
-    "e6w59CW3voWv60Kq4gU5r0rODMfsfTTP2MDh8FTU"
-  ],
-  "185.242.180.153": [
-    "Test",
-    "YWCanCEiDYezH5zKEZfGpruBbmUAghcw4JV4aODd"
-  ],
-  "145.239.205.126": [
-    "Casa",
-    "PB4qHR6eyiE1ZE6ETWHdZYYKsyFwnmZYPUaHq2mU"
-  ],
-  "83.53.228.250": [
-    "Home",
-    "PB4qHR6eyiE1ZE6ETWHdZYYKsyFwnmZYPUaHq2mU"
-  ],
-  "54.36.128.128": [
-    "Eagle",
+  "5.181.31.239": [
+    "ELITE",
     "ZJBhIexKd457FCyu6JhQ8NRPlmzjEKWXo18cKrd5"
   ],
-  "45.14.185.47": [
-    "server",
-    "I772zEdgEjiETyIkJ4eTY8LZhCNbjA5ZMxvs6jRg"
-  ],
-  "5.181.31.95": [
+  "185.25.204.210": [
     "Birmingham",
     "xA1vbVmNZVfp4UAEBZ3c69FzTTHWLYQflYaF9sLx"
-  ],
-  "145.239.130.120": [
-    "DawnValley",
-    "1urkuKEOFdn6n1q7cxts1hTmMrRZYnga9Af5iYU7"
-  ],
-  "141.94.98.129": [
-    "DawnvalleyV2",
-    "1urkuKEOFdn6n1q7cxts1hTmMrRZYnga9Af5iYU7"
-  ],
-  "5.181.31.118": [
-    "ServerPrincipale",
-    "ipXLWXUTrYLH704oADjeUYcVUulOYkRR4Sh5Ny0A"
-  ],
-  "176.9.34.13": [
-    "main",
-    "DaVgkHrjQP9uLVlFOTAOq4ZJmG1y5U0ba8zloDFj"
   ],
   "5.181.31.125": [
     "lemoncity",
     "a8zvKvXoj0dE9EAol3nwJ8zWO7t9MvEwPj5scxlw"
+  ],
+  "5.181.31.119": [
+    "Vinewood",
+    "e6w59CW3voWv60Kq4gU5r0rODMfsfTTP2MDh8FTU"
   ],
   "5.181.31.163": [
     "dille",
@@ -88,8 +52,8 @@
     "P6yopAjIKzOMpER5QBxXl8gAZbj7fSSPaSS2czMg"
   ],
   "5.181.31.113": [
-    "emerals",
-    "asULqU0m7OMqufWFM4MMJhRAsJ7G5uvwM8GsX6RT"
+    "Megalos",
+    "LK64ECN6lrrZggKpZiNNyi4WTBfPDpURQzhSzkwM"
   ],
   "185.229.237.181": [
     "NerdCity",
@@ -107,8 +71,8 @@
     "Arcadia",
     "4ksxQpCl3wnPs0QyGNFwjJBO4njwANV9zW7Ii4U4"
   ],
-  "185.229.237.160": [
-    "davide",
+  "45.14.185.47": [
+    "nardville",
     "ASNyJQoFE7JM9QpQBbJbhPiL6Cd8gCYpgELCSD5G"
   ],
   "5.181.31.109": [
@@ -139,8 +103,8 @@
     "Scheggia Main Server",
     "Y1LRopaEycRrGVXVuGewU9TyBblZ4U7ZTs4KHxdP"
   ],
-  "188.152.15.3": [
-    "grengah",
+  "5.95.134.137": [
+    "primo",
     "bqZYDbgaS2wrIC2JANNSEyR9Xz7SWe0K3oENSIPt"
   ],
   "5.181.31.142": [
@@ -159,7 +123,7 @@
     "Utopia RP",
     "2BdnylZb6HvXHfj2rC6PWMLVCJFIM0WgbXNbS1i3"
   ],
-  "5.181.31.136": [
+  "45.157.233.254": [
     "RewindCityRP",
     "OiYZ3VhyrHSaFuRXwaldOnqreKxJCDMd3THv0krB"
   ],
@@ -171,10 +135,6 @@
     "mati",
     "3rhxTbA3GUbEuHWlAnnaNaquxO4JslZzO3XEMYkQ"
   ],
-  "5.181.31.211": [
-    "Avalon",
-    "BZy4DvcUq7IXkh2Q5fPA78DgpAd41fMjU9BXewBN"
-  ],
   "5.181.31.229": [
     "Grau",
     "mh3LqIBlRV29MLY8d4qA5MVzDjN2rsW3ozukvBR4"
@@ -183,65 +143,21 @@
     "grautest",
     "mh3LqIBlRV29MLY8d4qA5MVzDjN2rsW3ozukvBR4"
   ],
-  "185.229.237.230": [
-    "AvatarCity",
-    "qNjb3rIQ2nlO9fFZOhScvOxx01yCXutQeI8xYrdB"
-  ],
-  "185.25.204.107": [
-    "Impero Main",
-    "owDfEWgmJTp8LFQWN2PL4QkFg3Ej8mywhA97obdU"
-  ],
-  "185.25.206.161": [
-    "Impero Test",
-    "owDfEWgmJTp8LFQWN2PL4QkFg3Ej8mywhA97obdU"
-  ],
   "5.181.31.151": [
     "test roma",
     "31XrNZW2cMwCeenbUVPv7w1966KxQbnm2GPQ0Vvr"
-  ],
-  "185.229.237.255": [
-    "Server di Il_bomber98",
-    "wciLUG2p35HlylU18IZ0vK5Q6aK9jXmR62NAvzuJ"
-  ],
-  "138.201.30.105": [
-    "Destiny",
-    "B3jOzsOEfVPepq5RFE5zqt2QbI7PaEoe0d29WP0c"
   ],
   "5.9.212.241": [
     "Atom",
     "suM0we0rsIu1iuIA9yKXemDDHZQDFAWfVfwgHDNd"
   ],
-  "5.181.31.69": [
-    "new italian full rp",
+  "5.181.31.205": [
+    "italy royal",
     "Cm7TRTQLD8atADmbRIrZsWcLykWi1tcGKkAFkAnU"
-  ],
-  "5.181.31.120": [
-    "cleo",
-    "l3tVVM3YNcUBrXQozEL6QNWGuCZvxaCBSX4v2bN5"
   ],
   "5.181.31.146": [
     "ImClod server",
     "qScuvrAePm2VDY7Q7T2WXkvjqcsfNU3CSy6FTyQz"
-  ],
-  "5.181.31.112": [
-    "Plaza",
-    "gcMLa7mgfJ7q8oK4NdRkB7KLnxSEjBbJ7n6yQsyy"
-  ],
-  "5.181.31.202": [
-    "nemesis",
-    "4Rxa7TmKO8xaQXa5fHUqr0xZ6KaQjH8nGWHGGHiU"
-  ],
-  "94.16.104.166": [
-    "StarLife",
-    "IHz7VqPzHx8ekRDv0IlxwNoOrHrO5ShejAZa7BEu"
-  ],
-  "5.181.31.131": [
-    "Borders",
-    "47hsFlKWKMabYNsePHWDtdKS13WNsglVGxBQUTtO"
-  ],
-  "5.181.31.193": [
-    "curoncity",
-    "6yN6oJsrRBYPH9nz3ejks7jiqMH4sNNjL3xTc37s"
   ],
   "178.218.144.226": [
     "Server Main",
@@ -250,10 +166,6 @@
   "45.141.57.170": [
     "Server 2",
     "DTyaIN44iwM8JWX3Xa78TXIWkjNMF1Zsri9jmdMh"
-  ],
-  "5.181.31.174": [
-    "Thund3rs1",
-    "FKsFdJFjX5XDtXJLS7uli3iaCyxFHb91Vfk6TvPl"
   ],
   "5.181.31.217": [
     "UnionRP",
@@ -271,14 +183,6 @@
     "IFRP",
     "pUjPIMCFde30Y3VF8uDJo1rhTMDrRb1kQr8bmumo"
   ],
-  "95.244.7.69": [
-    "MilanoRoleplay",
-    "VlaDapdSDc0V5QJwlSV2VAsuG0SFqnRvZ5Ii0tOG"
-  ],
-  "5.181.31.176": [
-    "Xeno",
-    "DDuocVowfCTys4ig0VW3iZeeL1nevJDrbskjcnkz"
-  ],
   "185.229.238.3": [
     "VPS",
     "KNahgcBZEZ84a4vprTskjWmsQCevfb5GpYYR5Igh"
@@ -287,33 +191,13 @@
     "glacial",
     "U7RB784U8fCYPSJOShlt0B2aWcXrwBPsEbMeNhb9"
   ],
-  "193.70.80.128": [
-    "Forasteros2K22",
-    "v5WnLSBsnVMODc4zsRJrNznEnIyeK4NIitbmlYSH"
-  ],
   "185.229.238.57": [
     "ROMA LIFE 2.0",
     "fRKWicvUgqLdtO1Q2S35j8tDAZNBVi6TXJX11a87"
   ],
-  "5.181.31.140": [
-    "Hades RP",
-    "Ba94NCib4WaHGNGRe78DwFMc0mdIa3neZJE30qhA"
-  ],
   "185.229.238.2": [
     "snake",
     "x0kKfmANGorAXq7iuMGSf9zQRseQymaHVAlUkbXh"
-  ],
-  "185.80.130.218": [
-    "DreamCity",
-    "K7fV2KED4G9DkJDPLdE1murATS5j5VO5lPBe0Rvp"
-  ],
-  "5.181.31.115": [
-    "sparrowco",
-    "Yuo7CEHIcmdMUnsL7CVzXddK3bBAjjN5j3bLgFVD"
-  ],
-  "5.181.31.242": [
-    "lvi3.0",
-    "p6QD38fe1tDOPnmv4qccGjh2N4E0tFtPjVnwvElF"
   ],
   "5.181.31.121": [
     "utis",
@@ -335,10 +219,6 @@
     "sigma",
     "acAyfzJuX31MEIWJ7fPZCGkiyQbuKrlphUKY0hUm"
   ],
-  "5.181.31.228": [
-    "Equity",
-    "HeeASNQqT2HDPfAhowm654FvtdX8VbMib5sma7wm"
-  ],
   "5.181.31.212": [
     "Kosmos",
     "lW2VCVcNFh7nU8TzrIlDhJlY2zYRH1JEHfKPtfQR"
@@ -351,10 +231,6 @@
     "requiem",
     "87XMmNLM3XTebvcbTwUPMnoqJmjkirQSHSF80hoX"
   ],
-  "45.14.185.96": [
-    "Suicide RP",
-    "JJuiE4cSYyMjcC0YNFIRaIVbg8xFsJFucYZrNLjS"
-  ],
   "185.229.236.209": [
     "Apollo",
     "kSp2baclHBNCHmhC5dvE1dvuOVLAiJpGXc7ohemZ"
@@ -363,21 +239,9 @@
     "alixrp",
     "ENx37LLepGrwcnfItqOqoeOxr7DmsyrO1AAlLONd"
   ],
-  "101.58.107.199": [
-    "ciuffystyle",
-    "25rOTWWR1rn3J6M6D0xgzdLAZvyX26YMZ7mBVxM3"
-  ],
-  "116.202.235.105": [
-    "ParadiseLife",
-    "UJZTrgC4XfjSkNJioTXb3cM0ZNjp1K3N0uVEW9Xr"
-  ],
   "5.181.31.173": [
     "Server principale",
     "pydIGEeaLubXdtTEYlLu7Fx7lmJtpmLQetSrWBfy"
-  ],
-  "185.185.82.237": [
-    "RealMask",
-    "AEgPeblfGPhWNmokyFIqss1vy2SpnIaIsQjfmdzR"
   ],
   "45.14.185.126": [
     "Francesco",
@@ -386,6 +250,10 @@
   "185.229.237.2": [
     "ðŸ‘¹Ó¨MÎ›á„‚Î£Æ§_315ðŸ‘¿#2160",
     "4vJbFtHqPQ0vLjZLG753C4ci9MdAgOR4ZzQRAzNp"
+  ],
+  "192.168.0.1": [
+    "test",
+    "gRXypm5kfKptsyIyyyR9Vyjid1yoQhOMoKOaUfpC"
   ],
   "192.168.1.1": [
     "disabled",
@@ -399,21 +267,9 @@
     "heroes",
     "FRPbkAAnFz2O4ridpCAi1qzF6ZCPmrrEpMXaSv6b"
   ],
-  "5.9.212.237": [
-    "LaVeraRoma",
-    "nTkgF0HkAhDPDZGYIKnhtfyDRxS6k71NDOEQ3xsC"
-  ],
   "23.88.49.177": [
     "MT Framework",
     "GA1Gxs5dSOHbUMS5iFa91MEqra4husIkL7SjcBm9"
-  ],
-  "5.181.31.218": [
-    "colosseum",
-    "Gqpvze3b3Jgn9RRRypoVsPTFvoQqaHX84UyCfldn"
-  ],
-  "185.229.237.248": [
-    "8FDGkXswLOVmkIynyemBPnclE4iitsBVZ2gXAGPS",
-    "8FDGkXswLOVmkIynyemBPnclE4iitsBVZ2gXAGPS"
   ],
   "185.25.204.55": [
     "Impero Main",
@@ -423,25 +279,13 @@
     "Impero Public",
     "7uM5RckbK67rHuAtIkWKX2svIgTUU4TC0cai7kHQ"
   ],
-  "1.1.1.1": [
-    "test",
-    "VOoBiFxaZvJZAjFiuZtL3X0rYBnZYlZ53CLfKWlF"
-  ],
   "5.181.31.171": [
     "LegionRP",
     "v3w4nDww3KEe3R1XtzjZlNdcGzapTf0nBr6PnWZT"
   ],
-  "45.14.185.169": [
-    "DirettaTV",
-    "6FnRwEjuddBbV3CAbwAFYCxFwcOqHCxgz0lItkts"
-  ],
   "45.14.185.42": [
     "Damokill98",
     "sEl9PzAeqiLSFNItMe0pSsMCsJsFBENp5e058HUg"
-  ],
-  "45.14.185.246": [
-    "AnonymusRP",
-    "hGbVtXEmOlCzrSvLHMuTGOAcFNlsKViEjVS2i7d2"
   ],
   "5.181.31.191": [
     "afterlife",
@@ -455,24 +299,12 @@
     "nextgen",
     "ii0HjtXDq77NtgjFtOrQT9HLjgpmQp42uJ8uCZ7j"
   ],
-  "45.14.185.214": [
-    "SmokeCity",
-    "YlIhBpncgJggcNRMzvceYeo0TBI2ANG2Sl23DoY3"
-  ],
-  "185.229.236.242": [
-    "anarchy",
-    "7Zb5OXjvRufBOxIja2fjC20SphQuOhHoCz3cZd28"
-  ],
-  "185.229.237.243": [
-    "Naja2.0",
+  "111.111.111.111": [
+    "Revoca",
     "stca8mKtP22dfmeB9SRT59DTX4Sp6Nyqm4w3zk3a"
   ],
-  "5.181.31.110": [
-    "Alfa_Terza",
-    "ZFDCVtstRCOgI6df6FnJVrqjBTTu0R6BPxClS1Q8"
-  ],
-  "54.37.194.176": [
-    "starcityrp",
-    "fAsPNBVSMI416EqrslAnafpiprFeG7V5cA6vFaIw"
+  "45.14.185.222": [
+    "wizard",
+    "NeFJkJf6WWMehHxyLs492HILZ77F5pjqaLFCes00"
   ]
 }
