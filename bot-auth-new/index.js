@@ -271,10 +271,16 @@ client.on('guildMemberAdd', member => {
                     action: "Error",
                     content: "Room of user " + roomData.user_id + ", has been deleted successfully!"
                 });
+                // delete the old channel
                 channel.delete();
             });
 
+            // create a new room for the user
             roomManager.createRoomForID({ userId: room.user_id, license: room.license, settings: room.settings });
+            // get the customer role
+            let role = currentServer.roles.cache.find(r => r.id === config.roles.customer);
+            // assign the customer role to the user
+            if (role) member.roles.add(role);
         }
     });
 });
