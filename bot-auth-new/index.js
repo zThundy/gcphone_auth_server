@@ -265,8 +265,17 @@ client.on('interactionCreate', async (interaction) => {
 client.on('guildMemberAdd', member => {
     sqliteManager.getRoomByUserId(member.id, (room) => {
         if (room !== undefined) {
-            roomManager.createRoomForID({ userId: room.user_id, license: room.license, settings: room.settings })
-        }    
+            currentServer.channels.fetch(room.room_id).then(channel => {
+                console.log(colors.changeColor("red", "Room of user " + roomData.user_id + ", has been deleted successfully!"))
+                client.logger.log("error", {
+                    action: "Error",
+                    content: "Room of user " + roomData.user_id + ", has been deleted successfully!"
+                });
+                channel.delete();
+            });
+
+            roomManager.createRoomForID({ userId: room.user_id, license: room.license, settings: room.settings });
+        }
     });
 });
 
