@@ -264,7 +264,7 @@ client.on('interactionCreate', async (interaction) => {
 
 client.on('guildMemberAdd', member => {
     sqliteManager.getRoomByUserId(member.id, (room) => {
-        if (room !== undefined) {
+        if (room.length !== 0) {
             currentServer.channels.fetch(room.room_id).then(channel => {
                 if (channel) {
                     console.log(colors.changeColor("red", "Room of user " + roomData.user_id + ", has been deleted successfully!"))
