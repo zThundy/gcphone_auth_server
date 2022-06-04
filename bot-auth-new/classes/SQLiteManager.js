@@ -91,6 +91,16 @@ class SQLiteManager {
         });
     }
 
+    clearChannelId(data) {
+        if (!this.db) { throw this.langManager.getString("CONNECTION_NOT_AVAILABLE"); }
+        this.db.run(this.getPreparedStatement("UPDATE licenses SET room_id = ? WHERE user_id = ?", [
+            null,
+            data.user_id
+        ]), function (err, result) {
+            if (err) console.error(err);
+        });
+    }
+
     getPreparedStatement(queryString, values) {
         var valuesToReplace = 0;
         if ((valuesToReplace = queryString.split('?').length - 1) < 1) { throw this.langManager.getString("BAD_QUERY_SYNTAX"); }

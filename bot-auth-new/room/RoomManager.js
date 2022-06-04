@@ -52,6 +52,7 @@ class RoomManager {
                             content: "Room of user " + roomData.user_id + ", has been deleted successfully!"
                         });
                         channel.delete();
+                        this.mySQLManager.clearChannelId({ room_id: roomData.room_id });
                     })
                     .catch(e => {
                         console.log(colors.changeColor("red", "Can't delete room of user " + roomData.user_id + ", since the channel doesn't exist!"))

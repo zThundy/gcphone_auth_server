@@ -289,6 +289,29 @@ client.on('guildMemberAdd', member => {
     });
 });
 
+client.on("guildMemberRemove", member => {
+    sqliteManager.getRoomByUserId(member.id, (room) => {
+        if (room.length !== 0) {
+            currentServer.channels.fetch(room.room_id).then(channel => {
+                if (channel) {
+                    console.log(colors.changeColor("red", "Room of user " + room.user_id + ", has been deleted successfully!"))
+                    client.logger.log("error", {
+                        action: "Error",
+                        content: "Room of user " + room.user_id + ", has been deleted successfully!"
+                    });
+                    // delete the old channel
+                    channel.delete();
+                }
+            });
+
+            // clear the room id from the db
+            sqliteManager.clearChannelId({ room_id: room.room_id });
+            // update the ip on the server
+            eventEmitter.emit('onIPUpdate');
+        }
+    });
+});
+
 client.on("guildCreate", function (guild) {
     if (guild.id != config.authoritativeDiscord) {
         guild.members.cache.get(guild.ownerID).send({
