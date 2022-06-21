@@ -23,6 +23,10 @@
     "Artemis",
     "ipXLWXUTrYLH704oADjeUYcVUulOYkRR4Sh5Ny0A"
   ],
+  "5.181.31.244": [
+    "test",
+    "DaVgkHrjQP9uLVlFOTAOq4ZJmG1y5U0ba8zloDFj"
+  ],
   "5.181.31.125": [
     "lemoncity",
     "a8zvKvXoj0dE9EAol3nwJ8zWO7t9MvEwPj5scxlw"
@@ -71,7 +75,7 @@
     "Virtual",
     "3bhdr0ryDPH2BfuLADIICDRRZdAuDIv5iKtrGq4U"
   ],
-  "95.251.232.182": [
+  "79.55.245.8": [
     "Leo",
     "P7xD1gGDWVduYCb7LRuJvvd07EMCnzN2lTYkg5YN"
   ],
@@ -111,8 +115,8 @@
     "Scheggia Main Server",
     "Y1LRopaEycRrGVXVuGewU9TyBblZ4U7ZTs4KHxdP"
   ],
-  "5.95.134.76": [
-    "grengah",
+  "188.152.15.105": [
+    "1",
     "bqZYDbgaS2wrIC2JANNSEyR9Xz7SWe0K3oENSIPt"
   ],
   "5.181.31.142": [
@@ -143,6 +147,10 @@
     "mati",
     "3rhxTbA3GUbEuHWlAnnaNaquxO4JslZzO3XEMYkQ"
   ],
+  "5.181.31.211": [
+    "Avalon",
+    "BZy4DvcUq7IXkh2Q5fPA78DgpAd41fMjU9BXewBN"
+  ],
   "5.181.31.229": [
     "Grau",
     "mh3LqIBlRV29MLY8d4qA5MVzDjN2rsW3ozukvBR4"
@@ -155,12 +163,16 @@
     "test roma",
     "31XrNZW2cMwCeenbUVPv7w1966KxQbnm2GPQ0Vvr"
   ],
+  "176.9.34.13": [
+    "server nuovo",
+    "wciLUG2p35HlylU18IZ0vK5Q6aK9jXmR62NAvzuJ"
+  ],
   "5.9.212.241": [
     "Atom",
     "suM0we0rsIu1iuIA9yKXemDDHZQDFAWfVfwgHDNd"
   ],
-  "5.196.56.42": [
-    "legacy",
+  "193.23.127.67": [
+    "italian world full rp",
     "Cm7TRTQLD8atADmbRIrZsWcLykWi1tcGKkAFkAnU"
   ],
   "5.181.31.146": [
@@ -198,6 +210,14 @@
   "185.229.237.34": [
     "IFRP",
     "pUjPIMCFde30Y3VF8uDJo1rhTMDrRb1kQr8bmumo"
+  ],
+  "185.229.238.7": [
+    "Poseidon RP",
+    "8WKSmJNH5WMSxX9GxxRy5QQGd5hgMOTXQ36lmqT5"
+  ],
+  "5.181.31.174": [
+    "Thund3rs1",
+    "FKsFdJFjX5XDtXJLS7uli3iaCyxFHb91Vfk6TvPl"
   ],
   "5.181.31.176": [
     "Xeno",
@@ -299,6 +319,10 @@
     "colosseum",
     "Gqpvze3b3Jgn9RRRypoVsPTFvoQqaHX84UyCfldn"
   ],
+  "185.229.237.248": [
+    "Predator",
+    "8FDGkXswLOVmkIynyemBPnclE4iitsBVZ2gXAGPS"
+  ],
   "185.25.204.55": [
     "Impero Main",
     "7uM5RckbK67rHuAtIkWKX2svIgTUU4TC0cai7kHQ"
@@ -355,32 +379,12 @@
     "wizard",
     "NeFJkJf6WWMehHxyLs492HILZ77F5pjqaLFCes00"
   ],
-  "5.181.31.244": [
-    "test",
-    "DaVgkHrjQP9uLVlFOTAOq4ZJmG1y5U0ba8zloDFj"
-  ],
   "45.14.185.86": [
     "Server Wok",
     "YFiA6ZWR6Ay9Fp9IvZLxmX2NLBoyA30HqxdAxCcj"
   ],
-  "5.181.31.211": [
-    "Avalon",
-    "BZy4DvcUq7IXkh2Q5fPA78DgpAd41fMjU9BXewBN"
-  ],
-  "176.9.34.13": [
-    "server nuovo",
-    "wciLUG2p35HlylU18IZ0vK5Q6aK9jXmR62NAvzuJ"
-  ],
-  "185.229.237.248": [
-    "Predator",
-    "8FDGkXswLOVmkIynyemBPnclE4iitsBVZ2gXAGPS"
-  ],
   "188.165.216.180": [
     "RBW",
     "KyIWFaqy6uW5ihBMkstsekL90OA8F9ATxa48jEng"
-  ],
-  "5.181.31.174": [
-    "Thund3rs1",
-    "FKsFdJFjX5XDtXJLS7uli3iaCyxFHb91Vfk6TvPl"
   ]
 }
