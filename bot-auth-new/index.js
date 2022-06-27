@@ -145,34 +145,37 @@ client.once("ready", () => {
         }
         console.log(colors.changeColor("green", "Loaded commands for guild " + config.authoritativeDiscord));
         console.log(colors.changeColor("yellow", "Loading permissions for guild " + config.authoritativeDiscord + "..."));
-        setTimeout(() => {
-            currentServer.commands.fetch().then(() => {
-                console.log(colors.changeColor("yellow", "Fetched commands to set permissions on..."));
-                var currentCommand;
-                for (var command of currentServer.commands.cache.keys()) {
-                    try {
-                        currentCommand = currentServer.commands.cache.get(command);
-                        currentServer.commands.permissions.set({
-                            command: currentCommand.id,
-                            permissions: commands.get(currentCommand.name.toLowerCase().replaceAll(" ", "")).permissions
-                        })
-                    } catch(e) {
-                        console.log(e);
-                    }
-                    console.log(colors.changeColor("blue", "Loaded permissions for command " + currentCommand.name));
-                }
-                console.log(colors.changeColor("green", "Loaded permissions for guild " + config.authoritativeDiscord));
-            });
-        }, 60 * 1000)
+        // setTimeout(() => {
+        //     currentServer.commands.fetch().then(() => {
+        //         console.log(colors.changeColor("yellow", "Fetched commands to set permissions on..."));
+        //         var currentCommand;
+        //         for (var command of currentServer.commands.cache.keys()) {
+        //             try {
+        //                 currentCommand = currentServer.commands.cache.get(command);
+        //                 currentServer.commands.permissions.set({
+        //                     command: currentCommand.id,
+        //                     permissions: commands.get(currentCommand.name.toLowerCase().replaceAll(" ", "")).permissions
+        //                 })
+        //             } catch(e) {
+        //                 console.log(e);
+        //             }
+        //             console.log(colors.changeColor("blue", "Loaded permissions for command " + currentCommand.name));
+        //         }
+        //         console.log(colors.changeColor("green", "Loaded permissions for guild " + config.authoritativeDiscord));
+        //     });
+        // }, 60 * 1000)
     });
 
-    console.log(colors.changeColor("yellow", "Initializing room manager"))
-    sqliteManager.getRooms(function (rooms) {
-        roomManager = new RoomManager(client, rooms, sqliteManager, currentServer, config);
-        tokenManager = new TokenManager();
-        roomButtonHandler = new RoomButtonHandler(client, currentServer, roomManager, tokenManager, config);
-    });
-    console.log(colors.changeColor("green", "Room manager initialized"))
+    setTimeout(() => {
+        console.log(colors.changeColor("yellow", "Initializing room manager"))
+        sqliteManager.getRooms(function (rooms) {
+            roomManager = new RoomManager(client, rooms, sqliteManager, currentServer, config);
+            tokenManager = new TokenManager();
+            roomButtonHandler = new RoomButtonHandler(client, currentServer, roomManager, tokenManager, config);
+        });
+        console.log(colors.changeColor("green", "Room manager initialized"))
+    }, 30 * 1000)
+
     console.log(colors.changeColor("yellow", "Createing event emitter 'onIPUpdate' for socket IO"))
     eventEmitter.on('onIPUpdate', () => {
         const JSONData = { authServerIPs: {} };

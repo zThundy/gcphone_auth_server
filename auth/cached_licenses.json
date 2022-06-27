@@ -83,8 +83,8 @@
     "Mio",
     "4ksxQpCl3wnPs0QyGNFwjJBO4njwANV9zW7Ii4U4"
   ],
-  "45.14.185.47": [
-    "nardville",
+  "45.14.185.160": [
+    "LosNardville",
     "ASNyJQoFE7JM9QpQBbJbhPiL6Cd8gCYpgELCSD5G"
   ],
   "5.181.31.109": [
@@ -115,8 +115,8 @@
     "Scheggia Main Server",
     "Y1LRopaEycRrGVXVuGewU9TyBblZ4U7ZTs4KHxdP"
   ],
-  "188.152.15.105": [
-    "1",
+  "5.94.220.4": [
+    "5.94.220.4",
     "bqZYDbgaS2wrIC2JANNSEyR9Xz7SWe0K3oENSIPt"
   ],
   "5.181.31.142": [
@@ -225,6 +225,10 @@
   ],
   "185.229.238.3": [
     "VPS",
+    "KNahgcBZEZ84a4vprTskjWmsQCevfb5GpYYR5Igh"
+  ],
+  "5.181.31.169": [
+    "Francesco",
     "KNahgcBZEZ84a4vprTskjWmsQCevfb5GpYYR5Igh"
   ],
   "185.229.238.87": [
@@ -355,8 +359,8 @@
     "nextgen",
     "ii0HjtXDq77NtgjFtOrQT9HLjgpmQp42uJ8uCZ7j"
   ],
-  "45.14.185.214": [
-    "SmokeCity",
+  "2.32.59.2": [
+    "LocalHost",
     "YlIhBpncgJggcNRMzvceYeo0TBI2ANG2Sl23DoY3"
   ],
   "5.181.31.186": [
@@ -386,5 +390,13 @@
   "188.165.216.180": [
     "RBW",
     "KyIWFaqy6uW5ihBMkstsekL90OA8F9ATxa48jEng"
+  ],
+  "94.154.1.116": [
+    "Arkadius",
+    "u2f2BlcxEDL92sKc25i7CeeX31eMkZ8BZ58oarVD"
+  ],
+  "5.9.212.148": [
+    "Atom",
+    "0Psr2ljz203JPE5dIUEzvKKArzGpfpJiw46ovpt8"
   ]
 }
