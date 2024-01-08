@@ -1,5 +1,5 @@
 const config = {
-    discord_token: "ODY3MDI1MTU5NTUzNDE3Mjc3.YPbGGg.FWCdkz-7JkLwMpN01LAToqZ9QsY",
+    discord_token: "*****",
     default_license_length: 40,
     mysql: {
         host: 'localhost',
