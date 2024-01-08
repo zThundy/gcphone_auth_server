@@ -6,7 +6,7 @@ class MySQLConnection {
         this.connection = mysql.createConnection({
             host: 'localhost',
             user: 'remote',
-            password: 'Anto-13062000',
+            password: '****',
             database: 'auth-server'
         });
 
